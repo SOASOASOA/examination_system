@@ -45,7 +45,7 @@
 	<!-- Mapper 接口扫描器 MapperScannerConfigurer-->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
-		<property name="basePackage" value="cn.soa.examination_system.dao"></property>
+		<property name="basePackage" value="cn.soa.examsystem.dao"></property>
 	</bean>
 </beans>
 

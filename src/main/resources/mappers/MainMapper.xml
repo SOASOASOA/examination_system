@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cn.soa.examsystem.dao.MainDao">
+	<select id="getUserInfoByUserAccount"  parameterType="string"
+					resultType="cn.soa.examsystem.entity.User">
+		select			 
+			USER_ID as id,
+			USER_ACCOUNT as account,
+			USER_PASSWORD as password,
+			USER_REGIST_TIME as registTime,
+			USER_MODIFY_TIME as modifyTime,
+			USER_NAME as name,
+			USER_SEX as sex,
+			USER_CERTIFICAITON_NUM as certificationNum,
+			USER_COMPANY as company,
+			USER_BIRTHDATE as birthday,
+			USER_ACCOUNT_STATE as state,
+			USER_NOTE as note,
+			USER_PHONE_NUM as phoneNum,
+			USER_EMAIL as email
+		from 
+			USER_INFO
+		where  
+			USER_NAME = #{ userAccount }
+	</select>
+	
+	<select id="getMainPageInfoByAccount"  parameterType="string"
+					resultMap="mainPageInfoHashMap">
+		select
+			 uf.UF_ID,FUNCITON_NAME,FUNCITON_DESC
+		from 
+			USER_INFO ui , UI_UR_RELATION uiur , USER_ROLE ur , 
+			UR_UA_RELATION urua , USER_AUTHORITY ua , UA_UF_RELATION uauf , USER_FUCNTION uf
+		where 
+			ui.USER_ID = uiur.UI_ID  and  uiur.UR_ID = ur.ROLE_ID and 
+			ur.ROLE_ID = urua.UR_ID  and  urua.UA_ID = ua.UA_ID   and 
+			ua.UA_ID = uauf.UA_ID    and  uauf.UF_ID = uf.UF_ID   and 
+			ui.USER_ACCOUNT = #{ userAccount }
+	</select>
+	<resultMap id="mainPageInfoHashMap"   type="cn.soa.examsystem.entity.UserFunction">  
+		<id column="UF_ID" property="functionID"/> 
+   		<result column="FUNCITON_NAME" property="functionName"/>  
+    	<result column="FUNCITON_DESC" property="functiondescribe" />
+	</resultMap>		
+</mapper>

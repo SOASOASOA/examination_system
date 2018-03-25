@@ -2,30 +2,140 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
-<mapper namespace="cn.soa.cloudnote.dao.UserDao">
-	<select id="findUserByName" parameterType="string" 
-			resultType="cn.soa.cloudnote.entity.User">
-		select 
-			*
+<mapper namespace="cn.soa.examsystem.dao.UserDao">
+
+	<!-- 根据用户账号查询用户信息 -->
+	<select id="getUserInfoByUserAccount"  parameterType="string"
+					resultType="cn.soa.examsystem.entity.User">
+		select			 
+			USER_ID as id,
+			USER_ACCOUNT as account,
+			USER_PASSWORD as password,
+			USER_REGIST_TIME as registTime,
+			USER_MODIFY_TIME as modifyTime,
+			USER_NAME as name,
+			USER_SEX as sex,
+			USER_CERTIFICAITON_NUM as certificationNum,
+			USER_COMPANY as company,
+			USER_BIRTHDATE as birthday,
+			USER_ACCOUNT_STATE as state,
+			USER_NOTE as note,
+			USER_PHONE_NUM as phoneNum,
+			USER_EMAIL as email
 		from 
-			cn_user 
+			USER_INFO
+		where  
+			USER_ACCOUNT = #{ userAccount }
+	</select>
+	
+	<!-- 根据用户姓名查询用户信息 -->
+	<select id="getUserInfoByUserName"  parameterType="string"
+					resultType="cn.soa.examsystem.entity.User">
+		select			 
+			USER_ID as id,
+			USER_ACCOUNT as account,
+			USER_PASSWORD as password,
+			USER_REGIST_TIME as registTime,
+			USER_MODIFY_TIME as modifyTime,
+			USER_NAME as name,
+			USER_SEX as sex,
+			USER_CERTIFICAITON_NUM as certificationNum,
+			USER_COMPANY as company,
+			USER_BIRTHDATE as birthday,
+			USER_ACCOUNT_STATE as state,
+			USER_NOTE as note,
+			USER_PHONE_NUM as phoneNum,
+			USER_EMAIL as email
+		from 
+			USER_INFO
+		where  
+			USER_NAME = #{ userName }
+	</select>
+	
+	<!-- 根据用户账号查询用户密码 -->
+	<select id="getUserPwdByUserAccount"  parameterType="string" resultType="string">
+		select		
+			USER_PASSWORD as password
+		from 
+			USER_INFO
+		where  
+			USER_ACCOUNT = #{ userAccount }
+	</select>
+	
+	<!-- 根据用户姓名查询用户密码 -->	
+	<select id="getUserPwdByUserName"  parameterType="string" resultType="string">
+		select		
+			USER_PASSWORD as password
+		from 
+			USER_INFO
+		where  
+			USER_NAME = #{ userName }
+	</select>
+	
+	<!-- 根据用户账号修改用户密码 -->
+	<update id="changeUserPwdByUserAccount"  parameterType="string">
+		update		
+			USER_INFO
+		set 
+			USER_PASSWORD = #{ arg1 }
 		where 
-			cn_user_name=#{userName}; 
-	</select>	
-	<insert id="addUser" parameterType="cn.soa.cloudnote.entity.User"  >
-		insert into 
-			cn_user
-		VALUES
-			(#{cn_user_id},#{cn_user_name},#{cn_user_password},
-				#{cn_user_token},#{cn_user_nick});
+			USER_ACCOUNT = #{ arg0 }
+			
+	</update>
+	
+	<!-- 根据用户姓名修改用户密码  -->
+	<update id="changeUserInfoByUserName"  parameterType="string">
+		update		
+			USER_INFO
+		set 
+			USER_PASSWORD = #{ arg1 }
+		where 
+			USER_NAME = #{ arg0 }
+	</update>
+	
+	<!-- 增加用户 -->
+	<insert id="addUserInfo"  parameterType="cn.soa.examsystem.entity.User">
+		insert into	USER_INFO
+		(
+			USER_ID,
+			USER_ACCOUNT,
+			USER_PASSWORD,
+			USER_REGIST_TIME,
+			USER_MODIFY_TIME,
+			USER_NAME,
+			USER_SEX,
+			USER_CERTIFICAITON_NUM,
+			USER_COMPANY,
+			USER_BIRTHDATE,
+			USER_ACCOUNT_STATE,
+			USER_NOTE,
+			USER_PHONE_NUM,
+			USER_EMAIL
+		)
+		values 
+		(
+			#{id},
+			#{account},
+			#{password},
+			#{registTime},
+			#{modifyTime},
+			#{name},
+			#{sex},
+			#{certificationNum},
+			#{company},
+			#{birthday},
+			#{state},
+			#{note},
+			#{phoneNum},
+			#{email}
+		)		
 	</insert>
 	
-	<select id="findUerIdByUserName" parameterType="string" resultType="string">
-		select 
-			cn_user_id
-		from 
-			cn_user
-		where 
-			cn_user_name=#{userName}
-	</select>
+	<!-- 根据用户账号删除用户 -->
+	<delete id="deleteUserInfo"  parameterType="string">
+		delete from	 
+			USER_INFO
+		where  
+			USER_ACCOUNT = #{ userAccount }
+	</delete>
 </mapper>

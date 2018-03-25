@@ -20,8 +20,7 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 	<!-- conf/spring-service.xml -->
-	<context:component-scan 
-		base-package="cn.soa.examination_system.service"/>
+	<context:component-scan  base-package="cn.soa.examsystem.service.impl"/>
 	<!-- annotation-driven:注解驱动的MVC	@RequestMapping -->
 	<mvc:annotation-driven/>
 </beans>
