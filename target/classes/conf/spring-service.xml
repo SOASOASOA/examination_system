@@ -23,5 +23,6 @@
 	<context:component-scan  base-package="cn.soa.examsystem.service.impl"/>
 	<!-- annotation-driven:注解驱动的MVC	@RequestMapping -->
 	<mvc:annotation-driven/>
+
 </beans>
 

@@ -21,7 +21,7 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 	<!-- 导入数据库参数 db.properties -->
 	<util:properties id="db" 
-		location="classpath:conf/db.properties"/> 
+		location="classpath:prop/db.properties"/> 
 	<!-- 配置数据库连接池dbcp -->
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource">
@@ -42,6 +42,7 @@
 		<!-- 映射文件-->
 		<property name="mapperLocations" value="classpath:mappers/*.xml"/>			
 	</bean>
+	
 	<!-- Mapper 接口扫描器 MapperScannerConfigurer-->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>

@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
@@ -72,6 +74,7 @@ public class BaseExceptionHandler {
     {
         return new JsonResult<String>("request_method_not_supported");
     }
+    
 
     /**
      * 415 - Unsupported Media Type。HttpMediaTypeNotSupportedException
@@ -83,10 +86,44 @@ public class BaseExceptionHandler {
     {
         return new JsonResult<String>("content_type_not_supported");
     }
+    
+    
+    
+    /**
+    * @Title: handleValidationException
+    * @Description: TODO(这里用一句话描述这个方法的作用)
+    * @param @param e
+    * @param @return    参数说明
+    * @return JsonResult<String>    返回类型
+    * @throws
+    */
+    
+	@ExceptionHandler(ConstraintViolationException.class)
+	@ResponseBody
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public JsonResult<String> handleValidationException(ConstraintViolationException e)
+	{
+	    for(ConstraintViolation<?> s:e.getConstraintViolations())
+	    {
+	        //return s.getInvalidValue()+": "+s.getMessage();
+		 return new JsonResult<String>(s.getMessage());
+	}
+	    return new JsonResult<String>("请求参数不合法");
+	}
 
-    /*
-     * 
-     */
+    
+    
+        /**
+        * @Title: validExceptionHandler
+        * @Description: TODO(这里用一句话描述这个方法的作用)
+        * @param @param e
+        * @param @param request
+        * @param @param response
+        * @param @return    参数说明
+        * @return JsonResult<JSONObject>    返回类型
+        * @throws
+        */
+        
     @ExceptionHandler(BindException.class)
     public JsonResult<JSONObject> validExceptionHandler(BindException e, WebRequest request, HttpServletResponse response) {
 
