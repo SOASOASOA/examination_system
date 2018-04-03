@@ -1,0 +1,8 @@
+eclipse.preferences.version=1
+encoding//src/main/java=UTF-8
+encoding//src/main/java/cn/soa/examsystem/controller/QuestionBankController.java=UTF-8
+encoding//src/main/java/cn/soa/examsystem/entity/Admin.java=UTF-8
+encoding//src/main/java/cn/soa/examsystem/service/impl/IndexServiceImpl.java=UTF-8
+encoding//src/main/java/cn/soa/examsystem/service/inter/IndexService.java=UTF-8
+encoding//src/main/java/cn/soa/examsystem/service/inter/LoginService.java=UTF-8
+encoding//src/main/java/cn/soa/examsystem/util/ExaminUtil.java=UTF-8
