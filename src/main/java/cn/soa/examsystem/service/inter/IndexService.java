@@ -1,5 +1,8 @@
 package cn.soa.examsystem.service.inter;
 
+import java.util.List;
+import java.util.Map;
+
 import cn.soa.examsystem.exception.MyException;
 import cn.soa.examsystem.util.JsonResult;
 
@@ -14,5 +17,5 @@ public interface IndexService {
 	 * @param user_id 鐢ㄦ埛ID
 	 * @return json瀵硅薄
 	 */
-	public JsonResult findUserModule(String user_id) throws MyException;
+	public JsonResult<List<Map<String,Object>>> findUserModule(String user_id) throws MyException;
 }

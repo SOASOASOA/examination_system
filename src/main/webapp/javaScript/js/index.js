@@ -84,15 +84,15 @@ layui.use(
 						})
 						//加载模板名称,模本描述,模板对应的URL
 						function addModuleData(id,data){
-							var funciton_name = data.FUNCITON_NAME;
-							var function_url = data.FUNCTION_URL;
-							var function_desc = data.FUNCTION_DESC;
+							var authority_name = data.AUTHORITY_NAME;
+							var authority_url = data.AUTHORITY_URL;
+							var authority_desc = data.AUTHORITY_DESC;
 							$("#"+id+"").show();
 							var $p='';
-							 $p+='<p class="funciton_name">'+funciton_name+'</p>';
-							 $p+='<p class="function_desc">'+function_desc+'</p>';
+							 $p+='<p class="authority_name">'+authority_name+'</p>';
+							 $p+='<p class="authority_desc">'+authority_desc+'</p>';
 							$("#"+id+"").append($($p));
-							$("#"+id+"").attr("href-url",function_url);
+							$("#"+id+"").attr("href-url",authority_url);
 						}
 					})
 			});

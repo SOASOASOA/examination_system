@@ -87,13 +87,13 @@ html, body {
 	background-image: url(../img/my_score.png);
 }
 /*模板名称样式*/
-.funciton_name{
+.authority_name{
 	font-weight: bold;
 	font-size: 20px;
 	margin-top:58%
 }
 /*模板描述样式*/
-.function_desc{
+.authority_desc{
 	font-size: 14px;
 	margin-top:10px;
 }
