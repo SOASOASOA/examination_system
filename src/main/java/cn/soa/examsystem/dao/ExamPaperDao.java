@@ -2,9 +2,9 @@
     /**  
     * @Title: ExamPaperDao.java
     * @Package cn.soa.examsystem.dao
-    * @Description: ����ϵͳ���Ʋ�
+    * @Description: 锟斤拷锟斤拷系统锟斤拷锟狡诧拷
     * @author zhugang
-    * @date 2018��3��24��
+    * @date 2018锟斤拷3锟斤拷24锟斤拷
     * @version V1.0  
     */
     
@@ -23,9 +23,9 @@ import cn.soa.examsystem.entity.Subject;
 
 /**
     * @ClassName: ExamPaperDao
-    * @Description: 试题查询dao层
+    * @Description: 璇曢鏌ヨdao灞�
     * @author zhugang
-    * @date 2018��3��24��
+    * @date 2018锟斤拷3锟斤拷24锟斤拷
     *
     */
 @Repository
@@ -34,10 +34,10 @@ public interface ExamPaperDao {
 	
 	    /**
 	    * @Title: getExamPaperByLimitContition
-	    * @Description: TODO(������һ�仰�����������������)
+	    * @Description: TODO(锟斤拷锟斤拷锟斤拷一锟戒话锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟�)
 	    * @param @param paramMap
-	    * @param @return    ����˵��
-	    * @return List<ExamPaper>    ��������
+	    * @param @return    锟斤拷锟斤拷说锟斤拷
+	    * @return List<ExamPaper>    锟斤拷锟斤拷锟斤拷锟斤拷
 	    * @throws
 	    */
 	    
@@ -45,9 +45,9 @@ public interface ExamPaperDao {
 		
 	    /**
 	    * @Title: getAllSubject
-	    * @Description: ��ȡ���еĿ�Ŀ
-	    * @param @return    ����˵��
-	    * @return List<Subject>    ��������
+	    * @Description: 锟斤拷取锟斤拷锟叫的匡拷目
+	    * @param @return    锟斤拷锟斤拷说锟斤拷
+	    * @return List<Subject>    锟斤拷锟斤拷锟斤拷锟斤拷
 	    * @throws
 	    */
 	    
@@ -55,10 +55,10 @@ public interface ExamPaperDao {
 	
 	    /**
 	    * @Title: getKnowledgePointBySubject
-	    * @Description: ��ȡ������Ŀ�¾��е�֪ʶ��
+	    * @Description: 锟斤拷取锟斤拷锟斤拷锟斤拷目锟铰撅拷锟叫碉拷知识锟斤拷
 	    * @param @param subject
-	    * @param @return    ����˵��
-	    * @return List<KnowledgePoint>    ��������
+	    * @param @return    锟斤拷锟斤拷说锟斤拷
+	    * @return List<KnowledgePoint>    锟斤拷锟斤拷锟斤拷锟斤拷
 	    * @throws
 	    */
 	    
@@ -67,10 +67,10 @@ public interface ExamPaperDao {
 	
 	    /**
 	    * @Title: getKnowledgePointByItsFather
-	    * @Description: ���ݸ��ڵ�֪ʶ���ѯ��֪ʶ��
+	    * @Description: 锟斤拷锟捷革拷锟节碉拷知识锟斤拷锟窖拷锟街讹拷锟�
 	    * @param @param subject
-	    * @param @return    ����˵��
-	    * @return List<KnowledgePoint>    ��������
+	    * @param @return    锟斤拷锟斤拷说锟斤拷
+	    * @return List<KnowledgePoint>    锟斤拷锟斤拷锟斤拷锟斤拷
 	    * @throws
 	    */
 	    
@@ -78,9 +78,9 @@ public interface ExamPaperDao {
 	
 	    /**
 	    * @Title: getAllQuestionType
-	    * @Description: ��ȡ���еĿ�������
-	    * @param @return    ����˵��
-	    * @return List<QuestionType>    ��������
+	    * @Description: 锟斤拷取锟斤拷锟叫的匡拷锟斤拷锟斤拷锟斤拷
+	    * @param @return    锟斤拷锟斤拷说锟斤拷
+	    * @return List<QuestionType>    锟斤拷锟斤拷锟斤拷锟斤拷
 	    * @throws
 	    */
 	    
@@ -88,9 +88,9 @@ public interface ExamPaperDao {
 	
 	    /**
 	    * @Title: getAllweight
-	    * @Description: ��ȡ���еĿ���Ȩ��
-	    * @param @return    ����˵��
-	    * @return List<String>    ��������
+	    * @Description: 锟斤拷取锟斤拷锟叫的匡拷锟斤拷权锟斤拷
+	    * @param @return    锟斤拷锟斤拷说锟斤拷
+	    * @return List<String>    锟斤拷锟斤拷锟斤拷锟斤拷
 	    * @throws
 	    */
 	    
@@ -98,9 +98,9 @@ public interface ExamPaperDao {
 	
 	    /**
 	    * @Title: getAllExamQuesAnswerTime
-	    * @Description: ��ȡ���еĿ�����ʱ
-	    * @param @return    ����˵��
-	    * @return List<String>    ��������
+	    * @Description: 锟斤拷取锟斤拷锟叫的匡拷锟斤拷锟斤拷时
+	    * @param @return    锟斤拷锟斤拷说锟斤拷
+	    * @return List<String>    锟斤拷锟斤拷锟斤拷锟斤拷
 	    * @throws
 	    */
 	    
@@ -108,9 +108,9 @@ public interface ExamPaperDao {
 	
 	    /**
 	    * @Title: getAllExamQuesAnswerNum
-	    * @Description: ��ȡ���еĿ������
-	    * @param @return    ����˵��
-	    * @return List<String>    ��������
+	    * @Description: 锟斤拷取锟斤拷锟叫的匡拷锟斤拷锟斤拷锟�
+	    * @param @return    锟斤拷锟斤拷说锟斤拷
+	    * @return List<String>    锟斤拷锟斤拷锟斤拷锟斤拷
 	    * @throws
 	    */
 	    
@@ -118,9 +118,9 @@ public interface ExamPaperDao {
 	
 	    /**
 	    * @Title: getAllExamDiffculty
-	    * @Description: ��ȡ���еĿ����Ѷ�
-	    * @param @return    ����˵��
-	    * @return List<String>    ��������
+	    * @Description: 锟斤拷取锟斤拷锟叫的匡拷锟斤拷锟窖讹拷
+	    * @param @return    锟斤拷锟斤拷说锟斤拷
+	    * @return List<String>    锟斤拷锟斤拷锟斤拷锟斤拷
 	    * @throws
 	    */
 	    
@@ -128,9 +128,9 @@ public interface ExamPaperDao {
 	
 	    /**
 	    * @Title: getAllExamEvaluate
-	    * @Description: ��ȡ���еĿ�������
-	    * @param @return    ����˵��
-	    * @return List<String>    ��������
+	    * @Description: 锟斤拷取锟斤拷锟叫的匡拷锟斤拷锟斤拷锟斤拷
+	    * @param @return    锟斤拷锟斤拷说锟斤拷
+	    * @return List<String>    锟斤拷锟斤拷锟斤拷锟斤拷
 	    * @throws
 	    */
 	    
@@ -138,9 +138,9 @@ public interface ExamPaperDao {
 	
 	    /**
 	    * @Title: getAllExamType
-	    * @Description: 查询试题类型
-	    * @param @return    ����˵��
-	    * @return List<String>    ��������
+	    * @Description: 鏌ヨ璇曢绫诲瀷
+	    * @param @return    锟斤拷锟斤拷说锟斤拷
+	    * @return List<String>    锟斤拷锟斤拷锟斤拷锟斤拷
 	    * @throws
 	    */
 	    
@@ -148,10 +148,10 @@ public interface ExamPaperDao {
 	
 	    /**
 	    * @Title: getAllExamQuesByTitle
-	    * @Description: 根据题目查询试题
+	    * @Description: 鏍规嵁棰樼洰鏌ヨ璇曢
 	    * @param @param title
-	    * @param @return    参数说明
-	    * @return List<ExamPaper>    返回类型
+	    * @param @return    鍙傛暟璇存槑
+	    * @return List<ExamPaper>    杩斿洖绫诲瀷
 	    * @throws
 	    */
 	    
@@ -161,11 +161,11 @@ public interface ExamPaperDao {
 	
 	    /**
 	    * @Title: getAllExamQuesByTitle
-	    * @Description: 根据条件修改数据库值
+	    * @Description: 鏍规嵁鏉′欢淇敼鏁版嵁搴撳��
 	    * @param @param id
 	    * @param @param map
-	    * @param @return    参数说明
-	    * @return int    返回类型
+	    * @param @return    鍙傛暟璇存槑
+	    * @return int    杩斿洖绫诲瀷
 	    * @throws
 	    */
 	    

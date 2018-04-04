@@ -33,11 +33,6 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_111">
-		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="E:/eclipse my all Info/own_maven_store/repository/org/springframework/spring-web/4.0.6.RELEASE/spring-web-4.0.6.RELEASE.jar">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
@@ -46,6 +41,11 @@
 			<attribute name="maven.artifactId" value="spring-web"/>
 			<attribute name="maven.version" value="4.0.6.RELEASE"/>
 			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_111">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
