@@ -8,10 +8,8 @@ public class BaseTest {
 	@Before
 	public void init(){
 		ctx=new ClassPathXmlApplicationContext(
-				"conf/spring-web.xml",
-				"conf/spring-mybatis.xml",
-				"conf/spring-util.xml",
-				"conf/spring-service.xml" 			
+				"conf/spring-mvc.xml",
+				"conf/spring-mybatis.xml"		
 				);
 	}
 }

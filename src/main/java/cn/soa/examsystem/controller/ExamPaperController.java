@@ -2,9 +2,9 @@
     /**  
     * @Title: ExamPaperController.java
     * @Package cn.soa.examsystem.controller
-    * @Description: TODO(��һ�仰�������ļ���ʲô)
+    * @Description: TODO(锟斤拷一锟戒话锟斤拷锟斤拷锟斤拷锟侥硷拷锟斤拷什么)
     * @author zhugang
-    * @date 2018��3��24��
+    * @date 2018锟斤拷3锟斤拷24锟斤拷
     * @version V1.0  
     */
     
@@ -33,9 +33,9 @@ import cn.soa.examsystem.util.JsonResultForTable;
 
 /**
     * @ClassName: ExamPaperController
-    * @Description: ����ģ����Ʋ�
+    * @Description: 锟斤拷锟斤拷模锟斤拷锟斤拷撇锟�
     * @author zhugang
-    * @date 2018��3��24��
+    * @date 2018锟斤拷3锟斤拷24锟斤拷
     *
     */
 @Validated
@@ -48,10 +48,10 @@ public class ExamPaperController {
 	
 	    /**
 	    * @Title: getExamPaperByLimitCondition
-	    * @Description: ��ѯ��������-���Ʋ�
+	    * @Description: 锟斤拷询锟斤拷锟斤拷锟斤拷锟斤拷-锟斤拷锟狡诧拷
 	    * @param @param paramMap
-	    * @param @return    ����˵��
-	    * @return JsonResultForTable<List<ExamPaper>>    ��������
+	    * @param @return    锟斤拷锟斤拷说锟斤拷
+	    * @return JsonResultForTable<List<ExamPaper>>    锟斤拷锟斤拷锟斤拷锟斤拷
 	    * @throws
 	    */
 	    
@@ -60,18 +60,18 @@ public class ExamPaperController {
 	public JsonResult<List<ExamPaper>> getExamPaperByLimitCondition(@RequestParam("paramMap") @NotNull(message= "{map.notnull}") Map<String, String> paramMap) 
 	{		
 		List<ExamPaper> returnExampaperList = examPaperService.getExamPaperByLimitCondition(paramMap);
-		//封装Json
-		String returnCount = ExamPaperUtils.getCountFromList(returnExampaperList);
+		//灏佽Json
+		Integer returnCount =ExamPaperUtils.getCountFromList(returnExampaperList);
 		return new JsonResult<List<ExamPaper>>(returnCount, returnExampaperList);		
 	}
 
 	
 	    /**
 	    * @Title: getKnowledgePointByItsFatherID
-	    * @Description: ���ݸ��ڵ�֪ʶ���ѯ�ӽڵ�֪ʶ��-���Ʋ�
+	    * @Description: 锟斤拷锟捷革拷锟节碉拷知识锟斤拷锟窖拷咏诘锟街讹拷锟�-锟斤拷锟狡诧拷
 	    * @param @param fatherKnowledgeID
-	    * @param @return    ����˵��
-	    * @return JsonResult<List<String>>    ��������
+	    * @param @return    锟斤拷锟斤拷说锟斤拷
+	    * @return JsonResult<List<String>>    锟斤拷锟斤拷锟斤拷锟斤拷
 	    * @throws
 	    */
 	    
@@ -79,17 +79,17 @@ public class ExamPaperController {
 	//@RequestMapping(value= {"/knowledgePoint/fatherKnowledgeID"},method=RequestMethod.GET)
 	public JsonResult<List<String>> getKnowledgePointByItsFatherID(@RequestParam("fatherKnowledgeID") @NotNull(message= "{fatherKnowledgeID.notnull}") String fatherKnowledgeID) {		
 		List<String> returnListKnowledge = examPaperService.getKnowledgePointByItsFatherID(fatherKnowledgeID);
-		//��װ���ص�json
+		//锟斤拷装锟斤拷锟截碉拷json
 		return new JsonResult<List<String>>(returnListKnowledge);	
 	}
 
 	
 	    /**
 	    * @Title: getKnowledgePointBySubject
-	    * @Description: ��ȡָ����Ŀ�¾��е�֪ʶ��
+	    * @Description: 锟斤拷取指锟斤拷锟斤拷目锟铰撅拷锟叫碉拷知识锟斤拷
 	    * @param @param subjectName
-	    * @param @return    ����˵��
-	    * @return JsonResult<List<String>>    ��������
+	    * @param @return    锟斤拷锟斤拷说锟斤拷
+	    * @return JsonResult<List<String>>    锟斤拷锟斤拷锟斤拷锟斤拷
 	    * @throws
 	    */
 	    
@@ -97,16 +97,16 @@ public class ExamPaperController {
 	//@RequestMapping(value= {"/knowledgePoint/subjectName"},method=RequestMethod.GET)
 	public JsonResult<List<String>> getKnowledgePointBySubject(@RequestParam("subjectName") @NotNull(message= "{subjectName.notnull}") String subjectName) {		
 		List<String> returnListKnowledge = examPaperService.getKnowledgePointBySubject(subjectName);
-		//��װ���ص�json
+		//锟斤拷装锟斤拷锟截碉拷json
 		return new JsonResult<List<String>>(returnListKnowledge);	
 	}
 	
 	
 	    /**
 	    * @Title: getAllQuestionType
-	    * @Description: ��ѯ�������������
-	    * @param @return    ����˵��
-	    * @return JsonResult<List<String>>    ��������
+	    * @Description: 锟斤拷询锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟�
+	    * @param @return    锟斤拷锟斤拷说锟斤拷
+	    * @return JsonResult<List<String>>    锟斤拷锟斤拷锟斤拷锟斤拷
 	    * @throws
 	    */
 	    
@@ -119,9 +119,9 @@ public class ExamPaperController {
 	
 	    /**
 	    * @Title: getAllExamQuesWeight
-	    * @Description: ��ѯ���������Ȩ��
-	    * @param @return    ����˵��
-	    * @return JsonResult<List<String>>    ��������
+	    * @Description: 锟斤拷询锟斤拷锟斤拷锟斤拷锟斤拷锟饺拷锟�
+	    * @param @return    锟斤拷锟斤拷说锟斤拷
+	    * @return JsonResult<List<String>>    锟斤拷锟斤拷锟斤拷锟斤拷
 	    * @throws
 	    */
 	    
@@ -134,9 +134,9 @@ public class ExamPaperController {
 	
 	    /**
 	    * @Title: getAllExamQuesAnswerTime
-	    * @Description: ��ѯ�����������ʱ
-	    * @param @return    ����˵��
-	    * @return JsonResult<List<String>>    ��������
+	    * @Description: 锟斤拷询锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟绞�
+	    * @param @return    锟斤拷锟斤拷说锟斤拷
+	    * @return JsonResult<List<String>>    锟斤拷锟斤拷锟斤拷锟斤拷
 	    * @throws
 	    */
 	    
@@ -149,9 +149,9 @@ public class ExamPaperController {
 	
 	    /**
 	    * @Title: getAllExamQuesAnswerNum
-	    * @Description: ��ѯ����������޴�
-	    * @param @return    ����˵��
-	    * @return JsonResult<List<String>>    ��������
+	    * @Description: 锟斤拷询锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷薮锟�
+	    * @param @return    锟斤拷锟斤拷说锟斤拷
+	    * @return JsonResult<List<String>>    锟斤拷锟斤拷锟斤拷锟斤拷
 	    * @throws
 	    */
 	    
@@ -164,9 +164,9 @@ public class ExamPaperController {
 	
 	    /**
 	    * @Title: getAllExamDiffculty
-	    * @Description: ��ѯ����������Ѷ�
-	    * @param @return    ����˵��
-	    * @return JsonResult<List<String>>    ��������
+	    * @Description: 锟斤拷询锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷讯锟�
+	    * @param @return    锟斤拷锟斤拷说锟斤拷
+	    * @return JsonResult<List<String>>    锟斤拷锟斤拷锟斤拷锟斤拷
 	    * @throws
 	    */
 	    
@@ -179,9 +179,9 @@ public class ExamPaperController {
 	
 	    /**
 	    * @Title: getAllExamEvaluate
-	    * @Description: ��ѯ�������������
-	    * @param @return    ����˵��
-	    * @return JsonResult<List<String>>    ��������
+	    * @Description: 锟斤拷询锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟�
+	    * @param @return    锟斤拷锟斤拷说锟斤拷
+	    * @return JsonResult<List<String>>    锟斤拷锟斤拷锟斤拷锟斤拷
 	    * @throws
 	    */
 	    
@@ -194,9 +194,9 @@ public class ExamPaperController {
 	
 	    /**
 	    * @Title: getAllExamType
-	    * @Description: ��ѯ�������������
-	    * @param @return    ����˵��
-	    * @return JsonResult<List<String>>    ��������
+	    * @Description: 锟斤拷询锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟�
+	    * @param @return    锟斤拷锟斤拷说锟斤拷
+	    * @return JsonResult<List<String>>    锟斤拷锟斤拷锟斤拷锟斤拷
 	    * @throws
 	    */
 	    
@@ -210,10 +210,10 @@ public class ExamPaperController {
 	
 	    /**
 	    * @Title: getAllExamQuesByTitle
-	    * @Description: 根据题目获取试题
+	    * @Description: 鏍规嵁棰樼洰鑾峰彇璇曢
 	    * @param @param title
-	    * @param @return    参数说明
-	    * @return JsonResult<List<ExamPaper>>    返回类型
+	    * @param @return    鍙傛暟璇存槑
+	    * @return JsonResult<List<ExamPaper>>    杩斿洖绫诲瀷
 	    * @throws
 	    */
 	    
@@ -221,7 +221,7 @@ public class ExamPaperController {
 	//@RequestMapping(value= {"/exampaper/title"},method=RequestMethod.GET)
 	public JsonResult<List<ExamPaper>> getAllExamQuesByTitle(@RequestParam("title") @NotNull(message= "{examques.title.notnull}") String title) {		
 		List<ExamPaper> returnListExam =examPaperService.getAllExamQuesByTitle(title);
-		String returnCount = ExamPaperUtils.getCountFromList(returnListExam);
+		Integer returnCount = ExamPaperUtils.getCountFromList(returnListExam);
 		return new JsonResult<List<ExamPaper>>(returnCount, returnListExam);	
 	}
 	

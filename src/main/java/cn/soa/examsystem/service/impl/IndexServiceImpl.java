@@ -25,6 +25,7 @@ public class IndexServiceImpl implements IndexService {
 	 */
 	@Cacheable(value = "myCache", key = "#user_id")
 	public JsonResult findUserModule(String user_id) throws MyException {
+		System.out.println(user_id);
 		if(user_id==null) {
 			throw new MyException("鐢ㄦ埛ID涓虹┖,涓嶈兘鑾峰彇妯℃澘淇℃伅");
 		}
@@ -32,6 +33,7 @@ public class IndexServiceImpl implements IndexService {
 		if(modules==null) {
 			throw new MyException("鑾峰彇鐢ㄦ埛妯℃澘淇℃伅寮傚父");
 		}
+		System.out.println(modules);
 		return new JsonResult(modules);
 	}
 }

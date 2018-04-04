@@ -16,18 +16,18 @@
 					if (/(^\_)|(\_+$)/.test(value)) {
 						return '用户名首尾不能出现下划线\'_\'';
 					}
-					if (!(/^\w{3,20}$/.test(value))) {
+					/*if (!(/^\w{2,20}$/.test(value))) {
 						return '用户名由3到20位字母、数字和下划线组成';
-					}
+					}*/
 				},
 				//密码的验证规则
 				password : function(value, item) {
 					if (value == null || value == '') {
 						return '密码不能为空';
 					}
-					if (!(/^\w{3,20}$/.test(value))) {
+					/*if (!(/^\w{2,20}$/.test(value))) {
 						return '密码由3到20位字母、数字和下划线组成';
-					}
+					}*/
 				}
 			});
 			//监听登录提交按钮事件,获取用户名，密码，验证码进行后端验证

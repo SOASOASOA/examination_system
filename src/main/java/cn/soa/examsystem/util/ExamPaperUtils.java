@@ -2,9 +2,9 @@
     /**  
     * @Title: ExamPaperUtils.java
     * @Package cn.soa.examsystem.util
-    * @Description: TODO(ÓÃÒ»¾ä»°ÃèÊö¸ÃÎÄ¼þ×öÊ²Ã´)
+    * @Description: TODO(ï¿½ï¿½Ò»ï¿½ä»°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ê²Ã´)
     * @author zhugang
-    * @date 2018Äê3ÔÂ29ÈÕ
+    * @date 2018ï¿½ï¿½3ï¿½ï¿½29ï¿½ï¿½
     * @version V1.0  
     */
     
@@ -21,9 +21,9 @@ import cn.soa.examsystem.entity.ExamPaper;
 
 /**
     * @ClassName: ExamPaperUtils
-    * @Description: ÊÔÌâÄ£¿é¹¤¾ßÀà
+    * @Description: ï¿½ï¿½ï¿½ï¿½Ä£ï¿½é¹¤ï¿½ï¿½ï¿½ï¿½
     * @author zhugang
-    * @date 2018Äê3ÔÂ29ÈÕ
+    * @date 2018ï¿½ï¿½3ï¿½ï¿½29ï¿½ï¿½
     *
     */
 @Component
@@ -34,10 +34,10 @@ public class ExamPaperUtils {
 
 		/**
 	    * @Title: transferEntityIntoMap
-	    * @Description: °ÑÊµÌåÀà×ªÎªmap
+	    * @Description: ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½×ªÎªmap
 	    * @param @param object
-	    * @param @return    ²ÎÊýËµÃ÷
-	    * @return Map<String,String>    ·µ»ØÀàÐÍ
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return Map<String,String>    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */	    
 	public static Map<String, String> transferEntityIntoMap(Object object)
@@ -47,10 +47,10 @@ public class ExamPaperUtils {
 	
 	    /**
 	    * @Title: removeValueNullInMap
-	    * @Description: È¥µômapÖÐvalueÎª¿ÕµÄentry
+	    * @Description: È¥ï¿½ï¿½mapï¿½ï¿½valueÎªï¿½Õµï¿½entry
 	    * @param @param map
-	    * @param @return    ²ÎÊýËµÃ÷
-	    * @return Map<String,String>    ·µ»ØÀàÐÍ
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return Map<String,String>    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */	    
 	public static Map<String, String> removeValueNullInMap(Map<String, String> map)
@@ -73,26 +73,26 @@ public class ExamPaperUtils {
 	
 	    /**
 	    * @Title: getCountFromList
-	    * @Description: »ñÈ¡listµÄ³¤¶È
+	    * @Description: ï¿½ï¿½È¡listï¿½Ä³ï¿½ï¿½ï¿½
 	    * @param @param list
-	    * @param @return    ²ÎÊýËµÃ÷
-	    * @return String    ·µ»ØÀàÐÍ
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return String    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */
 	    
-	public static String getCountFromList(List<ExamPaper> returnExampaperList)
+	public static Integer getCountFromList(List<ExamPaper> returnExampaperList)
 	{
-		return returnExampaperList.size()+"";
+		return returnExampaperList.size();
 	}
 	
 	
 	
 	    /**
 	    * @Title: transferNameMatchSQLInMap
-	    * @Description: ÐÞ¸ÄmapÖÐkey£¬ÒÔÂú×ãÊý¾Ý¿â·ÃÎÊÐèÒª
+	    * @Description: ï¿½Þ¸ï¿½mapï¿½ï¿½keyï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òª
 	    * @param @param paramMap
-	    * @param @return    ²ÎÊýËµÃ÷
-	    * @return Map<String,String>    ·µ»ØÀàÐÍ
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return Map<String,String>    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */
 	    
