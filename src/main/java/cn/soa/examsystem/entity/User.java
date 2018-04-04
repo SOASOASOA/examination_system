@@ -2,9 +2,9 @@
     /**  
     * @Title: User.java
     * @Package cn.soa.examsystem.entity
-    * @Description: TODO(ÓÃÒ»¾ä»°ÃèÊö¸ÃÎÄ¼þ×öÊ²Ã´)
+    * @Description: TODO(ï¿½ï¿½Ò»ï¿½ä»°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ê²Ã´)
     * @author zhugang
-    * @date 2018Äê3ÔÂ19ÈÕ
+    * @date 2018ï¿½ï¿½3ï¿½ï¿½19ï¿½ï¿½
     * @version V1.0  
     */
     
@@ -18,9 +18,9 @@ import javax.validation.constraints.NotNull;
 
     /**
     * @ClassName: User
-    * @Description: ÓÃ»§ÐÅÏ¢
+    * @Description:ç”¨æˆ·å®žä½“ç±»
     * @author zhugang
-    * @date 2018Äê3ÔÂ21ÈÕ
+    * @date 2018ï¿½ï¿½3ï¿½ï¿½21ï¿½ï¿½
     *
     */
     
@@ -28,7 +28,7 @@ public class User implements Serializable{
 
 	
 	    /**
-	    * @Fields serialVersionUID : ÐòÁÐ»¯Ê¹ÓÃ
+	    * @Fields serialVersionUID : ï¿½ï¿½ï¿½Ð»ï¿½Ê¹ï¿½ï¿½
 	    */
 	    
 	private static final long serialVersionUID = 11L;
@@ -65,7 +65,7 @@ public class User implements Serializable{
 	
 	    
 	    /**
-	     * ´´½¨Ò»¸öÐÂµÄÊµÀý User.
+	     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Âµï¿½Êµï¿½ï¿½ User.
 	     *
 	     */
 	    
@@ -78,7 +78,7 @@ public class User implements Serializable{
 
 
 		/**
-	     * ´´½¨Ò»¸öÐÂµÄÊµÀý User.
+	     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Âµï¿½Êµï¿½ï¿½ User.
 	     *
 	     * @param id
 	     * @param account
@@ -426,7 +426,7 @@ public class User implements Serializable{
 
 
 		
-		    /* (·Ç Javadoc)
+		    /* (ï¿½ï¿½ Javadoc)
 		    * 
 		    * 
 		    * @return

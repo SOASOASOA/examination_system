@@ -1,0 +1,54 @@
+
+.layui-body-first {
+	position: absolute; 
+	left: 220px; 
+	top: 100px; 
+	width: 100%;
+    height: 100%;
+}
+
+.f-content1 {
+	float:left;
+	margin-right:30px;
+	background-color:#F8F8F8;
+	width: 300px;
+    height: 380px;
+    position: relative;
+}
+
+.f-content2 {
+	float:left;
+	margin-right:30px;
+	background-color:#F8F8F8;
+	width: 300px;
+    height: 380px;
+    position: relative;
+}
+
+.c-content1{
+	position: absolute; 
+	left: 20px; 
+	top: 280px; 
+}
+
+.c-content2 {
+	position: absolute; 
+	left: 20px; 
+	top: 280px; 
+}
+
+
+#layui-body-first-pic1 {
+	position:absolute;
+	left:90px;
+	top:60px;
+	z-index:1
+}
+
+#layui-body-first-pic2 {
+	position:absolute;
+	left:410px;
+	top:60px;
+	z-index:1
+}
+

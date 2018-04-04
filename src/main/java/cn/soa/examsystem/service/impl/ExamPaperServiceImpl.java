@@ -2,9 +2,9 @@
     /**  
     * @Title: ExamPaperServiceImpl.java
     * @Package cn.soa.examsystem.service.impl
-    * @Description: TODO(ÓÃÒ»¾ä»°ÃèÊö¸ÃÎÄ¼ş×öÊ²Ã´)
+    * @Description: TODO(ï¿½ï¿½Ò»ï¿½ä»°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ê²Ã´)
     * @author zhugang
-    * @date 2018Äê3ÔÂ24ÈÕ
+    * @date 2018ï¿½ï¿½3ï¿½ï¿½24ï¿½ï¿½
     * @version V1.0  
     */
     
@@ -30,9 +30,9 @@ import cn.soa.examsystem.util.PropertiesUtils;
 
     /**
     * @ClassName: ExamPaperServiceImpl
-    * @Description: ÊÔÌâÄ£¿éÒµÎñ²ã·şÎñÀà
+    * @Description: ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     * @author zhugang
-    * @date 2018Äê3ÔÂ29ÈÕ
+    * @date 2018ï¿½ï¿½3ï¿½ï¿½29ï¿½ï¿½
     *
     */
     
@@ -50,7 +50,7 @@ public class ExamPaperServiceImpl implements ExamPaperServiceInter{
 	
 
 	
-	    /* (·Ç Javadoc)
+	    /* (ï¿½ï¿½ Javadoc)
 	    * 
 	    * 
 	    * @param paramMap
@@ -59,7 +59,7 @@ public class ExamPaperServiceImpl implements ExamPaperServiceInter{
 	    */
 	    
 	public List<ExamPaper> getExamPaperByLimitCondition(Map<String, String> paramMap) {
-		//¶Ô²ÎÊımapµÄkeyÌæ»»Îª¶ÔÓ¦Êı¾İ¿â×Ö¶Î
+		//ï¿½Ô²ï¿½ï¿½ï¿½mapï¿½ï¿½keyï¿½æ»»Îªï¿½ï¿½Ó¦ï¿½ï¿½ï¿½İ¿ï¿½ï¿½Ö¶ï¿½
 		paramMap = examPaperUtils.transferNameMatchSQLInMap(paramMap);
 		
 		Map<String, String> tempParamMap = ExamPaperUtils.removeValueNullInMap(paramMap);
@@ -68,7 +68,7 @@ public class ExamPaperServiceImpl implements ExamPaperServiceInter{
 	}
 
 
-	    /* (·Ç Javadoc)
+	    /* (ï¿½ï¿½ Javadoc)
 	    * 
 	    * List<KnowledgePoint> list=
 	    * @param fatherKnowledgeID
@@ -77,7 +77,7 @@ public class ExamPaperServiceImpl implements ExamPaperServiceInter{
 	    */
 	    
 	public List<String> getKnowledgePointByItsFatherID(String fatherKnowledgeID) {
-		//·µ»Ø²ÎÊı
+		//ï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½
 		List<String> returnList = new ArrayList<String>();
 		
 		List<KnowledgePoint> tempList = examPaperDao.getKnowledgePointByItsFatherID(fatherKnowledgeID);
@@ -87,7 +87,7 @@ public class ExamPaperServiceImpl implements ExamPaperServiceInter{
 		return returnList;
 	}
 	
-	    /* (·Ç Javadoc)
+	    /* (ï¿½ï¿½ Javadoc)
 	    * 
 	    * 
 	    * @param subjectName
@@ -96,7 +96,7 @@ public class ExamPaperServiceImpl implements ExamPaperServiceInter{
 	    */
 	    
 	public List<String> getKnowledgePointBySubject(String subjectName) {
-		//·µ»Ø²ÎÊı
+		//ï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½
 		List<String> returnList = new ArrayList<String>();
 		
 		List<KnowledgePoint> tempList = examPaperDao.getKnowledgePointByItsFatherID(subjectName);
@@ -108,7 +108,7 @@ public class ExamPaperServiceImpl implements ExamPaperServiceInter{
 
 
 	
-	    /* (·Ç Javadoc)
+	    /* (ï¿½ï¿½ Javadoc)
 	    * 
 	    * 
 	    * @return
@@ -116,7 +116,7 @@ public class ExamPaperServiceImpl implements ExamPaperServiceInter{
 	    */
 	    
 	public List<String> getAllExamQuestionType() {
-		//·µ»ØÖµ
+		//ï¿½ï¿½ï¿½ï¿½Öµ
 		List<String> returnList = new ArrayList<String>();
 		
 		List<QuestionType> tempList = examPaperDao.getAllExamQuestionType();
@@ -128,7 +128,7 @@ public class ExamPaperServiceImpl implements ExamPaperServiceInter{
 
 
 	
-	    /* (·Ç Javadoc)
+	    /* (ï¿½ï¿½ Javadoc)
 	    * 
 	    * 
 	    * @return
@@ -142,7 +142,7 @@ public class ExamPaperServiceImpl implements ExamPaperServiceInter{
 
 
 	
-	    /* (·Ç Javadoc)
+	    /* (ï¿½ï¿½ Javadoc)
 	    * 
 	    * 
 	    * @return
@@ -156,7 +156,7 @@ public class ExamPaperServiceImpl implements ExamPaperServiceInter{
 
 
 	
-	    /* (·Ç Javadoc)
+	    /* (ï¿½ï¿½ Javadoc)
 	    * 
 	    * 
 	    * @return
@@ -170,7 +170,7 @@ public class ExamPaperServiceImpl implements ExamPaperServiceInter{
 
 
 	
-	    /* (·Ç Javadoc)
+	    /* (ï¿½ï¿½ Javadoc)
 	    * 
 	    * 
 	    * @return
@@ -184,7 +184,7 @@ public class ExamPaperServiceImpl implements ExamPaperServiceInter{
 
 
 	
-	    /* (·Ç Javadoc)
+	    /* (ï¿½ï¿½ Javadoc)
 	    * 
 	    * 
 	    * @return
@@ -198,7 +198,7 @@ public class ExamPaperServiceImpl implements ExamPaperServiceInter{
 
 
 	
-	    /* (·Ç Javadoc)
+	    /* (ï¿½ï¿½ Javadoc)
 	    * 
 	    * 
 	    * @return
@@ -206,7 +206,7 @@ public class ExamPaperServiceImpl implements ExamPaperServiceInter{
 	    */
 	    
 	public List<String> getAllExamType() {
-		//·µ»ØÖµ
+		//ï¿½ï¿½ï¿½ï¿½Öµ
 		List<String> returnList = new ArrayList<String>();
 		
 		List<String> tempList = examPaperDao.getAllExamType();
@@ -217,6 +217,21 @@ public class ExamPaperServiceImpl implements ExamPaperServiceInter{
 				returnList.add(tempStr);	
 			}		
 		}
+		return returnList;
+	}
+
+
+	
+	    /* (é Javadoc)
+	    * 
+	    * 
+	    * @param title
+	    * @return
+	    * @see cn.soa.examsystem.service.inter.ExamPaperServiceInter#getAllExamQuesByTitle(java.lang.String)
+	    */
+	    
+	public List<ExamPaper> getAllExamQuesByTitle(String title) {
+		List<ExamPaper> returnList = examPaperDao.getAllExamQuesByTitle(title);
 		return returnList;
 	}
 	

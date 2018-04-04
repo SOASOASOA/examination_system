@@ -2,9 +2,9 @@
     /**  
     * @Title: ExamPaperDao.java
     * @Package cn.soa.examsystem.dao
-    * @Description: ¿¼ÊÔÏµÍ³¿ØÖÆ²ã
+    * @Description: ï¿½ï¿½ï¿½ï¿½ÏµÍ³ï¿½ï¿½ï¿½Æ²ï¿½
     * @author zhugang
-    * @date 2018Äê3ÔÂ24ÈÕ
+    * @date 2018ï¿½ï¿½3ï¿½ï¿½24ï¿½ï¿½
     * @version V1.0  
     */
     
@@ -23,9 +23,9 @@ import cn.soa.examsystem.entity.Subject;
 
 /**
     * @ClassName: ExamPaperDao
-    * @Description: ÊÔÌâÄ£¿édao²ã
+    * @Description: è¯•é¢˜æŸ¥è¯¢daoå±‚
     * @author zhugang
-    * @date 2018Äê3ÔÂ24ÈÕ
+    * @date 2018ï¿½ï¿½3ï¿½ï¿½24ï¿½ï¿½
     *
     */
 @Repository
@@ -34,10 +34,10 @@ public interface ExamPaperDao {
 	
 	    /**
 	    * @Title: getExamPaperByLimitContition
-	    * @Description: TODO(ÕâÀïÓÃÒ»¾ä»°ÃèÊöÕâ¸ö·½·¨µÄ×÷ÓÃ)
+	    * @Description: TODO(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ä»°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 	    * @param @param paramMap
-	    * @param @return    ²ÎÊıËµÃ÷
-	    * @return List<ExamPaper>    ·µ»ØÀàĞÍ
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return List<ExamPaper>    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */
 	    
@@ -45,9 +45,9 @@ public interface ExamPaperDao {
 		
 	    /**
 	    * @Title: getAllSubject
-	    * @Description: »ñÈ¡ËùÓĞµÄ¿ÆÄ¿
-	    * @param @return    ²ÎÊıËµÃ÷
-	    * @return List<Subject>    ·µ»ØÀàĞÍ
+	    * @Description: ï¿½ï¿½È¡ï¿½ï¿½ï¿½ĞµÄ¿ï¿½Ä¿
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return List<Subject>    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */
 	    
@@ -55,10 +55,10 @@ public interface ExamPaperDao {
 	
 	    /**
 	    * @Title: getKnowledgePointBySubject
-	    * @Description: »ñÈ¡¸ø¶¨¿ÆÄ¿ÏÂ¾ßÓĞµÄÖªÊ¶µã
+	    * @Description: ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½Â¾ï¿½ï¿½Ğµï¿½ÖªÊ¶ï¿½ï¿½
 	    * @param @param subject
-	    * @param @return    ²ÎÊıËµÃ÷
-	    * @return List<KnowledgePoint>    ·µ»ØÀàĞÍ
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return List<KnowledgePoint>    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */
 	    
@@ -67,10 +67,10 @@ public interface ExamPaperDao {
 	
 	    /**
 	    * @Title: getKnowledgePointByItsFather
-	    * @Description: ¸ù¾İ¸¸½ÚµãÖªÊ¶µã²éÑ¯×ÓÖªÊ¶µã
+	    * @Description: ï¿½ï¿½ï¿½İ¸ï¿½ï¿½Úµï¿½ÖªÊ¶ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ÖªÊ¶ï¿½ï¿½
 	    * @param @param subject
-	    * @param @return    ²ÎÊıËµÃ÷
-	    * @return List<KnowledgePoint>    ·µ»ØÀàĞÍ
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return List<KnowledgePoint>    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */
 	    
@@ -78,9 +78,9 @@ public interface ExamPaperDao {
 	
 	    /**
 	    * @Title: getAllQuestionType
-	    * @Description: »ñÈ¡ËùÓĞµÄ¿¼ÌâÌâĞÍ
-	    * @param @return    ²ÎÊıËµÃ÷
-	    * @return List<QuestionType>    ·µ»ØÀàĞÍ
+	    * @Description: ï¿½ï¿½È¡ï¿½ï¿½ï¿½ĞµÄ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return List<QuestionType>    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */
 	    
@@ -88,9 +88,9 @@ public interface ExamPaperDao {
 	
 	    /**
 	    * @Title: getAllweight
-	    * @Description: »ñÈ¡ËùÓĞµÄ¿¼ÌâÈ¨ÖØ
-	    * @param @return    ²ÎÊıËµÃ÷
-	    * @return List<String>    ·µ»ØÀàĞÍ
+	    * @Description: ï¿½ï¿½È¡ï¿½ï¿½ï¿½ĞµÄ¿ï¿½ï¿½ï¿½È¨ï¿½ï¿½
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return List<String>    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */
 	    
@@ -98,9 +98,9 @@ public interface ExamPaperDao {
 	
 	    /**
 	    * @Title: getAllExamQuesAnswerTime
-	    * @Description: »ñÈ¡ËùÓĞµÄ¿¼ÌâÏŞÊ±
-	    * @param @return    ²ÎÊıËµÃ÷
-	    * @return List<String>    ·µ»ØÀàĞÍ
+	    * @Description: ï¿½ï¿½È¡ï¿½ï¿½ï¿½ĞµÄ¿ï¿½ï¿½ï¿½ï¿½ï¿½Ê±
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return List<String>    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */
 	    
@@ -108,9 +108,9 @@ public interface ExamPaperDao {
 	
 	    /**
 	    * @Title: getAllExamQuesAnswerNum
-	    * @Description: »ñÈ¡ËùÓĞµÄ¿¼Ìâ´ÎÊı
-	    * @param @return    ²ÎÊıËµÃ÷
-	    * @return List<String>    ·µ»ØÀàĞÍ
+	    * @Description: ï¿½ï¿½È¡ï¿½ï¿½ï¿½ĞµÄ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return List<String>    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */
 	    
@@ -118,9 +118,9 @@ public interface ExamPaperDao {
 	
 	    /**
 	    * @Title: getAllExamDiffculty
-	    * @Description: »ñÈ¡ËùÓĞµÄ¿¼ÌâÄÑ¶È
-	    * @param @return    ²ÎÊıËµÃ÷
-	    * @return List<String>    ·µ»ØÀàĞÍ
+	    * @Description: ï¿½ï¿½È¡ï¿½ï¿½ï¿½ĞµÄ¿ï¿½ï¿½ï¿½ï¿½Ñ¶ï¿½
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return List<String>    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */
 	    
@@ -128,9 +128,9 @@ public interface ExamPaperDao {
 	
 	    /**
 	    * @Title: getAllExamEvaluate
-	    * @Description: »ñÈ¡ËùÓĞµÄ¿¼ÌâÆÀ¼Û
-	    * @param @return    ²ÎÊıËµÃ÷
-	    * @return List<String>    ·µ»ØÀàĞÍ
+	    * @Description: ï¿½ï¿½È¡ï¿½ï¿½ï¿½ĞµÄ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return List<String>    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */
 	    
@@ -138,11 +138,36 @@ public interface ExamPaperDao {
 	
 	    /**
 	    * @Title: getAllExamType
-	    * @Description: »ñÈ¡ËùÓĞµÄ¿¼ÌâÀàĞÍ
-	    * @param @return    ²ÎÊıËµÃ÷
-	    * @return List<String>    ·µ»ØÀàĞÍ
+	    * @Description: æŸ¥è¯¢è¯•é¢˜ç±»å‹
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return List<String>    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */
 	    
 	public List<String> getAllExamType();
+	
+	    /**
+	    * @Title: getAllExamQuesByTitle
+	    * @Description: æ ¹æ®é¢˜ç›®æŸ¥è¯¢è¯•é¢˜
+	    * @param @param title
+	    * @param @return    å‚æ•°è¯´æ˜
+	    * @return List<ExamPaper>    è¿”å›ç±»å‹
+	    * @throws
+	    */
+	    
+	public List<ExamPaper> getAllExamQuesByTitle(String title);
+	
+	
+	
+	    /**
+	    * @Title: getAllExamQuesByTitle
+	    * @Description: æ ¹æ®æ¡ä»¶ä¿®æ”¹æ•°æ®åº“å€¼
+	    * @param @param id
+	    * @param @param map
+	    * @param @return    å‚æ•°è¯´æ˜
+	    * @return int    è¿”å›ç±»å‹
+	    * @throws
+	    */
+	    
+	public int changeExamQuesValue(@Param("paramID") String id,@Param("paramMap") Map<String, String> map);
 }

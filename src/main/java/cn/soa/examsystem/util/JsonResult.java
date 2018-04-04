@@ -8,14 +8,24 @@ public class JsonResult<T> implements Serializable{
 	private int state;
 	private String message;
 	private T data;
+	private String count;
 	
 	public static final int SUCCESS=0;
 	public static final int ERROR=1;
+	
+	
 	
 	public JsonResult(){
 		state=ERROR;
 		state=SUCCESS;
 	}
+	
+	public JsonResult( String count,  T data) {
+		state=SUCCESS;
+		this.count = count;
+		this.data=data;
+	}
+	
 	public JsonResult(T data){
 		state=SUCCESS;
 		this.data=data;
@@ -56,6 +66,26 @@ public class JsonResult<T> implements Serializable{
 	public void setData(T data) {
 		this.data = data;
 	}
+	
+	
+	
+	/**
+	* @return count
+	*/
+	
+	public String getCount() {
+		return count;
+	}
+
+	
+	/**
+	 * @param count the count to set
+	 */
+	
+	public void setCount(String count) {
+		this.count = count;
+	}
+
 	@Override
 	public String toString() {
 		return "JsonResult [state=" + state + ", message=" + message + ", data=" + data + "]";

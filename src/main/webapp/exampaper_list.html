@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>考试列表</title>
+	<link rel="stylesheet" href="layui/css/layui.css">
+	<!-- 引入外联样式文件 -->
+	<link href="css/exampaper/examPaper_list.css" rel="stylesheet" type="text/css" rel="stylesheet"/>
+	<script src="layui/layui.all.js"></script>
+	<script src="jquery/jquery-3.2.1.js"></script>
+	<script>	
+		var element = layui.element;
+		var table = layui.table;
+		var form = layui.form;
+		var layer = layui.layer;
+		var layedit = layui.layedit;
+		var laydate = layui.laydate;
+		
+		//url-pre定义
+		var ip = "localhost";
+		var port = "8080";
+		var preUrl = ip + ":" + port + "/examination_system";
+
+		//url定义
+		var tableUrl =preUrl +"/exampaperModule/exampaper/all";
+		var subjectUrl =preUrl + "";
+		var knowledgeUrl =preUrl + "";
+		var QuesTypeUrl =preUrl + "";
+		var answerTimeUrl =preUrl + "";
+		var answerNumUrl =preUrl + "";
+		var weightUrl =preUrl + "";
+		var difficultyUrl =preUrl + "";
+		var evaluateUrl =preUrl + "";
+		var typeUrl =preUrl + "";
+
+		var options = {};
+		form.render();
+		$().ready(function() {
+			//form渲染
+			form.render();
+			
+			//发送请求加载表格
+			options = table.render({
+			    elem: '#demo',
+			    cols: [[ //标题栏
+			      {field: 'id', title: 'ID', width: 180, sort: true, fixed: 'left'},
+			      {field: 'questionType', title: '题型', width: 120, fixed: 'left'},
+			      {field: 'weight', title: '权重', edit: 'text',  minWidth: 250},
+			      {field: 'answerTime', title: '限时', edit: 'text',  minWidth:180},
+			      {field: 'answerNum', title: '限答', width: 180},
+			      {field: 'difficulty', title: '难度', edit: 'text', width: 100},
+			      {field: 'evaluate', title: '评价', width: 180, sort: true}	,
+			      {field: 'type',fixed: '属性', Width:50, align:'center'},
+			      {field: 'time', title: '时间', width: 180, sort: true}	,
+			      {field: 'title', title: '题目', width: 180, sort: true}
+			    ]],
+			    data:[{id:"1",questionType:"2",weight:"3",answerTime:"4",answerNum:"5",
+			    	difficulty:"6",evaluate:"7",type:"8",time:"9",title:"10"},
+			    	{id:"1",questionType:"2",weight:"3",answerTime:"4",answerNum:"5",
+			    	difficulty:"6",evaluate:"7",type:"8",time:"9",title:"10"}],
+			    skin: 'line' ,//表格风格
+			    even: true,
+			    page: true, //是否显示分页
+			    limits: [5, 10, 15],
+			    limit: 10 //每页默认显示的数量
+			});
+				
+			//测试添加subject
+			var testSubjectJson = new Array("你的","废话","很多","挺好");
+			
+				
+				
+		});
+		//监听单元格编辑
+		table.on('edit(test3)', function(obj){
+			
+			var value = obj.value, //得到修改后的值
+			data = obj.data, //得到所在行所有键值
+			field = obj.field; //得到字段
+			layer.msg('[ID: '+ data.id +'] ' + field + ' 字段更改为：'+ value);
+		});
+		
+		var initFormFunction = function(){
+			console.log(subjectUrl);
+			//加载科目
+			$.ajax({
+			         type: "GET",
+			         url: subjectUrl,
+			         data: {},
+			         async: true, //默认
+			         cache: true, //默认
+			         contentType: "application/x-www-form-urlencoded",//默认
+			         dataType: "json",//必须指定，否则根据后端判断
+			         beforeSend:  function(XMLHttpRequest){//在beforeSend中如果返回false可以取消本次ajax请求
+			             //this;   //调用本次ajax请求时传递的options参数
+			         },
+			         complete:   function(XMLHttpRequest, textStatus){//请求完成后调用的回调函数（请求成功或失败时均调用）
+			            //this;    //调用本次ajax请求时传递的options参数
+			         },
+			         success: function(subjectData){
+			         	console.log(subjectData);
+			        	for(var i=0;i<subjectData.length;i++){
+			 				console.log(i);
+			 				var tempSubjectInfo = subjectData[i];
+			 				$('#from-div-div-select').append("<option value=''>" + tempSubjectInfo + "</option>");
+			 			}
+			        	//$('#from-div-div-select').append("<option value="">请选择科目</option>");
+			        	//重新渲染form
+			 			form.render();
+			         },
+			         error:function(){}
+			     });
+			
+			//加载知识点
+			$.getJSON("knowledgeUrl",{},function(knowledgeData){
+				 console.log(knowledgeData);
+	        	 for(var i=0;i<knowledgeData.length;i++){
+	 				console.log(i);
+	 				var tempKnowledgeInfo = knowledgeData[i];
+	 				$('#from-div-div-select').append("<option value=''>" + tempKnowledgeInfo + "</option>");
+	 			 }
+	        	 //$('#from-div-div-select').append("<option value="">请选择知识点</option>");	        	
+	        	 //重新渲染form
+	 			 form.render();
+			});
+			//动态生成子级知识点
+			
+			
+			//加载类型、限时、限答、权重、难度……
+			
+		}
+		
+		
+		
+
+	</script>
+	<script type="text/html" id="barDemo">
+		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+	</script>
+</head>
+<body class="layui-layout-body">
+	<div class="layui-layout layui-layout-admin">
+	  <div class="layui-header">
+	    <div class="layui-logo">在线考试系统</div>
+	    <!-- 头部区域（可配合layui已有的水平导航） -->
+	    <ul class="layui-nav layui-layout-left">
+	      <li class="layui-nav-item"><a href="">题库管理</a></li>
+	      <li class="layui-nav-item"><a href="">用户管理</a></li>
+	      <li class="layui-nav-item"><a href="">试卷管理</a></li>
+	      <li class="layui-nav-item"><a href="">考场管理</a></li>
+	    </ul>
+	    <ul class="layui-nav layui-layout-right">
+	      <li class="layui-nav-item">
+	        <a href="javascript:;">
+	          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+	       	      贤心
+	        </a>
+	        <dl class="layui-nav-child">
+	          <dd><a href="">基本资料</a></dd>
+	          <dd><a href="">安全设置</a></dd>
+	        </dl>
+	      </li>
+	      <li class="layui-nav-item"><a href="">退了</a></li>
+	    </ul>
+	  </div>
+	  
+	  <!-- 内容主体区域 -->
+	  <div >
+	  	<!-- 搜索框 -->
+	  	 <div >
+	      <form class="layui-form" action="" style="margin-left:10px;">
+	         <div class="layui-form-item" style="margin-top:5px;height:20px;">
+			    <div class="layui-inline" style="width:200px;">
+			      <select id='from-div-div-select' class="select1" lay-verify="required" > 
+			        <!--  <option value="">请选择科目</option>
+			        <option value="0">净化</option>
+			        <option value="1">维修</option>
+			        <option value="2">分析</option>-->
+			      </select>
+			    </div>
+			    <div class="layui-inline" style="width:200px;">
+			      <select class="select1" lay-verify="required" >
+			        <option value="">请选择知识点</option>
+			        <option value="0">初级</option>
+			        <option value="1">中级</option>
+			        <option value="2">高级</option>
+			      </select>
+			    </div>
+			   </div>
+			   <div class="layui-form-item" style="height:20px;margin-buttom:5px;">
+			    <div class="layui-inline" style="width:150px;margin-top:5px;margin-right:0px;">
+			      <select name="select2" lay-verify="required" >
+			        <option value="">选择题型</option>
+			        <option value="0">判断题</option>
+			        <option value="1">选择题</option>
+			        <option value="2">多选题</option>
+			      </select>
+			    </div>
+			    <div class="layui-inline" style="width:150px;margin-top:5px;margin-left:0px;margin-right:0px;" >
+			      <select name="select2" lay-verify="required"  >
+			        <option value="">限答次数</option>
+			        <option value="0">1</option>
+			        <option value="1">2</option>
+			        <option value="2">3</option>
+			      </select>
+			    </div>
+			    <div class="layui-inline" style="width:150px;margin-top:5px;margin-left:0px;margin-right:0px;" >
+			      <select name="select2" lay-verify="required"  >
+			        <option value="">限答时间</option>
+			        <option value="0">1</option>
+			        <option value="1">2</option>
+			        <option value="2">3</option>
+			      </select>
+			    </div>
+			    <div class="layui-inline" style="width:150px;margin-top:5px;margin-left:0px;margin-right:0px;" >
+			      <select name="select2" lay-verify="required"  >
+			        <option value="">权重</option>
+			        <option value="0">1</option>
+			        <option value="1">2</option>
+			        <option value="2">3</option>
+			      </select>
+			    </div>
+			    <div class="layui-inline" style="width:150px;margin-top:5px;margin-left:0px;margin-right:0px;" >
+			      <select name="select2" lay-verify="required"  >
+			        <option value="">难度</option>
+			        <option value="0">1</option>
+			        <option value="1">2</option>
+			        <option value="2">3</option>
+			      </select>
+			    </div>
+			    <div class="layui-inline" style="width:150px;margin-top:5px;margin-left:0px;margin-right:0px;" >
+			      <select name="select2" lay-verify="required"  >
+			        <option value="">评价</option>
+			        <option value="0">1</option>
+			        <option value="1">2</option>
+			        <option value="2">3</option>
+			      </select>
+			    </div>
+			    <div class="layui-inline" style="width:150px;margin-top:5px;margin-left:0px;margin-right:0px;" >
+			      <select name="select2" lay-verify="required"  >
+			        <option value="">属性</option>
+			        <option value="0">1</option>
+			        <option value="1">2</option>
+			        <option value="2">3</option>
+			      </select>
+			    </div>
+			    <div class="layui-inline" style="width:150px;margin-top:5px;margin-left:0px;margin-right:0px;" >
+			      <select name="select2" lay-verify="required"  >
+			        <option value="">时间</option>
+			        <option value="0">1</option>
+			        <option value="1">2</option>
+			        <option value="2">3</option>
+			      </select>
+			    </div>
+			   </div>
+	     </form>
+	   </div>		     	  	
+	  	<!-- 数据表格 -->	 	 	   
+	    <div style="margin-left:10px;">	
+		  	<table class="layui-hide" id="demo" ></table>
+	    </div>
+	</div>
+	
+	  <div class="layui-footer">
+	    <!-- 底部固定区域 -->
+	    © layui.com - 底部固定区域
+	  </div>
+	</div>
+</body>
+</html>

@@ -56,29 +56,33 @@
 	    <property name="defaultEncoding" value="UTF-8"/>  
 	    <property name="cacheSeconds" value="60"/>  
 	</bean>  
+	
 	<!-- 方法级别效验 -->
 	<bean class="org.springframework.validation.beanvalidation.BeanValidationPostProcessor"/>  
-	<!--=================配置拦截器=================================== -->
+	
+	<!--=================配置拦截器=================================== 
 	<mvc:interceptors>
-		<mvc:interceptor>
-			<!--拦截的请求 -->
-			<mvc:mapping path="/**"/>
-			<!--放过的请求 -->
+		<mvc:interceptor>-->
+			<!--拦截的请求
+			<mvc:mapping path="/**"/> -->
+			<!--放过的请求 
 			<mvc:exclude-mapping path="/login/checkUser.do"/>
 			<bean class="com.soa.intercepter.LoginIntercepter"></bean>
 		</mvc:interceptor>
-	</mvc:interceptors>
-	<!--=================启用Spring对基于注解的Cache的支持=================================== -->
-	<cache:annotation-driven cache-manager="ehcacheManager" />
+	</mvc:interceptors>-->
 	
-	<!-- cacheManager工厂类，指定ehcache.xml的位置 -->
+	<!--=================启用Spring对基于注解的Cache的支持=================================== 
+	<cache:annotation-driven cache-manager="ehcacheManager" />-->
+	
+	<!-- cacheManager工厂类，指定ehcache.xml的位置 
 	<bean id="ehcacheManagerFactory"
 		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
 		<property name="configLocation" value="classpath:conf/ehcache.xml" />
-	</bean>
-	<!-- 声明cacheManager -->
+	</bean>-->
+	
+	<!-- 声明cacheManager 
 	<bean id="ehcacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
 		<property name="cacheManager" ref="ehcacheManagerFactory" />
-	</bean>
+	</bean>-->
 </beans>
 

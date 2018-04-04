@@ -2,9 +2,9 @@
     /**  
     * @Title: ExamPaperController.java
     * @Package cn.soa.examsystem.controller
-    * @Description: TODO(ÓÃÒ»¾ä»°ÃèÊö¸ÃÎÄ¼ş×öÊ²Ã´)
+    * @Description: TODO(ï¿½ï¿½Ò»ï¿½ä»°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ê²Ã´)
     * @author zhugang
-    * @date 2018Äê3ÔÂ24ÈÕ
+    * @date 2018ï¿½ï¿½3ï¿½ï¿½24ï¿½ï¿½
     * @version V1.0  
     */
     
@@ -33,9 +33,9 @@ import cn.soa.examsystem.util.JsonResultForTable;
 
 /**
     * @ClassName: ExamPaperController
-    * @Description: ÊÔÌâÄ£¿é¿ØÖÆ²ã
+    * @Description: ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½Æ²ï¿½
     * @author zhugang
-    * @date 2018Äê3ÔÂ24ÈÕ
+    * @date 2018ï¿½ï¿½3ï¿½ï¿½24ï¿½ï¿½
     *
     */
 @Validated
@@ -48,30 +48,30 @@ public class ExamPaperController {
 	
 	    /**
 	    * @Title: getExamPaperByLimitCondition
-	    * @Description: ²éÑ¯ËùÓĞÊÔÌâ-¿ØÖÆ²ã
+	    * @Description: ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-ï¿½ï¿½ï¿½Æ²ï¿½
 	    * @param @param paramMap
-	    * @param @return    ²ÎÊıËµÃ÷
-	    * @return JsonResultForTable<List<ExamPaper>>    ·µ»ØÀàĞÍ
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return JsonResultForTable<List<ExamPaper>>    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */
 	    
 	@RequestMapping(value= {"/exampaper/all"})
 	//@RequestMapping(value= {"/exampaper/all"},method=RequestMethod.GET)
-	public JsonResultForTable<List<ExamPaper>> getExamPaperByLimitCondition(@RequestParam("paramMap") @NotNull(message= "{map.notnull}") Map<String, String> paramMap) 
+	public JsonResult<List<ExamPaper>> getExamPaperByLimitCondition(@RequestParam("paramMap") @NotNull(message= "{map.notnull}") Map<String, String> paramMap) 
 	{		
 		List<ExamPaper> returnExampaperList = examPaperService.getExamPaperByLimitCondition(paramMap);
-		//·â×°·µ»ØµÄjson
+		//å°è£…Json
 		String returnCount = ExamPaperUtils.getCountFromList(returnExampaperList);
-		return new JsonResultForTable<List<ExamPaper>>("0", "ÇëÇó³É¹¦", returnCount, returnExampaperList);		
+		return new JsonResult<List<ExamPaper>>(returnCount, returnExampaperList);		
 	}
 
 	
 	    /**
 	    * @Title: getKnowledgePointByItsFatherID
-	    * @Description: ¸ù¾İ¸¸½ÚµãÖªÊ¶µã²éÑ¯×Ó½ÚµãÖªÊ¶µã-¿ØÖÆ²ã
+	    * @Description: ï¿½ï¿½ï¿½İ¸ï¿½ï¿½Úµï¿½ÖªÊ¶ï¿½ï¿½ï¿½Ñ¯ï¿½Ó½Úµï¿½ÖªÊ¶ï¿½ï¿½-ï¿½ï¿½ï¿½Æ²ï¿½
 	    * @param @param fatherKnowledgeID
-	    * @param @return    ²ÎÊıËµÃ÷
-	    * @return JsonResult<List<String>>    ·µ»ØÀàĞÍ
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return JsonResult<List<String>>    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */
 	    
@@ -79,17 +79,17 @@ public class ExamPaperController {
 	//@RequestMapping(value= {"/knowledgePoint/fatherKnowledgeID"},method=RequestMethod.GET)
 	public JsonResult<List<String>> getKnowledgePointByItsFatherID(@RequestParam("fatherKnowledgeID") @NotNull(message= "{fatherKnowledgeID.notnull}") String fatherKnowledgeID) {		
 		List<String> returnListKnowledge = examPaperService.getKnowledgePointByItsFatherID(fatherKnowledgeID);
-		//·â×°·µ»ØµÄjson
+		//ï¿½ï¿½×°ï¿½ï¿½ï¿½Øµï¿½json
 		return new JsonResult<List<String>>(returnListKnowledge);	
 	}
 
 	
 	    /**
 	    * @Title: getKnowledgePointBySubject
-	    * @Description: »ñÈ¡Ö¸¶¨¿ÆÄ¿ÏÂ¾ßÓĞµÄÖªÊ¶µã
+	    * @Description: ï¿½ï¿½È¡Ö¸ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½Â¾ï¿½ï¿½Ğµï¿½ÖªÊ¶ï¿½ï¿½
 	    * @param @param subjectName
-	    * @param @return    ²ÎÊıËµÃ÷
-	    * @return JsonResult<List<String>>    ·µ»ØÀàĞÍ
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return JsonResult<List<String>>    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */
 	    
@@ -97,16 +97,16 @@ public class ExamPaperController {
 	//@RequestMapping(value= {"/knowledgePoint/subjectName"},method=RequestMethod.GET)
 	public JsonResult<List<String>> getKnowledgePointBySubject(@RequestParam("subjectName") @NotNull(message= "{subjectName.notnull}") String subjectName) {		
 		List<String> returnListKnowledge = examPaperService.getKnowledgePointBySubject(subjectName);
-		//·â×°·µ»ØµÄjson
+		//ï¿½ï¿½×°ï¿½ï¿½ï¿½Øµï¿½json
 		return new JsonResult<List<String>>(returnListKnowledge);	
 	}
 	
 	
 	    /**
 	    * @Title: getAllQuestionType
-	    * @Description: ²éÑ¯ËùÓĞÎÊÌâµÄÀàĞÍ
-	    * @param @return    ²ÎÊıËµÃ÷
-	    * @return JsonResult<List<String>>    ·µ»ØÀàĞÍ
+	    * @Description: ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return JsonResult<List<String>>    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */
 	    
@@ -119,9 +119,9 @@ public class ExamPaperController {
 	
 	    /**
 	    * @Title: getAllExamQuesWeight
-	    * @Description: ²éÑ¯ËùÓĞÎÊÌâµÄÈ¨ÖØ
-	    * @param @return    ²ÎÊıËµÃ÷
-	    * @return JsonResult<List<String>>    ·µ»ØÀàĞÍ
+	    * @Description: ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return JsonResult<List<String>>    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */
 	    
@@ -134,9 +134,9 @@ public class ExamPaperController {
 	
 	    /**
 	    * @Title: getAllExamQuesAnswerTime
-	    * @Description: ²éÑ¯ËùÓĞÎÊÌâµÄÏŞÊ±
-	    * @param @return    ²ÎÊıËµÃ÷
-	    * @return JsonResult<List<String>>    ·µ»ØÀàĞÍ
+	    * @Description: ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return JsonResult<List<String>>    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */
 	    
@@ -149,9 +149,9 @@ public class ExamPaperController {
 	
 	    /**
 	    * @Title: getAllExamQuesAnswerNum
-	    * @Description: ²éÑ¯ËùÓĞÎÊÌâµÄÏŞ´ğ
-	    * @param @return    ²ÎÊıËµÃ÷
-	    * @return JsonResult<List<String>>    ·µ»ØÀàĞÍ
+	    * @Description: ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ş´ï¿½
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return JsonResult<List<String>>    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */
 	    
@@ -164,9 +164,9 @@ public class ExamPaperController {
 	
 	    /**
 	    * @Title: getAllExamDiffculty
-	    * @Description: ²éÑ¯ËùÓĞÎÊÌâµÄÄÑ¶È
-	    * @param @return    ²ÎÊıËµÃ÷
-	    * @return JsonResult<List<String>>    ·µ»ØÀàĞÍ
+	    * @Description: ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¶ï¿½
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return JsonResult<List<String>>    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */
 	    
@@ -179,9 +179,9 @@ public class ExamPaperController {
 	
 	    /**
 	    * @Title: getAllExamEvaluate
-	    * @Description: ²éÑ¯ËùÓĞÎÊÌâµÄÆÀ¼Û
-	    * @param @return    ²ÎÊıËµÃ÷
-	    * @return JsonResult<List<String>>    ·µ»ØÀàĞÍ
+	    * @Description: ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return JsonResult<List<String>>    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */
 	    
@@ -194,9 +194,9 @@ public class ExamPaperController {
 	
 	    /**
 	    * @Title: getAllExamType
-	    * @Description: ²éÑ¯ËùÓĞÎÊÌâµÄÊôĞÔ
-	    * @param @return    ²ÎÊıËµÃ÷
-	    * @return JsonResult<List<String>>    ·µ»ØÀàĞÍ
+	    * @Description: ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	    * @param @return    ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
+	    * @return JsonResult<List<String>>    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	    * @throws
 	    */
 	    
@@ -206,4 +206,24 @@ public class ExamPaperController {
 		List<String> returnListExamQuesType =examPaperService.getAllExamType();
 		return new JsonResult<List<String>>(returnListExamQuesType);	
 	}
+	
+	
+	    /**
+	    * @Title: getAllExamQuesByTitle
+	    * @Description: æ ¹æ®é¢˜ç›®è·å–è¯•é¢˜
+	    * @param @param title
+	    * @param @return    å‚æ•°è¯´æ˜
+	    * @return JsonResult<List<ExamPaper>>    è¿”å›ç±»å‹
+	    * @throws
+	    */
+	    
+	@RequestMapping(value= {"/exampaper/title"})
+	//@RequestMapping(value= {"/exampaper/title"},method=RequestMethod.GET)
+	public JsonResult<List<ExamPaper>> getAllExamQuesByTitle(@RequestParam("title") @NotNull(message= "{examques.title.notnull}") String title) {		
+		List<ExamPaper> returnListExam =examPaperService.getAllExamQuesByTitle(title);
+		String returnCount = ExamPaperUtils.getCountFromList(returnListExam);
+		return new JsonResult<List<ExamPaper>>(returnCount, returnListExam);	
+	}
+	
+	
 }

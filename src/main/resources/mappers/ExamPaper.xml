@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cn.soa.examsystem.dao.ExamPaperDao">
+	<sql id="queryExamPaper">
+		select		
+			EP_ID	as	id		,	
+			QS_ID	as	qsid	,
+			EXAMQUES_CREATE_TIME	as	createTime	,
+			EXAMQUES_CREATE_PERSON	as	createPerson	,
+			EXAMQUES_MODIFY_TIME	as	modifyTime	,		 
+			EXAMQUES_NAME	as	name	,
+			EXAMQUES_TITLE	as	title	,
+			EXAMQUES_DIFFICULTY	as	difficulty	,
+			EXAMQUES_EVALUATE	as	evaluate	,
+			EXAMQUES_WEIGHT	as	weight	,
+			EXAMQUES_ANSWER_TIME	as	answerTime	,
+			EXAMQUES_ANSWER_NUM	as	answerNum	,
+			EXAMQUES_TYPE	as	type	,
+			EXAMQUES_RIGHT_ANSWER1	as	rightAnswer1	,
+			EXAMQUES_WRONG_ANSWER1	as	wrongAnswer1	,
+			EXAMQUES_WRONG_ANSWER2	as	wrongAnswer2	,
+			EXAMQUES_WRONG_ANSWER3	as	wrongAnswer3	,
+			EXAMQUES_WRONG_ANSWER4	as	wrongAnswer4	,
+			EXAMQUES_WRONG_ANSWER5	as	wrongAnswer5	,
+			EXAMQUES_WRONG_ANSWER6	as	wrongAnswer6	,
+			EXAMQUES_WRONG_ANSWER7	as	wrongAnswer7	,
+			EXAMQUES_WRONG_ANSWER8	as	wrongAnswer8	,
+			IS_CASE_SENSITIVITY	as	caseSensitivity	,
+			IS_ALLOW_SPACE	as	allowSpace	,
+			EXAMQUES_ANALYSIS	as	analysis	,
+			IS_SHARE	as	"share"	,
+			EXAMQUES_IMPORTANT_LEVEL	as	importantLevel	,
+			EXAMQUES_RIGHT_ANSWER2	as	rightAnswer2	,
+			EXAMQUES_RIGHT_ANSWER3	as	rightAnswer3	,
+			EXAMQUES_RIGHT_ANSWER4	as	rightAnswer4	,
+			EXAMQUES_RIGHT_ANSWER5	as	rightAnswer5	
+		from 
+			EXAM_QUESTION
+	</sql>
+	
+	<!-- 根据用户账号查询用户信息 -->
+	<select id="getExamPaperByLimitContition"  parameterType="string" resultType="cn.soa.examsystem.entity.ExamPaper">
+		<include refid="queryExamPaper"/>
+		<where>
+			<foreach collection="paramMap.keys" item="key" separator="and">  
+    			<if test="null != paramMap[key]">    
+    				${key} = #{paramMap[${key}]}  
+				</if>  
+	    	</foreach>  
+		</where>
+	</select>
+	
+	<!-- 获取科目下具有的知识点 -->
+	<select id="getAllSubject"  resultType="cn.soa.examsystem.entity.KnowledgePoint">
+		select 
+		  QS_ID as id,
+		  SUBJECT_NAME as name,
+		  SUBJECT_CREATE_TIME as createTime,
+		  SUBJECT_MODIFY_TIME as modifyTime,
+		  SUBJECT_STATE as	state 
+		from 
+		  QUESTIONBANK_SUBJECT
+	</select>
+	
+	<!-- 获取指定科目下具有的知识点 -->
+	<select id="getKnowledgePointBySubject" parameterType="string"  resultType="cn.soa.examsystem.entity.KnowledgePoint">
+		select 
+			 QKP_ID	id,
+			 KNOWLEDGEPOINT_NAME as	name,
+			 KNOWLEDGEPOINT_CREATE_TIME as	createTime,
+			 KNOWLEDGEPOINT_MODIFY_TIME as	modifyTime,
+			 KNOWLEDGEPOINT_FATHER_ID as	fatherID,
+			 KNOWLEDGEPOINT_CREATE_PERSON as	createPerson,
+			 KNOWLEDGEPOINT_MODIFY_PERSON as	modifyPerson
+		from 
+			QUESTIONBANK_KNOWLEDGE_POINT qkp,QUESTIONBANK_SUBJECT qs
+		where 
+			qkp.KNOWLEDGEPOINT_FATHER_ID=qs.QS_ID  and
+			qs.SUBJECT_STATE='1'  and 
+			qs.SUBJECT_NAME = #{subjectName}
+	</select>
+	
+	<!-- 根据父节点知识点名称查询下一节点知识点 -->
+	<select id="getKnowledgePointByItsFatherID" parameterType="string"  resultType="cn.soa.examsystem.entity.KnowledgePoint">
+		select 
+		    QKP_ID  as 	id,
+		    KNOWLEDGEPOINT_NAME as	name,
+		    KNOWLEDGEPOINT_CREATE_TIME as	createTime,
+		    KNOWLEDGEPOINT_MODIFY_TIME as	modifyTime,
+		    KNOWLEDGEPOINT_FATHER_ID as	fatherID,
+		    KNOWLEDGEPOINT_CREATE_PERSON as	createPerson,
+		    KNOWLEDGEPOINT_MODIFY_PERSON as	modifyPerson
+		from
+		    QUESTIONBANK_KNOWLEDGE_POINT
+		where
+		    KNOWLEDGEPOINT_FATHER_ID = #{ fatherKnowledgeID } 
+      </select>
+      
+	<!-- 获取所有的考题题型 -->
+	<select id="getAllExamQuestionType"  resultType="cn.soa.examsystem.entity.QuestionType">
+		select 
+		  QQT_ID as	id,
+		  QUESTIONTYPE_NAME	as	name,
+		  QUESTIONTYPE_CREATE_TIME	as	createTime,
+		  QUESTIONTYPE_MODIFY_TIME	as	modifyTime,
+		  QUESTIONTYPE_CREATE_PERSON	as	createPerson
+		from 
+		  QUESTIONBANK_QUESTION_TYPE		
+	</select>
+	
+	<!-- 获取所有的考题权重-->
+	<select id="getAllExamQuesweight"  resultType="string">
+		select 
+		  DISTINCT(EXAMQUES_WEIGHT)
+		from 
+		  EXAM_QUESTION		
+	</select>
+	
+	<!-- 获取所有的考题限时-->
+	<select id="getAllExamQuesAnswerTime"  resultType="string">
+		select 
+		  DISTINCT(EXAMQUES_ANSWER_TIME)
+		from 
+		  EXAM_QUESTION
+	</select>
+	
+	<!-- 获取所有的考题次数-->
+	<select id="getAllExamQuesAnswerNum"  resultType="string">
+		select 
+		  DISTINCT(EXAMQUES_ANSWER_Num)
+		from 
+		  EXAM_QUESTION
+	</select>
+	
+	<!-- 获取所有的考题难度-->
+	<select id="getAllExamDiffculty"  resultType="string">
+		select 
+		  DISTINCT(EXAMQUES_DIFFICULTY)
+		from 
+		  EXAM_QUESTION
+	</select>
+	
+	<!-- 获取所有的考题评价-->
+	<select id="getAllExamEvaluate"  resultType="string">
+		select 
+		  DISTINCT(EXAMQUES_EVALUATE)
+		from 
+		  EXAM_QUESTION
+	</select>
+	
+	<!-- 获取所有的考题类型-->
+	<select id="getAllExamType"  resultType="string">
+		select 
+		  DISTINCT(EXAMQUES_TYPE)
+		from 
+		  EXAM_QUESTION
+	</select>
+	
+	<!-- 查询所有的考题题目-->
+	<select id="getAllExamQuesByTitle" parameterType="string"  resultType="cn.soa.examsystem.entity.ExamPaper">
+		<include refid="queryExamPaper"/>
+		<where>
+			EXAMQUES_TITLE like concat(concat('%',#{arg0}),'%')
+		</where>
+	</select>
+	
+	<!-- 根据条件修改数据库值-->
+	<update id="changeExamQuesValue" parameterType="string"  >
+		update EXAM_QUESTION
+		set
+			<foreach  collection = "paramMap.keys"  item = 'key'  separator = ",">
+				${ key } =  #{ paramMap[${key}] } 
+			</foreach>
+		where 
+			EP_ID = #{ paramID }
+	</update>
+</mapper>
