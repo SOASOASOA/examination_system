@@ -6,13 +6,113 @@
 <link rel="stylesheet" type="text/css" href="layui/css/layui.css">
 <script type="text/javascript" src="layui/layui.js"></script>
 <style type="text/css">
-#tt {
-	display: none;
+html, body {
+	height: 100%;
+	background-color: #fff;
+	position: relative;
+}
+
+#head {
+	width: 100%;
+	position: absolute;
+}
+#logo{
+	height: 59.64px;
+	width: 13%;
+	float: left;
+	background-color: #393D49;
+	text-align: center;
+}
+/*logo字体样式*/
+#logo span{
+	line-height: 60px;
+	margin-left: 20px;
+	font-weight: bold;
+	font-size: 25px;
+	letter-spacing: 2px;
+	color: #fafafa;
+}
+#head_nav{
+	width:87%;
+	float: left;
+}
+#body {
+	position: absolute;
+	width: 100%;
+	top: 59.64px;
+	bottom: 0px;
+}
+/*设置垂直导航高度*/
+#body > ul{
+	position: absolute;
+	height: 100%;
+}
+
+/*导航去四边圆角*/
+.layui-nav{
+	border-radius:0px;
+	
+}
+/*垂直导航背景顔色*/
+.layui-bg-cyan{
+	border-right: 1.5px solid #DADADA;
+	background-color: #fff;
+}
+.layui-bg-cyan{
+	background-color: #fff!important;
+}
+/*侧边导航字体颜色*/
+#body_nav>li a{
+	color: #000;
+}
+/*侧边导航鼠标经过时字体和背景颜色*/
+#body_nav>li a:hover{
+	color: #fff;
+	background-color: #CBCBCB;
+}
+#body_nav>li a:hover{
+	background-color: #CBCBCB!important;
+}
+/*侧边导航选中时候的颜色*/
+.layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this>a, .layui-nav-tree .layui-this>a:hover{
+	background-color: #CBCBCB;
 }
 </style>
 </head>
 <body>
-	<div id="head"></div>
+	<div id="head">
+		<div id="logo">
+			<span>考试编排</span>
+		</div>
+		<ul id="head_nav" class="layui-nav">
+			<li class="layui-nav-item"><a href="javascript:;">管理中心</a></li>
+			<li class="layui-nav-item layui-this"><a href="javascript:;">快速跳转</a>
+				<dl class="layui-nav-child">
+					<dd>
+						<a href="">题库管理</a>
+					</dd>
+					<dd>
+						<a href="">用户管理</a>
+					</dd>
+					<dd>
+						<a href="">考试编排</a>
+					</dd>
+					<dd>
+						<a href="">考试管理</a>
+					</dd>
+				</dl></li>
+			<li class="layui-nav-item"><a href=""></a></li>
+		</ul>
+	</div>
+	<div id="body">
+		<ul id="body_nav" class="layui-nav layui-nav-tree  layui-bg-cyan layui-inline" lay-filter="demo">
+			<li class="layui-nav-item"><a href="javascript:;">考生分配</a>
+			</li>
+			<li class="layui-nav-item"><a href="javascript:;">考场管理</a>
+				</li>
+		</ul>
+
+	</div>
 	<script type="text/javascript" src="javaScript/js/global-path.js"></script>
 	<!-- ------------------cookie工具类------------------------------------->
 	<script type="text/javascript" src="javaScript/cookie_util.js"></script>
@@ -26,7 +126,7 @@
 					{
 						var $EXAM_NAME;//试卷名
 						var $EXAM_ID;//试卷ID
-						layer.open(
+						/* layer.open(
 							{
 								type : 2,
 								area :
@@ -47,7 +147,7 @@
 								  ,btn2: function(index, layero){
 									  window.location.href="index.html";
 								  }
-							});
+							}); */
 					})
 			});
 	</script>
