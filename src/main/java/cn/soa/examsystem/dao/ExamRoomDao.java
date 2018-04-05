@@ -1,24 +1,26 @@
 
-    /**  
-    * @Title: ExamRoomDao.java
-    * @Package cn.soa.examsystem.dao
-    * @Description: TODO(ÓÃÒ»¾ä»°ÃèÊö¸ÃÎÄ¼ş×öÊ²Ã´)
-    * @author zhugang
-    * @date 2018Äê3ÔÂ24ÈÕ
-    * @version V1.0  
-    */
-    
 package cn.soa.examsystem.dao;
 
+import java.util.List;
+import java.util.Map;
 
-    /**
+/**
+ * è€ƒè¯•ç¼–æ’çš„DAOå±‚
     * @ClassName: ExamRoomDao
-    * @Description: TODO(ÕâÀïÓÃÒ»¾ä»°ÃèÊöÕâ¸öÀàµÄ×÷ÓÃ)
-    * @author yanghua
-    * @date 2018Äê3ÔÂ24ÈÕ
+    * @Description: TODO(è¿™é‡Œç”¨ä¸€å¥è¯æè¿°è¿™ä¸ªç±»çš„ä½œç”¨)
+    * @author zhugang
+    * @date 2018å¹´4æœˆ5æ—¥
     *
-    */
-
+ */
 public interface ExamRoomDao {
-
+	/**
+	 * æŸ¥è¯¢æ‰€æœ‰çš„è€ƒè¯•è¯•å·
+	 * @return
+	 */
+	public List<Map<String,Object>> findAllExaminPaper(Integer start_page,Integer end_page);
+	/**
+	 * æŸ¥è¯¢è¯•å·ç»“æœé›†çš„æ€»è¡Œæ•°
+	 * @return
+	 */
+	public Integer findTotalCount();
 }

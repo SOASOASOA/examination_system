@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>考试编排</title>
+<link rel="stylesheet" type="text/css" href="layui/css/layui.css">
+<script type="text/javascript" src="layui/layui.js"></script>
+<style type="text/css">
+.exam_name {
+	color: red
+}
+.layui-form-label{
+	width: 100px;
+}
+</style>
+</head>
+<body>
+	<table id="examin_paper" class="layui-table" lay-filter="examin_paper_filter" lay-skin="line"></table>
+	<div class="layui-form-item">
+    <label class="layui-form-label">快速定位试卷</label>
+    <div class="layui-input-inline">
+      <input id="keyword" type="text"  placeholder="请输入关键词" autocomplete="off" class="layui-input">
+    </div>
+ 	</div>
+	<script type="text/javascript" src="javaScript/js/global-path.js"></script>
+	<!-- ------------------cookie工具类------------------------------------->
+	<script type="text/javascript" src="javaScript/cookie_util.js"></script>
+	<script type="text/javascript">
+		layui.use(
+			[ 'layer', 'form', 'table', 'element' ], function()
+			{
+				var element = layui.element, layer = layui.layer, form = layui.form, table = layui.table;
+				$ = layui.$;
+				$(function()
+					{
+						//初始化试卷表格
+						table.render(
+							{ 
+								elem : '#examin_paper',
+								height : 315,
+								url : path + 'examroom/findAllExaminPaper.do' //数据接口
+								,
+								method : 'post',
+								page : true //开启分页
+								,
+								cols :
+									[
+										[ //表头
+											{
+												field : 'EXAM_ID',
+												title : '序号',
+												sort : true,
+												align : 'center',
+											},
+											{
+												field : 'EXAM_NAME',
+												title : '考卷名',
+												align : 'center',
+											}] ],
+								limit : 10,
+								request :
+									{
+										pageName : 'page' //页码的参数名称，默认：page
+										,
+										limitName : 'limit' //每页数据量的参数名，默认：limit
+									},
+								response :
+									{
+										statusName : 'state' //数据状态的字段名称，默认：code
+										,
+										msgName : '' //状态信息的字段名称，默认：msg
+										,
+										countName : 'total' //数据总数的字段名称，默认：count
+										,
+										dataName : 'data' //数据列表的字段名称，默认：data
+									},
+								done : function(res, curr, count)//异步请求数据的回调
+									{
+										var state=res.state;
+										if(state!=0){
+											layer.msg('暂无试卷相关数据');
+										}
+									}
+							});
+						
+						//初始化EXAM_NAME和EXAM_ID
+						addCookie("EXAM_ID", "", 1);
+						table.on('radio(examin_paper_filter)', function(obj){
+							    //console.log(obj.checked); //当前是否选中状态
+							    console.log(obj.data); //选中行的相关数据
+							  });
+						//获取试卷名称和试卷ID,并将其存入Cookie中,并对用户选中的某一行
+						//进行样式的切换。
+						$('body').on('click', 'tr[data-index]', function()
+							{
+								var checkStatus = table.checkStatus('EXAM_ID');
+								console.log(checkStatus);
+								$(this).siblings().find('td[data-field=EXAM_NAME]>div').removeClass('exam_name');
+								var $EXAM_NAME = $(this).find('td[data-field=EXAM_NAME]>div').html();
+								var $EXAM_ID = $(this).find('td[data-field=EXAM_ID]>div').html();
+								$(this).find('td[data-field=EXAM_NAME]>div').toggleClass("exam_name");;
+								addCookie("EXAM_NAME", $EXAM_NAME, 1);
+								addCookie("EXAM_ID", $EXAM_ID, 1); 
+							}); 
+						//前端搜索,快速定位搜索框
+						$("#keyword").bind('input propertychange',function(){
+							$('tr[data-index]').hide().filter(":contains("+$(this).val()+")").show();
+						})
+						
+
+					})
+			});
+	</script>
+</body>
+</html>

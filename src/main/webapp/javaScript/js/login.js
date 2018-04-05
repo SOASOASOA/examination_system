@@ -35,7 +35,7 @@
 				var data=data.field;
 				$.ajax(
 						{
-							url : path + "/login/checkUser.do",
+							url : path + "login/checkUser.do",
 							type : "post",
 							data : data,
 							dataType : "json",

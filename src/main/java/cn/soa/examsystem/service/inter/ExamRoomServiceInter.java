@@ -1,24 +1,21 @@
 
-    /**  
-    * @Title: ExamRoomServiceInter.java
-    * @Package cn.soa.examsystem.service.inter
-    * @Description: TODO(用一句话描述该文件做什么)
-    * @author zhugang
-    * @date 2018年3月24日
-    * @version V1.0  
-    */
+
     
 package cn.soa.examsystem.service.inter;
 
+import java.util.List;
+import java.util.Map;
 
-    /**
-    * @ClassName: ExamRoomServiceInter
-    * @Description: TODO(这里用一句话描述这个类的作用)
-    * @author yanghua
-    * @date 2018年3月24日
-    *
-    */
+import cn.soa.examsystem.exception.MyException;
+import cn.soa.examsystem.util.JsonResult;
+
+
 
 public interface ExamRoomServiceInter {
-
+	/**
+	 * 鏌ヨ鎵�鏈夌殑鑰冭瘯璇曞嵎
+	 * @return
+	 * @throws MyException 
+	 */
+	public JsonResult<List<Map<String,Object>>> findAllExaminPaper(Integer page,Integer limit) throws MyException;
 }

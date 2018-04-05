@@ -16,7 +16,7 @@ layui.use(
 						//发送AJAX根据user_id查询对应的用户模板信息
 						$.ajax(
 							{
-								url : path + "/index/findUserModule.do",
+								url : path + "index/findUserModule.do",
 								type : "post",
 								data :
 									{
@@ -92,7 +92,12 @@ layui.use(
 							 $p+='<p class="authority_name">'+authority_name+'</p>';
 							 $p+='<p class="authority_desc">'+authority_desc+'</p>';
 							$("#"+id+"").append($($p));
-							$("#"+id+"").attr("href-url",authority_url);
+							$("#"+id+"").parent().attr("href-url",authority_url);
 						}
+						//点击模块
+						$('#examin_pic_ul>a').click(function(){
+							var $url=$(this).attr('href-url');
+							window.location.href=path+$url;
+						});
 					})
 			});

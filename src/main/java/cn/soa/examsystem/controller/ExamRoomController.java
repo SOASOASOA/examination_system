@@ -1,24 +1,43 @@
 
-    /**  
-    * @Title: ExamRoomController.java
-    * @Package cn.soa.examsystem.controller
-    * @Description: TODO(ÓÃÒ»¾ä»°ÃèÊö¸ÃÎÄ¼ş×öÊ²Ã´)
-    * @author zhugang
-    * @date 2018Äê3ÔÂ24ÈÕ
-    * @version V1.0  
-    */
+
     
 package cn.soa.examsystem.controller;
 
+import java.util.List;
+import java.util.Map;
 
-    /**
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import cn.soa.examsystem.exception.ExceptionController;
+import cn.soa.examsystem.exception.MyException;
+import cn.soa.examsystem.service.inter.ExamRoomServiceInter;
+import cn.soa.examsystem.util.JsonResult;
+
+/**
+ * è€ƒè¯•ç¼–æ’çš„æ§åˆ¶å±‚
     * @ClassName: ExamRoomController
-    * @Description: TODO(ÕâÀïÓÃÒ»¾ä»°ÃèÊöÕâ¸öÀàµÄ×÷ÓÃ)
-    * @author zhguang
-    * @date 2018Äê3ÔÂ24ÈÕ
+    * @Description: TODO(è¿™é‡Œç”¨ä¸€å¥è¯æè¿°è¿™ä¸ªç±»çš„ä½œç”¨)
+    * @author zhugang
+    * @date 2018å¹´4æœˆ5æ—¥
     *
-    */
-
-public class ExamRoomController {
-
+ */
+@Controller
+@RequestMapping("/examroom")
+public class ExamRoomController extends ExceptionController{
+	@Resource
+	private ExamRoomServiceInter examRoomServiceInter;
+	/**
+	 * æŸ¥è¯¢æ‰€æœ‰çš„è€ƒè¯•è¯•å·
+	 * @return
+	 * @throws MyException 
+	 */
+	@ResponseBody
+	@RequestMapping("/findAllExaminPaper.do")
+	public JsonResult<List<Map<String,Object>>> findAllExaminPaper(Integer page,Integer limit) throws MyException{
+		return examRoomServiceInter.findAllExaminPaper(page, limit);
+	}
 }

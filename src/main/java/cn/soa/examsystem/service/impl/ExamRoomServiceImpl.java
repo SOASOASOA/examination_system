@@ -2,23 +2,63 @@
     /**  
     * @Title: ExamRoomServiceImpl.java
     * @Package cn.soa.examsystem.service.impl
-    * @Description: TODO(ÓÃÒ»¾ä»°ÃèÊö¸ÃÎÄ¼ş×öÊ²Ã´)
+    * @Description: TODO(ï¿½ï¿½Ò»ï¿½ä»°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ê²Ã´)
     * @author zhugang
-    * @date 2018Äê3ÔÂ24ÈÕ
+    * @date 2018ï¿½ï¿½3ï¿½ï¿½24ï¿½ï¿½
     * @version V1.0  
     */
     
 package cn.soa.examsystem.service.impl;
 
+import java.util.List;
+import java.util.Map;
 
-    /**
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+
+import cn.soa.examsystem.dao.ExamRoomDao;
+import cn.soa.examsystem.exception.MyException;
+import cn.soa.examsystem.service.inter.ExamRoomServiceInter;
+import cn.soa.examsystem.util.JsonResult;
+
+/**
+ * è€ƒè¯•ç¼–æ’çš„é€»è¾‘å±‚
     * @ClassName: ExamRoomServiceImpl
-    * @Description: TODO(ÕâÀïÓÃÒ»¾ä»°ÃèÊöÕâ¸öÀàµÄ×÷ÓÃ)
-    * @author yanghua
-    * @date 2018Äê3ÔÂ24ÈÕ
+    * @Description: TODO(è¿™é‡Œç”¨ä¸€å¥è¯æè¿°è¿™ä¸ªç±»çš„ä½œç”¨)
+    * @author zhugang
+    * @date 2018å¹´4æœˆ5æ—¥
     *
-    */
+ */
+@Service("examRoomServiceInter")
+public class ExamRoomServiceImpl implements ExamRoomServiceInter{
 
-public class ExamRoomServiceImpl {
-
+	@Resource
+	private ExamRoomDao examRoomDao;
+	private Integer start_page;//èµ·å§‹è¡Œ 
+	private Integer end_page;//ç»“æŸè¡Œ
+	
+	/**
+	 * æŸ¥è¯¢æ‰€æœ‰çš„è€ƒè¯•è¯•å·
+	 * @return
+	 * @throws MyException 
+	 */
+	@Override
+	public JsonResult<List<Map<String, Object>>> findAllExaminPaper(Integer page, Integer limit) throws MyException {
+		if(page==null||limit==null) {
+			throw new MyException("åˆ†é¡µæŸ¥è¯¢å¼‚å¸¸");
+		}
+		start_page=(page-1)*limit+1;//èµ·å§‹è¡Œ 
+		end_page=page*limit;//ç»“æŸè¡Œ
+		List<Map<String, Object>> findAllExaminPaper = examRoomDao.findAllExaminPaper(start_page, end_page);
+		if(findAllExaminPaper==null) {
+			throw new MyException("æŸ¥è¯¢è€ƒå·ä¿¡æ¯å¼‚å¸¸");
+		}
+		Integer total = examRoomDao.findTotalCount();
+		if(total==null) {
+			throw new MyException("æŸ¥è¯¢è€ƒå·æ€»æ•°å¼‚å¸¸");
+		}
+		return new JsonResult<List<Map<String, Object>>>(total,findAllExaminPaper);
+	}
 }

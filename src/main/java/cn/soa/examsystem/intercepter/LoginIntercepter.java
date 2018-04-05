@@ -33,12 +33,6 @@ public class LoginIntercepter implements HandlerInterceptor{
 			return false;
 			
 		}
-		//如果用户不是同一个人则跳转到登录页面
-		String id =req.getParameter("user_id");
-		if(!user_id.equals(id)) {
-			ExaminUtil.returnPromptMessage(res, new JsonResult(1,null,"login.html"));
-			return false;
-		}
 		return true;
 	}
 

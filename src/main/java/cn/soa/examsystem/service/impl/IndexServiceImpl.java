@@ -19,18 +19,18 @@ public class IndexServiceImpl implements IndexService {
 	@Resource
 	private IndexDAO indexDAO;
 	/**
-	 * 鏍规嵁鐢ㄦ埛ID鏌ヨ瀵瑰簲鐨勭敤鎴锋ā鍧�
-	 * @param user_id 鐢ㄦ埛ID
-	 * @return json瀵硅薄
+	 * 根据用户ID查询对应的用户模块
+	 * @param user_id 用户ID
+	 * @return json对象
 	 */
 	@Cacheable(value = "myCache", key = "#user_id")
 	public JsonResult<List<Map<String,Object>>> findUserModule(String user_id) throws MyException {
 		if(user_id==null) {
-			throw new MyException("鐢ㄦ埛ID涓虹┖,涓嶈兘鑾峰彇妯℃澘淇℃伅");
+			throw new MyException("用户ID为空,不能获取模板信息");
 		}
 		  List<Map<String, Object>> modules = indexDAO.findUserModule(user_id);
 		if(modules==null) {
-			throw new MyException("鑾峰彇鐢ㄦ埛妯℃澘淇℃伅寮傚父");
+			throw new MyException("获取用户模板信息异常");
 		}
 		return new JsonResult<List<Map<String,Object>>>(modules);
 	}

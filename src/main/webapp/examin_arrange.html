@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>考试编排</title>
+<link rel="stylesheet" type="text/css" href="layui/css/layui.css">
+<script type="text/javascript" src="layui/layui.js"></script>
+<style type="text/css">
+#tt {
+	display: none;
+}
+</style>
+</head>
+<body>
+	<div id="head"></div>
+	<script type="text/javascript" src="javaScript/js/global-path.js"></script>
+	<!-- ------------------cookie工具类------------------------------------->
+	<script type="text/javascript" src="javaScript/cookie_util.js"></script>
+	<script type="text/javascript">
+		layui.use(
+			[ 'layer', 'form', 'table', 'element' ], function()
+			{
+				var element = layui.element, layer = layui.layer, form = layui.form, table = layui.table;
+				$ = layui.$;
+				$(function()
+					{
+						var $EXAM_NAME;//试卷名
+						var $EXAM_ID;//试卷ID
+						layer.open(
+							{
+								type : 2,
+								area :
+									[ '800px', '500px' ],
+								title : '请选择要操作的试卷',//弹出层标题
+								closeBtn: 0,//不展示关闭按钮
+								content : 'http://localhost:8080/examination_system/select_examin_paper.html',
+								btn :[ '确定', '返回首页' ],
+								yes: function(index, layero){
+									$EXAM_NAME=getCookie("EXAM_NAME");
+									$EXAM_ID=getCookie("EXAM_ID");
+									if($EXAM_ID==""||typeof $EXAM_ID=="undefined"){
+										layer.msg("请选择试卷");
+										return false;
+									}
+									layer.close(index);
+								  }
+								  ,btn2: function(index, layero){
+									  window.location.href="index.html";
+								  }
+							});
+					})
+			});
+	</script>
+</body>
+</html>
