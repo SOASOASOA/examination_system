@@ -85,16 +85,12 @@
 						
 						//初始化EXAM_NAME和EXAM_ID
 						addCookie("EXAM_ID", "", 1);
-						table.on('radio(examin_paper_filter)', function(obj){
-							    //console.log(obj.checked); //当前是否选中状态
-							    console.log(obj.data); //选中行的相关数据
-							  });
+						addCookie("EXAM_NAME", "", 1);
 						//获取试卷名称和试卷ID,并将其存入Cookie中,并对用户选中的某一行
 						//进行样式的切换。
 						$('body').on('click', 'tr[data-index]', function()
 							{
 								var checkStatus = table.checkStatus('EXAM_ID');
-								console.log(checkStatus);
 								$(this).siblings().find('td[data-field=EXAM_NAME]>div').removeClass('exam_name');
 								var $EXAM_NAME = $(this).find('td[data-field=EXAM_NAME]>div').html();
 								var $EXAM_ID = $(this).find('td[data-field=EXAM_ID]>div').html();
@@ -104,7 +100,7 @@
 							}); 
 						//前端搜索,快速定位搜索框
 						$("#keyword").bind('input propertychange',function(){
-							$('tr[data-index]').hide().filter(":contains("+$(this).val()+")").show();
+								$('tr[data-index]').hide().filter(":contains("+$(this).val()+")").show();
 						})
 						
 

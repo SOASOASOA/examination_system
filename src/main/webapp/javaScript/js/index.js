@@ -87,16 +87,20 @@ layui.use(
 							var authority_name = data.AUTHORITY_NAME;
 							var authority_url = data.AUTHORITY_URL;
 							var authority_desc = data.AUTHORITY_DESC;
+							var ua_id = data.UA_ID;
 							$("#"+id+"").show();
 							var $p='';
 							 $p+='<p class="authority_name">'+authority_name+'</p>';
 							 $p+='<p class="authority_desc">'+authority_desc+'</p>';
 							$("#"+id+"").append($($p));
 							$("#"+id+"").parent().attr("href-url",authority_url);
+							$("#"+id+"").parent().attr("ua_id",ua_id);
 						}
 						//点击模块
 						$('#examin_pic_ul>a').click(function(){
 							var $url=$(this).attr('href-url');
+							var $ua_id=$(this).attr('ua_id');
+							addCookie("ua_id",$ua_id,1);
 							window.location.href=path+$url;
 						});
 					})

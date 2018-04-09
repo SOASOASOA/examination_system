@@ -40,4 +40,12 @@ public class ExamRoomController extends ExceptionController{
 	public JsonResult<List<Map<String,Object>>> findAllExaminPaper(Integer page,Integer limit) throws MyException{
 		return examRoomServiceInter.findAllExaminPaper(page, limit);
 	}
+	/**
+	 * 根据模块ID查询对应的功能模块信息
+	 */
+	@ResponseBody
+	@RequestMapping("/findUserFunction.do")
+	public JsonResult<List<Map<String,Object>>> findUserFunction(String ua_id) throws MyException{
+		return examRoomServiceInter.findUserFunction(ua_id);
+	}
 }

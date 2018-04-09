@@ -23,4 +23,8 @@ public interface ExamRoomDao {
 	 * @return
 	 */
 	public Integer findTotalCount();
+	/**
+	 * 根据模块ID查询对应的功能模块信息
+	 */
+	public List<Map<String,Object>> findUserFunction(String ua_id);
 }

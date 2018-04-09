@@ -4,7 +4,7 @@
 <mapper namespace="cn.soa.examsystem.dao.IndexDAO">
 	<select id="findUserModule" resultType="map" parameterType="string">
 		select distinct
-		u5.authority_name,u5.authority_url,u5.authority_desc
+		u5.ua_id,u5.authority_name,u5.authority_url,u5.authority_desc
 		from user_info u1,ui_ur_relation u2,user_role u3,ur_ua_relation
 		u4,user_authority u5
 		where u2.ui_id=#{user_id} and u2.ur_id=u3.role_id and u3.role_id=u4.ur_id

@@ -10,6 +10,7 @@ html, body {
 	height: 100%;
 	background-color: #fff;
 	position: relative;
+	margin:0; padding:0;
 }
 
 #head {
@@ -77,6 +78,19 @@ html, body {
 .layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this>a, .layui-nav-tree .layui-this>a:hover{
 	background-color: #CBCBCB;
 }
+#right_body{
+	position: absolute;
+	left:200px;
+	top: 0px;
+	bottom: 0px;
+	right: 0px;
+}
+#right_body>iframe{
+	width: 100%;
+	height: 100%;
+	frameborder:0;
+	border: none;
+}
 </style>
 </head>
 <body>
@@ -85,7 +99,7 @@ html, body {
 			<span>考试编排</span>
 		</div>
 		<ul id="head_nav" class="layui-nav">
-			<li class="layui-nav-item"><a href="javascript:;">管理中心</a></li>
+			<li id="index" class="layui-nav-item"><a  href="javascript:;">管理中心</a></li>
 			<li class="layui-nav-item layui-this"><a href="javascript:;">快速跳转</a>
 				<dl class="layui-nav-child">
 					<dd>
@@ -94,28 +108,30 @@ html, body {
 					<dd>
 						<a href="">用户管理</a>
 					</dd>
-					<dd>
+					<dd id="examin_arrange">
 						<a href="">考试编排</a>
 					</dd>
 					<dd>
 						<a href="">考试管理</a>
 					</dd>
 				</dl></li>
-			<li class="layui-nav-item"><a href=""></a></li>
+			<li id="exam_name" class="layui-nav-item"><a href="javascript:;"></a></li>
 		</ul>
 	</div>
 	<div id="body">
 		<ul id="body_nav" class="layui-nav layui-nav-tree  layui-bg-cyan layui-inline" lay-filter="demo">
-			<li class="layui-nav-item"><a href="javascript:;">考生分配</a>
+			<li id="examinee_distribution" class="layui-nav-item"><a href="javascript:;">考生分配</a>
 			</li>
-			<li class="layui-nav-item"><a href="javascript:;">考场管理</a>
-				</li>
+			<li id="examinationroom_management" class="layui-nav-item"><a href="javascript:;">考场管理</a>
+			</li>
 		</ul>
-
+	<div id="right_body">
+	</div>
 	</div>
 	<script type="text/javascript" src="javaScript/js/global-path.js"></script>
 	<!-- ------------------cookie工具类------------------------------------->
 	<script type="text/javascript" src="javaScript/cookie_util.js"></script>
+	<script type="text/javascript" src="javaScript/js/global-path.js"></script>
 	<script type="text/javascript">
 		layui.use(
 			[ 'layer', 'form', 'table', 'element' ], function()
@@ -126,14 +142,14 @@ html, body {
 					{
 						var $EXAM_NAME;//试卷名
 						var $EXAM_ID;//试卷ID
-						/* layer.open(
+						//考试编排弹出层,选择考试的试卷,获取到对应的考卷信息后对页面进行初始化
+						layer.open(
 							{
 								type : 2,
-								area :
-									[ '800px', '500px' ],
+								area :[ '800px', '500px' ],
 								title : '请选择要操作的试卷',//弹出层标题
 								closeBtn: 0,//不展示关闭按钮
-								content : 'http://localhost:8080/examination_system/select_examin_paper.html',
+								content : path+'select_examin_paper.html',
 								btn :[ '确定', '返回首页' ],
 								yes: function(index, layero){
 									$EXAM_NAME=getCookie("EXAM_NAME");
@@ -143,11 +159,92 @@ html, body {
 										return false;
 									}
 									layer.close(index);
+									init();
 								  }
 								  ,btn2: function(index, layero){
 									  window.location.href="index.html";
 								  }
-							}); */
+							});
+						//页面初始化,并添加对应的点击事件
+						function init(){
+							//初始化考试编排页面
+							var ua_id=getCookie("ua_id");
+							$.ajax(
+										{
+											url : path + "examroom/findUserFunction.do",
+											type : "post",
+											data : {ua_id:ua_id},
+											dataType : "json",
+											success : function(result)
+												{
+													var state = result.state;
+													var data=result.data;
+													var message = result.message;
+													if (state == 0)
+														{
+															$('#exam_name').children("a").html("");
+															$('#exam_name').children("a").html($EXAM_NAME);
+															for (var i = 0; i < data.length; i++)
+																{
+																	var function_name = data[i].FUNCTION_NAME;
+																	var function_url = data[i].FUNCTION_URL;
+																	var id="";
+																	switch (function_name)
+																		{
+																		case "管理中心":
+																			var id="index";
+																			addURL(id,function_url);
+																			break;
+																		case "考场管理":
+																			var id="examinationroom_management";
+																			addURL(id,function_url);
+																			break;
+																		case "考生分配":
+																			var id="examinee_distribution";
+																			addURL(id,function_url);
+																			break;
+																		case "考试编排":
+																			var id="examin_arrange";
+																			addURL(id,function_url);
+																			break;
+																		default:
+																			alert("初始化考试编排页面异常");
+																			break;
+																		}
+																}
+														}
+													if (state == "1")
+														{
+															layer.msg(message);
+														}
+													return false;//阻止表单跳转
+												}
+										});
+							//初始化考试分配对应的子页面
+							$("#right_body").load("examinee_distribution.html");
+							//给顶部水平导航中所有a标签添加单击事件,获取a标签中的
+							//URL,并实现对应跳转
+							$("#head_nav li:not(#exam_name)").find("a").click(function(){
+								var $href_url=$(this).attr("href-url");
+								window.location.href = $href_url;
+							});
+							//在显示考卷名的li添加一个跳转页面
+							$("#exam_name").click(function(){
+								var $href_url=$("#examin_arrange").children("a").attr("href-url");
+								window.location.href = $href_url;
+							});
+							//垂直导航添加单击事件,并根据模板添加对应的子页面
+							$("#body_nav>li>a").click(function(){
+								var $url=$(this).attr("href-url");
+								$("#right_body").load($url);
+							});
+						}
+						
+						//往的功能模块中添加对应的URL
+						function addURL(id,function_url){
+							$("#"+id+"").children("a").attr("href-url",function_url);
+						} 
+						
 					})
 			});
 	</script>

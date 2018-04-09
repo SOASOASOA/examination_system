@@ -9,6 +9,9 @@
 	<select id="findTotalCount" resultType="int">
 		select count(*) from questionbank_examination_paper
 	</select>
+	<select id="findUserFunction" resultType="map">
+		select function_name,function_url from user_function  where uf_id in (select uf_id from ua_uf_relation where ua_id=#{ua_id})
+	</select>
 </mapper>
 
 

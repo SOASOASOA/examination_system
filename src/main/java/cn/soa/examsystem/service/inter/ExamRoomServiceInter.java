@@ -18,4 +18,8 @@ public interface ExamRoomServiceInter {
 	 * @throws MyException 
 	 */
 	public JsonResult<List<Map<String,Object>>> findAllExaminPaper(Integer page,Integer limit) throws MyException;
+	/**
+	 * 根据模块ID查询对应的功能模块信息
+	 */
+	public JsonResult<List<Map<String,Object>>> findUserFunction(String ua_id) throws MyException;
 }

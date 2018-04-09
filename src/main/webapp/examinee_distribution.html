@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>考生分配</title>
+<style type="text/css">
+html, body {
+	height: 100%;
+	background-color: #fff;
+	position: relative;
+}
+#left_div{
+	width:200px;
+	position:absolute;
+	top: 0px;
+	bottom: 0px;
+}
+#left_nav{
+	height: 100%;
+}
+.layui-bg-cyan{
+	border-right: 1.5px solid #DADADA;
+	background-color: #fff;
+}
+.layui-bg-cyan{
+	background-color: #fff!important;
+}
+/*侧边导航字体颜色*/
+#left_nav>li a{
+	color: #000;
+}
+/*侧边导航鼠标经过时字体和背景颜色*/
+#left_nav>li a:hover{
+	color: #fff;
+	background-color: #CBCBCB;
+}
+#left_nav>li a:hover{
+	background-color: #CBCBCB!important;
+}
+/*导航标题高度，并设置底边*/
+#nav_title{
+	height: 45px;
+	border-bottom: 1.5px solid #DADADA;
+}
+/*导航标题字体大小,垂直居中*/
+#nav_title a{
+	font-size: 17px;
+	margin-left: 20px;
+	line-height: 45px;
+}
+#right_div{
+	position:absolute;
+	left: 200px;
+	top: 0px;
+	bottom: 0px;
+	right: 0px;
+}
+</style>
+</head>
+<body>
+	<div id="left_div">
+		<ul id='left_nav' class="layui-nav layui-nav-tree  layui-bg-cyan layui-inline" lay-filter="demo">
+			<li id="nav_title"><a ><i class="layui-icon"  style="font-size: 20px;">&#xe68e;</i>考场列表</a></li>
+			<li class="layui-nav-item"><a href="javascript:;">考生分配</a>
+			</li>
+			<li class="layui-nav-item"><a href="javascript:;">考场管理</a>
+				</li>
+		</ul>
+	</div>
+	<div id="right_div"></div>
+	<script type="text/javascript">
+	layui.use(
+			[ 'layer', 'form', 'table', 'element' ], function()
+			{
+				var element = layui.element, layer = layui.layer, form = layui.form, table = layui.table;
+				$ = layui.$;
+				$(function()
+					{
+						
+					})
+			});
+	</script>
+</body>
+
+
+</html>

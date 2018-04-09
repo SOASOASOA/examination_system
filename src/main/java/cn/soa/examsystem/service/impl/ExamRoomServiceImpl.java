@@ -61,4 +61,21 @@ public class ExamRoomServiceImpl implements ExamRoomServiceInter{
 		}
 		return new JsonResult<List<Map<String, Object>>>(total,findAllExaminPaper);
 	}
+
+	
+	/**
+	 * 根据模块ID查询对应的功能模块信息
+	 */
+	@Override
+	public JsonResult<List<Map<String, Object>>> findUserFunction(String ua_id) throws MyException {
+		if(ua_id==null) {
+			throw new MyException("模板ID异常");
+		}
+		List<Map<String, Object>> findUserFunction = examRoomDao.findUserFunction(ua_id);
+		if(findUserFunction==null||findUserFunction.size()<0) {
+			throw new MyException("功能模块查询异常");
+		}
+		
+		return new JsonResult<List<Map<String, Object>>>(findUserFunction);
+	}
 }
