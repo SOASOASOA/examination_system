@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.soa.examsystem.entity.Examroom;
 import cn.soa.examsystem.exception.ExceptionController;
 import cn.soa.examsystem.exception.MyException;
 import cn.soa.examsystem.service.inter.ExamRoomServiceInter;
@@ -47,5 +48,13 @@ public class ExamRoomController extends ExceptionController{
 	@RequestMapping("/findUserFunction.do")
 	public JsonResult<List<Map<String,Object>>> findUserFunction(String ua_id) throws MyException{
 		return examRoomServiceInter.findUserFunction(ua_id);
+	}
+	/**
+	 * 根据模块ID查询对应的功能模块信息
+	 */
+	@ResponseBody
+	@RequestMapping("/addExamroom.do")
+	public JsonResult<String> addExamroom(Examroom examroom) throws MyException{
+		return examRoomServiceInter.addExamroom(examroom);
 	}
 }

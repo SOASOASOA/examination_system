@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>考场管理</title>
+<link rel="stylesheet" type="text/css" href="layui/css/layui.css">
+<script type="text/javascript" src="layui/layui.js"></script>
 <style type="text/css">
 html, body {
 	height: 100%;
@@ -58,7 +60,7 @@ height: 50px;
 	</button>
 	</div>
 	<div id="em_from">
-		<form class="layui-form" action="">
+		<form class="layui-form">
 			<div class="layui-form-item">
 				<label class="layui-form-label">考场名称:</label>
 				<div class="layui-input-inline">
@@ -97,17 +99,21 @@ height: 50px;
 			<div class="layui-form-item">
 				<label class="layui-form-label">锁定考场</label>
 				<div class="layui-input-inline">
-					<input type="checkbox" name="examroom_lock_status" title="是否锁定">
+					<input type="checkbox" value="on" name="examroom_lock_status" title="是否锁定">
 				</div>
 			</div>
 			<div class="layui-form-item">
 				<div class="layui-input-block">
-					<button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+					<button class="layui-btn" lay-submit="" lay-filter="submit">立即提交</button>
 					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 				</div>
 			</div>
 		</form>
 	</div>
+	<script type="text/javascript" src="javaScript/javascriptUtil.js"></script>
+	<script type="text/javascript" src="javaScript/cookie_util.js"></script>
+	<script type="text/javascript" src="javaScript/js/global-path.js"></script>
+	<script type="text/javascript" src="javaScript/jquery-1.11.1.js"></script>
 	<script type="text/javascript">
 		layui.use(
 			[ 'layer', 'form', 'table', 'element', 'laydate' ], function()
@@ -154,17 +160,6 @@ height: 50px;
 							});
 						//表单验证
 						form.verify({
-							  username: function(value, item){ //value：表单的值、item：表单的DOM对象
-							    if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
-							      return '用户名不能有特殊字符';
-							    }
-							    if(/(^\_)|(\__)|(\_+$)/.test(value)){
-							      return '用户名首尾不能出现下划线\'_\'';
-							    }
-							    if(/^\d+\d+\d$/.test(value)){
-							      return '用户名不能全为数字';
-							    }
-							  },
 							  //日期格式的验证
 							  date: function(value, item){ //value：表单的值、item：表单的DOM对象 
 								  if(value==''){
@@ -174,16 +169,58 @@ height: 50px;
 								      return '日期格式不正确';
 								    }
 								  },
-								  examroom_max_person: function(value, item){ //value：表单的值、item：表单的DOM对象
+							 //考生最大人数的验证
+							 examroom_max_person: function(value, item){ //value：表单的值、item：表单的DOM对象
 									    if(!/^[0-9]*$/.test(value)){
 									      return '考生数量格式不正确';
 									    }
 									  }
 							}); 
+						var $hashcode=0;
+						//点击提交按钮,新增考场信息
+						form.on('submit(submit)', function(data){
+							var start_time=new Date(data.field.examroom_begin_time);
+							var end_time=new Date(data.field.examroom_end_time);
+							if($hashcode==hashcode(data.field.examroom_name)){
+								return false;
+							}
+							$hashcode=hashcode(data.field.examroom_name);
+							if((end_time.getTime()-start_time.getTime())<0){
+								layer.msg("考试结束时间不能小于开考时间");
+								return false;
+							}
+							var str = getCookie("user");//从Cookie中取出管理员信息
+							if(str==null||typeof str=='undefined'){
+								alert("不能获取用户信息,请重新登录");
+							}
+							//获取考试创建人
+							data.field.examroom_create_person = JSON.parse(str).user_name;
+							var ajson={
+									url:"examroom/addExamroom.do",
+									data:data.field,
+									success: function (result)
+										{
+											var state = result.state;
+											var data = result.data;
+											var message = result.message;
+											if (state == 0)
+												{
+													layer.msg(data);
+												} else
+												{
+													layer.msg(message);
+												}
+											return false;// 阻止表单跳转
+										}
+							};
+							//自定义AJAX函数
+							ajaxJson(ajson);
+							return false;
+							});
 						//load时重新加载表单
 						form.render();
-
 					})
+					
 			});
 	</script>
 </body>

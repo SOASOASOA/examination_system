@@ -98,6 +98,7 @@ html, body {
 	margin-top:10px;
 }
 #examin_pic_ul li:hover {
+	border:1px solid #0DC6EA;
 	background-size:280px;
 	transform:scale(1.12);
 }

@@ -12,6 +12,16 @@
 	<select id="findUserFunction" resultType="map">
 		select function_name,function_url from user_function  where uf_id in (select uf_id from ua_uf_relation where ua_id=#{ua_id})
 	</select>
+	<insert id="addExamroom"
+			   parameterType="cn.soa.examsystem.entity.Examroom">
+		insert into
+		examroom_info(examroom_id,examroom_create_time,examroom_create_person,examroom_begin_time,examroom_end_time,examroom_place,examroom_max_person,examroom_name,examroom_lock_status)
+		values
+		(#{examroom_id},to_date(#{examroom_create_time},'yyyy-MM-dd HH24:mi:ss'),#{examroom_create_person},to_date(#{examroom_begin_time},'yyyy-MM-dd HH24:mi:ss'),to_date(#{examroom_end_time},'yyyy-MM-dd HH24:mi:ss'),#{examroom_place},#{examroom_max_person},#{examroom_name},#{examroom_lock_status})
+	</insert>
+	<select id="findExamroomByName" resultType="string">
+		select examroom_name from examroom_info where examroom_name=#{examroom_name}
+	</select>
 </mapper>
 
 

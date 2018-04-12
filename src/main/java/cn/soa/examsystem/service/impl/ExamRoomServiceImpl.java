@@ -10,6 +10,8 @@
     
 package cn.soa.examsystem.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -19,8 +21,10 @@ import org.springframework.stereotype.Service;
 
 
 import cn.soa.examsystem.dao.ExamRoomDao;
+import cn.soa.examsystem.entity.Examroom;
 import cn.soa.examsystem.exception.MyException;
 import cn.soa.examsystem.service.inter.ExamRoomServiceInter;
+import cn.soa.examsystem.util.ExaminUtil;
 import cn.soa.examsystem.util.JsonResult;
 
 /**
@@ -77,5 +81,36 @@ public class ExamRoomServiceImpl implements ExamRoomServiceInter{
 		}
 		
 		return new JsonResult<List<Map<String, Object>>>(findUserFunction);
+	}
+	
+	/**
+	 * 增加考场
+	 * @throws MyException 
+	 */
+	@Override
+	public JsonResult<String> addExamroom(Examroom examroom) throws MyException {
+		if(examroom==null) {
+			throw new MyException("添加考场异常");
+		}
+		List<String> findExamroomByName = examRoomDao.findExamroomByName(examroom.getExamroom_name());
+		if(findExamroomByName.size()>0) {
+			throw new MyException("考场名称已存在请重新输入");
+		}
+		//设置考场的创建时间
+		Date date = new Date();
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		examroom.setExamroom_create_time(sdf.format(date));
+		//设置考场锁定的状态
+		if(examroom.getExamroom_lock_status()==null) {
+			examroom.setExamroom_lock_status("off");
+		}
+		//设置考场ID
+		examroom.setExamroom_id(ExaminUtil.getUUID());
+		Integer num = examRoomDao.addExamroom(examroom);
+		String str="考场添加成功";
+		if(num!=1) {
+			str="考场信息添加失败";
+		}
+		return new JsonResult<String>(str);
 	}
 }

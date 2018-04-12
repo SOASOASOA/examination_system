@@ -4,6 +4,8 @@ package cn.soa.examsystem.dao;
 import java.util.List;
 import java.util.Map;
 
+import cn.soa.examsystem.entity.Examroom;
+
 /**
  * 考试编排的DAO层
     * @ClassName: ExamRoomDao
@@ -27,4 +29,18 @@ public interface ExamRoomDao {
 	 * 根据模块ID查询对应的功能模块信息
 	 */
 	public List<Map<String,Object>> findUserFunction(String ua_id);
+	/**
+	 * 增加考场
+	 */
+	public int addExamroom(Examroom examroom);
+	/**
+	 * 
+	    * @Title: findExamroomByName
+	    * @Description: 根据考场名称查询是否存在相同名称的考场，如果存在则不能添加考场
+	    * @param @param examroom_name 考场名称
+	    * @param @return    参数说明
+	    * @return String    返回类型
+	    * @throws
+	 */
+	public List<String> findExamroomByName(String examroom_name);
 }
