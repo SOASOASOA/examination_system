@@ -28,4 +28,9 @@ public interface ExamRoomServiceInter {
 	 * @throws MyException 
 	 */
 	public JsonResult<String> addExamroom(Examroom examroom) throws MyException;
+	/**
+	 * 查询所有的考场信息
+	 * @return
+	 */
+	public JsonResult<List<Map<String, Object>>> findAllExamroomInfo(Integer page,Integer limit) throws MyException;
 }

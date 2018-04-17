@@ -22,6 +22,14 @@
 	<select id="findExamroomByName" resultType="string">
 		select examroom_name from examroom_info where examroom_name=#{examroom_name}
 	</select>
+	<select id="findAllExamroomInfo" resultType="map">
+		 select * from (select rownum rn,a1.* from (select EXAMROOM_NAME,EXAMROOM_BEGIN_TIME,EXAMROOM_END_TIME,
+ 		EXAMROOM_MAX_PERSON,EXAMROOM_LOCK_STATUS,EXAMROOM_PLACE from examroom_info order by EXAMROOM_CREATE_TIME desc) a1 where rownum<![CDATA[<=]]>#{1})
+		where rn<![CDATA[>=]]>#{0}
+	</select>
+	<select id="findExamroomTotalCount" resultType="int">
+		select count(*) from examroom_info
+	</select>
 </mapper>
 
 

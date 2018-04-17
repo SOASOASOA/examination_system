@@ -113,4 +113,25 @@ public class ExamRoomServiceImpl implements ExamRoomServiceInter{
 		}
 		return new JsonResult<String>(str);
 	}
+	/**
+	 * 查询所有的考场信息
+	 * @return
+	 */
+	@Override
+	public JsonResult<List<Map<String, Object>>> findAllExamroomInfo(Integer page, Integer limit) throws MyException {
+		if(page==null||limit==null) {
+			throw new MyException("考场分页查询异常");
+		}
+		start_page=(page-1)*limit+1;//起始行 
+		end_page=page*limit;//结束行
+		List<Map<String, Object>> findAllExamroomInfo = examRoomDao.findAllExamroomInfo(start_page, end_page);
+		if(findAllExamroomInfo==null) {
+			throw new MyException("查询考场信息异常");
+		}
+		Integer total = examRoomDao.findExamroomTotalCount();
+		if(total==null) {
+			throw new MyException("查询考场总数异常");
+		}
+		return new JsonResult<List<Map<String, Object>>>(total,findAllExamroomInfo);
+	}
 }

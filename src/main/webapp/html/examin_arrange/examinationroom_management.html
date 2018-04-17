@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>考场管理</title>
-<link rel="stylesheet" type="text/css" href="layui/css/layui.css">
-<script type="text/javascript" src="layui/layui.js"></script>
+<link rel="stylesheet" type="text/css" href="../../layui/css/layui.css">
+<script type="text/javascript" src="../../layui/layui.js"></script>
 <style type="text/css">
 html, body {
 	height: 100%;
@@ -22,7 +22,7 @@ html, body {
 	width: 500px;
 }
 
-#em_from {
+#em_body {
 	position:absolute;
 	border-top:1.5px solid #C9C9C9;
 	width: 100%;
@@ -35,7 +35,7 @@ html, body {
 .layui-input{
 white-space : normal nowrap 
 }
-#em_from>.layui-form input{
+#em_body>.layui-form input{
 	width: 500px;
 }
 .star{
@@ -51,6 +51,10 @@ white-space : normal nowrap
 #em_head{
 height: 50px;
 }
+
+.layui-form,button[type=reset]{
+	display: none;
+}
 </style>
 </head>
 <body>
@@ -59,7 +63,7 @@ height: 50px;
 		<i class="layui-icon">&#xe608;</i>添加新考场
 	</button>
 	</div>
-	<div id="em_from">
+	<div id="em_body">
 		<form class="layui-form">
 			<div class="layui-form-item">
 				<label class="layui-form-label">考场名称:</label>
@@ -106,14 +110,16 @@ height: 50px;
 				<div class="layui-input-block">
 					<button class="layui-btn" lay-submit="" lay-filter="submit">立即提交</button>
 					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+					<button type="cancel" class="layui-btn layui-btn-primary">取消</button>
 				</div>
 			</div>
 		</form>
+		<table id="em_table" class="layui-table" lay-filter="em_table_filter" lay-skin="line"></table>
 	</div>
-	<script type="text/javascript" src="javaScript/javascriptUtil.js"></script>
-	<script type="text/javascript" src="javaScript/cookie_util.js"></script>
-	<script type="text/javascript" src="javaScript/js/global-path.js"></script>
-	<script type="text/javascript" src="javaScript/jquery-1.11.1.js"></script>
+	<script type="text/javascript" src="../../javaScript/javascriptUtil.js"></script>
+	<script type="text/javascript" src="../../javaScript/cookie_util.js"></script>
+	<script type="text/javascript" src="../../javaScript/js/global-path.js"></script>
+	<script type="text/javascript" src="../../javaScript/jquery-1.11.1.js"></script>
 	<script type="text/javascript">
 		layui.use(
 			[ 'layer', 'form', 'table', 'element', 'laydate' ], function()
@@ -216,6 +222,65 @@ height: 50px;
 							//自定义AJAX函数
 							ajaxJson(ajson);
 							return false;
+							});
+						//添加新考场按钮添加单击事件，展示并重置表单
+						$('#em_bt').click(function(){
+							$('button[type=reset]').click();
+							$('.layui-form').show();
+						});
+						//取消按钮添加点击事件，并隐藏表单
+						$('button[type=cancel]').click(function(){
+							$('.layui-form').hide();
+						});
+						
+						//初始化试卷表格
+						table.render(
+							{ 
+								elem : '#examin_paper',
+								height : 315,
+								url : path + 'examroom/findAllExaminPaper.do' //数据接口
+								,
+								method : 'post',
+								page : true //开启分页
+								,
+								cols :
+									[
+										[ //表头
+											{
+												field : 'EXAM_ID',
+												title : '序号',
+												sort : true,
+												align : 'center',
+											},
+											{
+												field : 'EXAM_NAME',
+												title : '考卷名',
+												align : 'center',
+											}] ],
+								limit : 10,
+								request :
+									{
+										pageName : 'page' //页码的参数名称，默认：page
+										,
+										limitName : 'limit' //每页数据量的参数名，默认：limit
+									},
+								response :
+									{
+										statusName : 'state' //数据状态的字段名称，默认：code
+										,
+										msgName : '' //状态信息的字段名称，默认：msg
+										,
+										countName : 'total' //数据总数的字段名称，默认：count
+										,
+										dataName : 'data' //数据列表的字段名称，默认：data
+									},
+								done : function(res, curr, count)//异步请求数据的回调
+									{
+										var state=res.state;
+										if(state!=0){
+											layer.msg('暂无试卷相关数据');
+										}
+									}
 							});
 						//load时重新加载表单
 						form.render();

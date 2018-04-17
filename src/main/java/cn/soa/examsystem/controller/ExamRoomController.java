@@ -57,4 +57,13 @@ public class ExamRoomController extends ExceptionController{
 	public JsonResult<String> addExamroom(Examroom examroom) throws MyException{
 		return examRoomServiceInter.addExamroom(examroom);
 	}
+	/**
+	 * 查询所有的考场信息
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/findAllExamroomInfo.do")
+	public JsonResult<List<Map<String,Object>>> findAllExamroomInfo(Integer page,Integer limit) throws MyException{
+		return examRoomServiceInter.findAllExamroomInfo(page, limit);
+	}
 }

@@ -43,4 +43,14 @@ public interface ExamRoomDao {
 	    * @throws
 	 */
 	public List<String> findExamroomByName(String examroom_name);
+	/**
+	 * 查询所有的考场信息
+	 * @return
+	 */
+	public List<Map<String,Object>> findAllExamroomInfo(Integer start_page,Integer end_page);
+	/**
+	 * 查询考场总行数
+	 * @return
+	 */
+	public Integer findExamroomTotalCount();
 }

@@ -46,4 +46,12 @@ public class ExamRoomTest extends BaseTest{
 		Integer num= examRoomDao.addExamroom(examroom);
 		System.out.println(num);
 	}
+	@Test
+	public void findAllExamroomInfo()
+	{
+		List<Map<String, Object>> findAllExamroomInfo = examRoomDao.findAllExamroomInfo(2, 4);
+		for (Map<String, Object> map : findAllExamroomInfo) {
+			System.out.println(map);
+		}
+	}
 }
