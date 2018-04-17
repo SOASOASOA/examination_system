@@ -50,7 +50,7 @@
 											var str=JSON.stringify(data);
 											addCookie("user",str,1);
 											//跳转到主页面
-											window.location.href="index.html";
+											window.location.href="index/index.html";
 										}
 									if (state == "1")
 										{
