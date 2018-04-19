@@ -3,8 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>考场管理</title>
-<link rel="stylesheet" type="text/css" href="../../layui/css/layui.css">
-<script type="text/javascript" src="../../layui/layui.js"></script>
 <style type="text/css">
 html, body {
 	height: 100%;
@@ -13,8 +11,8 @@ html, body {
 }
 
 #em_bt {
-	position:absolute;
-	right:100px;
+	position: absolute;
+	right: 100px;
 	margin-top: 5px;
 }
 
@@ -23,82 +21,104 @@ html, body {
 }
 
 #em_body {
-	position:absolute;
-	border-top:1.5px solid #C9C9C9;
+	position: absolute;
+	border-top: 1.5px solid #C9C9C9;
 	width: 100%;
 	display: flex;
 }
 
-.layui-form {
+#em_form {
 	margin: auto;
 }
-.layui-input{
-white-space : normal nowrap 
+
+#em_form .layui-input {
+	white-space: normal nowrap
 }
-#em_body>.layui-form input{
+
+#em_body>.layui-form input {
 	width: 500px;
 }
-.star{
+
+.star {
 	position: absolute;
-	left:310px;
+	left: 310px;
 	color: red;
 	font-size: 20px;
 }
-.layui-form-item{
+
+.layui-form-item {
 	margin-top: 40px;
 }
 /*考试管理head高度*/
-#em_head{
-height: 50px;
+#em_head {
+	height: 50px;
 }
 
-.layui-form,button[type=reset]{
+#em_form, button[type=reset], #em_form_modify {
 	display: none;
+}
+
+#em_form_modify {
+	margin-left: 30%
+}
+
+.star_modify {
+	color: red;
 }
 </style>
 </head>
 <body>
 	<div id="em_head">
-	<button id="em_bt" class="layui-btn layui-btn-normal">
-		<i class="layui-icon">&#xe608;</i>添加新考场
-	</button>
+		<button id="em_bt" class="layui-btn layui-btn-normal">
+			<i class="layui-icon">&#xe608;</i>添加新考场
+		</button>
 	</div>
 	<div id="em_body">
-		<form class="layui-form">
+		<form id="em_form" class="layui-form">
 			<div class="layui-form-item">
 				<label class="layui-form-label">考场名称:</label>
 				<div class="layui-input-inline">
-					<input type="text" name="examroom_name" required lay-verify="required" placeholder="请输入考场名称" class="layui-input">
+					<input type="text" name="examroom_name" lay-verify="required" placeholder="请输入考场名称" class="layui-input">
 				</div>
-				 <div class="layui-form-mid layui-word-aux"><span class="star">*</span></div>
+				<div class="layui-form-mid layui-word-aux">
+					<span class="star">*</span>
+				</div>
 			</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label">考生数量:</label>
 				<div class="layui-input-inline">
-					<input type="text" name="examroom_max_person" required lay-verify="examroom_max_person" placeholder="容纳考生数量" class="layui-input">
+					<input type="text" name="examroom_max_person" lay-verify="examroom_max_person" placeholder="容纳考生数量" class="layui-input">
 				</div>
-				 <div class="layui-form-mid layui-word-aux"><span class="star">*</span></div>
+				<div class="layui-form-mid layui-word-aux">
+					<span class="star">*</span>
+				</div>
 			</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label">开考时间:</label>
 				<div class="layui-input-inline">
 					<input type="text" name="examroom_begin_time" id="examroom_begin_time" lay-verify="date" placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off" class="layui-input">
 				</div>
-				 <div class="layui-form-mid layui-word-aux"><span class="star">*</span></div>
+				<div class="layui-form-mid layui-word-aux">
+					<span class="star">*</span>
+				</div>
 			</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label">结束时间:</label>
 				<div class="layui-input-inline">
 					<input type="text" name="examroom_end_time" id="examroom_end_time" lay-verify="date" placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off" class="layui-input">
 				</div>
-				 <div class="layui-form-mid layui-word-aux"><span class="star">*</span></div>
+				<div class="layui-form-mid layui-word-aux">
+					<span class="star">*</span>
+				</div>
 			</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label">考场地点:</label>
 				<div class="layui-input-inline">
 					<input type="text" name="examroom_place" lay-verify="required" placeholder="请输入考场地点" class="layui-input">
 				</div>
-				 <div class="layui-form-mid layui-word-aux"><span class="star">*</span></div>
+				<div class="layui-form-mid layui-word-aux">
+					<span class="star">*</span>
+				</div>
 			</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label">锁定考场</label>
@@ -114,12 +134,67 @@ height: 50px;
 				</div>
 			</div>
 		</form>
+	</div>
+	<div id="em_table_body">
 		<table id="em_table" class="layui-table" lay-filter="em_table_filter" lay-skin="line"></table>
 	</div>
-	<script type="text/javascript" src="../../javaScript/javascriptUtil.js"></script>
-	<script type="text/javascript" src="../../javaScript/cookie_util.js"></script>
-	<script type="text/javascript" src="../../javaScript/js/global-path.js"></script>
-	<script type="text/javascript" src="../../javaScript/jquery-1.11.1.js"></script>
+	<script type="text/html" id="barDemo">
+  		<a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+  		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除此考场</a>
+	</script>
+	<form id="em_form_modify" class="layui-form">
+		<div class="layui-form-item">
+			<label class="layui-form-label">考场名称:</label>
+			<div class="layui-input-inline">
+				<input type="text" name="examroom_name" lay-verify="required" placeholder="请输入考场名称" class="layui-input">
+			</div>
+			<div class="layui-form-mid layui-word-aux">
+				<span class="star_modify">*</span>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">考生数量:</label>
+			<div class="layui-input-inline">
+				<input type="text" name="examroom_max_person" lay-verify="examroom_max_person" placeholder="容纳考生数量" class="layui-input">
+			</div>
+			<div class="layui-form-mid layui-word-aux">
+				<span class="star_modify">*</span>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">开考时间:</label>
+			<div class="layui-input-inline">
+				<input type="text" name="examroom_begin_time" id="examroom_begin_time_modify" lay-verify="date" placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off" class="layui-input">
+			</div>
+			<div class="layui-form-mid layui-word-aux">
+				<span class="star_modify">*</span>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">结束时间:</label>
+			<div class="layui-input-inline">
+				<input type="text" name="examroom_end_time" id="examroom_end_time_modify" lay-verify="date" placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off" class="layui-input">
+			</div>
+			<div class="layui-form-mid layui-word-aux">
+				<span class="star_modify">*</span>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">考场地点:</label>
+			<div class="layui-input-inline">
+				<input type="text" name="examroom_place" lay-verify="required" placeholder="请输入考场地点" class="layui-input">
+			</div>
+			<div class="layui-form-mid layui-word-aux">
+				<span class="star_modify">*</span>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">锁定考场</label>
+			<div class="layui-input-inline">
+				<input type="checkbox" value="on" name="examroom_lock_status" title="是否锁定">
+			</div>
+		</div>
+	</form>
 	<script type="text/javascript">
 		layui.use(
 			[ 'layer', 'form', 'table', 'element', 'laydate' ], function()
@@ -128,117 +203,116 @@ height: 50px;
 
 				$(function()
 					{
-						//封装表单数据的JSON对象
-						jsonData =
-							{};
 						//添加开始时间控件
 						laydate.render(
 							{
 								elem : '#examroom_begin_time',
-								type : 'datetime',
-								done : function(value, date, endDate)
-									{
-										jsonData.start_time = value.trim();
-									}
+								type : 'datetime'
 							});
 						//添加结束时间控件
 						laydate.render(
 							{
 								elem : '#examroom_end_time',
-								type : 'datetime',
-								done : function(value, date, endDate)
-									{
-										jsonData.end_time = value.trim();
-										/* console.log(endDate);
-										if (typeof jsonData.start_time != 'undefined')
+								type : 'datetime'
+							});
+						//添加开始时间控件
+						laydate.render(
+							{
+								elem : '#examroom_begin_time_modify',
+								type : 'datetime'
+							});
+						//添加结束时间控件
+						laydate.render(
+							{
+								elem : '#examroom_end_time_modify',
+								type : 'datetime'
+							});
+						//layui表单验证
+						form.verify(
+							{
+								//日期格式的验证
+								date : function(value, item)
+									{ //value：表单的值、item：表单的DOM对象 
+										if (value == '')
 											{
-												jsonData.end_time = value.trim();
-												var start_time=new Date(jsonData.start_time);
-												var end_time=new Date(jsonData.end_time);
-												if((end_time.getTime()-start_time.getTime())<0){
-													console.log(1);
-													$('#examroom_end_time').val(null);
-													return false;
-												}
-												
-											} */
+												return '请输入日期';
+											}
+										if (!/^(?:19|20)[0-9][0-9]-(?:(?:0[1-9])|(?:1[0-2]))-(?:(?:[0-2][1-9])|(?:[1-3][0-1])) (?:(?:[0-2][0-3])|(?:[0-1][0-9])):[0-5][0-9]:[0-5][0-9]$/.test(value))
+											{
+												return '日期格式不正确';
+											}
+									},
+								//考生最大人数的验证
+								examroom_max_person : function(value, item)
+									{ //value：表单的值、item：表单的DOM对象
+										if (!/^[0-9]*$/.test(value))
+											{
+												return '考生数量格式不正确';
+											}
 									}
 							});
-						//表单验证
-						form.verify({
-							  //日期格式的验证
-							  date: function(value, item){ //value：表单的值、item：表单的DOM对象 
-								  if(value==''){
-								      return '请输入日期';
-								    }
-								    if(!/^(?:19|20)[0-9][0-9]-(?:(?:0[1-9])|(?:1[0-2]))-(?:(?:[0-2][1-9])|(?:[1-3][0-1])) (?:(?:[0-2][0-3])|(?:[0-1][0-9])):[0-5][0-9]:[0-5][0-9]$/.test(value)){
-								      return '日期格式不正确';
-								    }
-								  },
-							 //考生最大人数的验证
-							 examroom_max_person: function(value, item){ //value：表单的值、item：表单的DOM对象
-									    if(!/^[0-9]*$/.test(value)){
-									      return '考生数量格式不正确';
-									    }
-									  }
-							}); 
-						var $hashcode=0;
+						var $hashcode = 0;
 						//点击提交按钮,新增考场信息
-						form.on('submit(submit)', function(data){
-							var start_time=new Date(data.field.examroom_begin_time);
-							var end_time=new Date(data.field.examroom_end_time);
-							if($hashcode==hashcode(data.field.examroom_name)){
+						form.on('submit(submit)', function(data)
+							{
+								var start_time = new Date(data.field.examroom_begin_time);
+								var end_time = new Date(data.field.examroom_end_time);
+								if ($hashcode == hashcode(data.field.examroom_name))
+									{
+										return false;
+									}
+								$hashcode = hashcode(data.field.examroom_name);
+								if ((end_time.getTime() - start_time.getTime()) < 0)
+									{
+										layer.msg("考试结束时间不能小于开考时间");
+										return false;
+									}
+								var str = getCookie("user");//从Cookie中取出管理员信息
+								if (str == null || typeof str == 'undefined')
+									{
+										alert("不能获取用户信息,请重新登录");
+									}
+								//获取考试创建人
+								data.field.examroom_create_person = JSON.parse(str).user_name.trim();
+								var ajson =
+									{
+										url : path + "examroom/addExamroom.do",
+										data : data.field
+									};
+								//自定义AJAX函数
+								ajaxJsonReturnMessage(ajson);
 								return false;
-							}
-							$hashcode=hashcode(data.field.examroom_name);
-							if((end_time.getTime()-start_time.getTime())<0){
-								layer.msg("考试结束时间不能小于开考时间");
-								return false;
-							}
-							var str = getCookie("user");//从Cookie中取出管理员信息
-							if(str==null||typeof str=='undefined'){
-								alert("不能获取用户信息,请重新登录");
-							}
-							//获取考试创建人
-							data.field.examroom_create_person = JSON.parse(str).user_name;
-							var ajson={
-									url:"examroom/addExamroom.do",
-									data:data.field,
-									success: function (result)
-										{
-											var state = result.state;
-											var data = result.data;
-											var message = result.message;
-											if (state == 0)
-												{
-													layer.msg(data);
-												} else
-												{
-													layer.msg(message);
-												}
-											return false;// 阻止表单跳转
-										}
-							};
-							//自定义AJAX函数
-							ajaxJson(ajson);
-							return false;
 							});
-						//添加新考场按钮添加单击事件，展示并重置表单
-						$('#em_bt').click(function(){
-							$('button[type=reset]').click();
-							$('.layui-form').show();
-						});
-						//取消按钮添加点击事件，并隐藏表单
-						$('button[type=cancel]').click(function(){
-							$('.layui-form').hide();
-						});
-						
+						//<添加新考场按钮>添加单击事件，展示并重置表单
+						$('#em_bt').click(function()
+							{
+								$('button[type=reset]').click();
+								$('#em_form').show();
+								$('#em_table_body').hide();
+							});
+						//<取消按钮>添加点击事件，并隐藏表单
+						$('#em_form button[type=cancel]').click(function()
+							{
+								tableIns.reload(
+									{
+										page :
+											{
+												curr : 1
+											//重新从第 1 页开始
+											}
+									});
+								$('#em_form').hide();
+								$('#em_table_body').show();
+
+								return false;
+							});
+
 						//初始化试卷表格
-						table.render(
-							{ 
-								elem : '#examin_paper',
-								height : 315,
-								url : path + 'examroom/findAllExaminPaper.do' //数据接口
+						var tableIns = table.render(
+							{
+								elem : '#em_table',
+								height : 'full-250',
+								url : path + 'examroom/findAllExamroomInfo.do' //数据接口
 								,
 								method : 'post',
 								page : true //开启分页
@@ -247,16 +321,47 @@ height: 50px;
 									[
 										[ //表头
 											{
-												field : 'EXAM_ID',
+												field : 'RN',
 												title : '序号',
 												sort : true,
 												align : 'center',
 											},
 											{
-												field : 'EXAM_NAME',
-												title : '考卷名',
+												field : 'EXAMROOM_NAME',
+												title : '考场名称',
 												align : 'center',
-											}] ],
+											},
+											{
+												field : 'EXAMROOM_BEGIN_TIME',
+												title : '开始时间',
+												align : 'center',
+											},
+											{
+												field : 'EXAMROOM_END_TIME',
+												title : '结束时间',
+												align : 'center',
+											},
+											{
+												field : 'EXAMROOM_MAX_PERSON',
+												title : '考生人数',
+												align : 'center',
+											},
+											{
+												field : 'EXAMROOM_LOCK_STATUS',
+												title : '锁定考场',
+												align : 'center',
+											},
+											{
+												field : 'EXAMROOM_PLACE',
+												title : '考场地点',
+												align : 'center',
+											},
+											{
+												fixed : 'right',
+												width : 150,
+												align : 'center',
+												toolbar : '#barDemo'
+											} ] ],
 								limit : 10,
 								request :
 									{
@@ -276,16 +381,126 @@ height: 50px;
 									},
 								done : function(res, curr, count)//异步请求数据的回调
 									{
-										var state=res.state;
-										if(state!=0){
-											layer.msg('暂无试卷相关数据');
-										}
+										var state = res.state;
+										if (state != 0)
+											{
+												layer.msg('暂无试卷相关数据');
+											}
+									}
+							});
+						var $examroom_id = '';
+						//监听工具条
+						table.on('tool(em_table_filter)', function(obj)
+							{ //注：tool是工具条事件名，em_table_filter是table原始容器的属性 lay-filter="对应的值"
+								var data = obj.data; //获得当前行数据
+								$examroom_id = data.EXAMROOM_ID;//获得当前考场的考场ID
+								var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+								var tr = obj.tr; //获得当前行 tr 的DOM对象
+								if (layEvent === 'del')
+									{ //删除
+										layer.confirm('是否删除此考场', function(index)
+											{
+												obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+												layer.close(index);
+												//向服务端发送删除指令
+												var ajson =
+													{
+														url : path + "examroom/deleteExamroomById.do",
+														data :
+															{
+																'examroom_id' : data.EXAMROOM_ID
+															}
+													};
+												//自定义AJAX函数
+												ajaxJsonReturnMessage(ajson);
+											});
+									} else if (layEvent === 'edit')
+									{ //编辑
+										//将表格中对应行的值赋值到跳出的表单层中
+										$('#em_form_modify input[name=examroom_name]').val(data.EXAMROOM_NAME);
+										$('#em_form_modify input[name=examroom_max_person]').val(data.EXAMROOM_MAX_PERSON);
+										$('#em_form_modify input[name=examroom_begin_time]').val(data.EXAMROOM_BEGIN_TIME);
+										$('#em_form_modify input[name=examroom_end_time]').val(data.EXAMROOM_END_TIME);
+										$('#em_form_modify input[name=examroom_place]').val(data.EXAMROOM_PLACE);
+										if (data.EXAMROOM_LOCK_STATUS == '是')
+											{
+												$('#em_form_modify input[name=examroom_lock_status]').prop('checked', true);
+											} else
+											{
+												$('#em_form_modify input[name=examroom_lock_status]').prop('checked', false);
+											}
+										form.render();
+										//点击操作跳出对应数据行的表单遮罩层
+										layer.open(
+											{
+												type : 1,
+												title : '修改考场信息',
+												skin : 'demo-class',
+												offset : 'auto',
+												area :
+													[ '900px', '700px' ],
+												content : $('#em_form_modify'),
+												btn :
+													[ '立即提交', '取消' ],
+												yes : function(index, layero)
+													{
+														var dataJson =
+															{};
+														dataJson.examroom_id = data.EXAMROOM_ID;
+														dataJson.examroom_name = $('#em_form_modify input[name=examroom_name]').val();
+														dataJson.examroom_max_person = $('#em_form_modify input[name=examroom_max_person]').val();
+														dataJson.examroom_begin_time = $('#em_form_modify input[name=examroom_begin_time]').val();
+														dataJson.examroom_end_time = $('#em_form_modify input[name=examroom_end_time]').val();
+														dataJson.examroom_place = $('#em_form_modify input[name=examroom_place]').val();
+														if ($('#em_form_modify input[name=examroom_lock_status]').is(':checked'))
+															{
+																dataJson.examroom_lock_status = "on";
+															} else
+															{
+																dataJson.examroom_lock_status = "off";
+															}
+														//对考场的开始时间和结束时间进行判断
+														var start_time = new Date(dataJson.examroom_begin_time);
+														var end_time = new Date(dataJson.examroom_end_time);
+														if ($hashcode == hashcode(dataJson.examroom_name))
+															{
+																return false;
+															}
+														$hashcode = hashcode(dataJson.examroom_name);
+														if ((end_time.getTime() - start_time.getTime()) < 0)
+															{
+																layer.msg("考试结束时间不能小于开考时间");
+																return false;
+															}
+														var ajson =
+															{
+																url : path + "examroom/updateExamroomInfoById.do",
+																data : dataJson,
+															};
+														//自定义AJAX函数
+														ajaxJsonReturnMessage(ajson);
+														return false;
+													},
+												btn2 : function(index, layero)
+													{
+														tableIns.reload(
+															{
+																page :
+																	{
+																		curr : 1
+																	//重新从第 1 页开始
+																	}
+															});
+														layer.close(index);
+													}
+											//这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+											});
 									}
 							});
 						//load时重新加载表单
 						form.render();
 					})
-					
+
 			});
 	</script>
 </body>

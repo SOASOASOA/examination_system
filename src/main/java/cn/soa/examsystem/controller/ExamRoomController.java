@@ -66,4 +66,23 @@ public class ExamRoomController extends ExceptionController{
 	public JsonResult<List<Map<String,Object>>> findAllExamroomInfo(Integer page,Integer limit) throws MyException{
 		return examRoomServiceInter.findAllExamroomInfo(page, limit);
 	}
+	/**
+	 * 根据考场ID删除对应的考场信息
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/deleteExamroomById.do")
+	public JsonResult<String> deleteExamroomById(String examroom_id) throws MyException{
+		return examRoomServiceInter.deleteExamroomById(examroom_id);
+	}
+	/**
+	 * 根据examroomId,修改对应的考场信息
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/updateExamroomInfoById.do")
+	public JsonResult<String> updateExamroomInfoById(Examroom examroom) throws MyException{
+		System.out.println(examroom);
+		return examRoomServiceInter.updateExamroomInfoById(examroom);
+	}
 }

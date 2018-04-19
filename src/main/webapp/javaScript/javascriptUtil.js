@@ -1,24 +1,32 @@
 /**
- * 自定义异步请求：传送类型为POST,返回类型为JSON,该函数接收一个JSON的参数对象
+ * 自定义异步请求：传送类型为POST,返回类型为JSON,该函数返回只接受一个对应的消息，并不做返回数据的处理
 	object.path为自定义请求地址
 	object.data为自定义发送的JSON对象
 	object.success为自定义处理data的逻辑函数
 	object.error为自定义错误消息
  * @returns
  */
-function ajaxJson()
+function ajaxJsonReturnMessage()
 	{
-		console.log(arguments[0]);
 		if (arguments.length==1 && typeof arguments[0] === 'object')
 			{
-				$.ajax(
+				arguments[0].type="post";
+				arguments[0].dataType="json";
+				arguments[0].success=function(result)
 					{
-						url : path + arguments[0].url,
-						type : "post",
-						data : arguments[0].data,
-						dataType : "json",
-						success :arguments[0].success
-					});
+						var state = result.state;
+						var data = result.data;
+						var message = result.message;
+						if (state == 0)
+							{
+								layer.msg(data);
+							} else
+							{
+								layer.msg(message);
+							}
+						return false;// 阻止表单跳转
+					}
+				$.ajax(arguments[0]);
 			}
 	}
 

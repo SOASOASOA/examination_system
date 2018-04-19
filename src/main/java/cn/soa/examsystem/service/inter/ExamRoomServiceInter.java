@@ -33,4 +33,14 @@ public interface ExamRoomServiceInter {
 	 * @return
 	 */
 	public JsonResult<List<Map<String, Object>>> findAllExamroomInfo(Integer page,Integer limit) throws MyException;
+	/**
+	 * 根据考场ID删除对应的考场信息
+	 * @throws MyException 
+	 */
+	public JsonResult<String> deleteExamroomById(String examroom_id) throws MyException;
+	/**
+	 * 根据examroomId,修改对应的考场信息
+	 * @throws MyException 
+	 */
+	public JsonResult<String> updateExamroomInfoById(Examroom examroom) throws MyException;
 }

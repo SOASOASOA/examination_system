@@ -89,6 +89,7 @@ public class ExamRoomServiceImpl implements ExamRoomServiceInter{
 	 */
 	@Override
 	public JsonResult<String> addExamroom(Examroom examroom) throws MyException {
+		
 		if(examroom==null) {
 			throw new MyException("添加考场异常");
 		}
@@ -133,5 +134,42 @@ public class ExamRoomServiceImpl implements ExamRoomServiceInter{
 			throw new MyException("查询考场总数异常");
 		}
 		return new JsonResult<List<Map<String, Object>>>(total,findAllExamroomInfo);
+	}
+	/**
+	 *根据考场ID删除对应的考场信息
+	 * @throws MyException 
+	 */
+	@Override
+	public JsonResult<String> deleteExamroomById(String examroom_id) throws MyException {
+		if(examroom_id==null) {
+			throw new MyException("删除考场ID异常");
+		}
+		Integer num = examRoomDao.deleteExamroomById(examroom_id);
+		String str="删除考场成功";
+		if(num!=1) {
+			str="删除考场失败";
+		}
+		return new JsonResult<String>(str);
+	}
+
+	/**
+	 * 根据examroomId,修改对应的考场信息
+	 * @throws MyException 
+	 */
+	@Override
+	public JsonResult<String> updateExamroomInfoById(Examroom examroom) throws MyException {
+		if(examroom==null) {
+			throw new MyException("修改考场数据异常");
+		}
+		//设置考场锁定的状态
+		if(examroom.getExamroom_lock_status()==null) {
+					examroom.setExamroom_lock_status("off");
+				}
+		Integer num = examRoomDao.updateExamroomInfoById(examroom);
+		String str="修改考场成功";
+		if(num!=1) {
+			str="修改考场失败";
+		}
+		return new JsonResult<String>(str);
 	}
 }

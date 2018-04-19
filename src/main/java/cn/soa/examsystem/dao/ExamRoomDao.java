@@ -53,4 +53,24 @@ public interface ExamRoomDao {
 	 * @return
 	 */
 	public Integer findExamroomTotalCount();
+	/**
+	 * 
+	    * @Title: deleteExamroomById
+	    * @Description: 根据考场ID删除对应的考场信息
+	    * @param @param examroom_id
+	    * @param @return    参数说明
+	    * @return Integer    返回类型
+	    * @throws
+	 */
+	public Integer deleteExamroomById(String examroom_id);
+	/**
+	 * 根据examroomId,修改对应的考场信息
+	    * @Title: updateExamroomInfoById
+	    * @Description: TODO(这里用一句话描述这个方法的作用)
+	    * @param @param examroom
+	    * @param @return    参数说明
+	    * @return Integer    返回类型
+	    * @throws
+	 */
+	public Integer updateExamroomInfoById(Examroom examroom);
 }

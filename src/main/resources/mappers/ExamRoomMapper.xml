@@ -23,13 +23,24 @@
 		select examroom_name from examroom_info where examroom_name=#{examroom_name}
 	</select>
 	<select id="findAllExamroomInfo" resultType="map">
-		 select * from (select rownum rn,a1.* from (select EXAMROOM_NAME,EXAMROOM_BEGIN_TIME,EXAMROOM_END_TIME,
- 		EXAMROOM_MAX_PERSON,EXAMROOM_LOCK_STATUS,EXAMROOM_PLACE from examroom_info order by EXAMROOM_CREATE_TIME desc) a1 where rownum<![CDATA[<=]]>#{1})
+		 select * from (select rownum rn,a1.* from (select EXAMROOM_ID,EXAMROOM_NAME,to_char(EXAMROOM_BEGIN_TIME,'yyyy-mm-dd hh24:mi:ss') as EXAMROOM_BEGIN_TIME,to_char(EXAMROOM_END_TIME,'yyyy-mm-dd hh24:mi:ss') as EXAMROOM_END_TIME,
+ 		EXAMROOM_MAX_PERSON,decode(replace(EXAMROOM_LOCK_STATUS,' ',''),'on','是','off','否') as EXAMROOM_LOCK_STATUS,EXAMROOM_PLACE from examroom_info order by EXAMROOM_CREATE_TIME desc) a1 where rownum<![CDATA[<=]]>#{1})
 		where rn<![CDATA[>=]]>#{0}
 	</select>
 	<select id="findExamroomTotalCount" resultType="int">
 		select count(*) from examroom_info
 	</select>
+	<delete id="deleteExamroomById" parameterType="string">
+		 delete examroom_info where examroom_id=#{examroom_id}
+	</delete>
+	<update id="updateExamroomInfoById" parameterType="cn.soa.examsystem.entity.Examroom">
+		update
+		examroom_info
+		set
+		examroom_begin_time=to_date(#{examroom_begin_time},'yyyy-MM-dd HH24:mi:ss'),examroom_end_time=to_date(#{examroom_end_time},'yyyy-MM-dd HH24:mi:ss'),examroom_lock_status=#{examroom_lock_status},examroom_max_person=#{examroom_max_person},examroom_name=#{examroom_name},examroom_place=#{examroom_place}
+		where
+		examroom_id=#{examroom_id}
+	</update>
 </mapper>
 
 
