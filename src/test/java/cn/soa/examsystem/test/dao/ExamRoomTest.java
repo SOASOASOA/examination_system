@@ -49,9 +49,9 @@ public class ExamRoomTest extends BaseTest{
 	@Test
 	public void findAllExamroomInfo()
 	{
-		List<Map<String, Object>> findAllExamroomInfo = examRoomDao.findAllExamroomInfo(2, 4);
+		/*List<Map<String, Object>> findAllExamroomInfo = examRoomDao.findAllExamroomInfo(2, 4,"efbc6f5a-0c0a-4a40-ac12-d2483389a00d");
 		for (Map<String, Object> map : findAllExamroomInfo) {
 			System.out.println(map);
-		}
+		}*/
 	}
 }

@@ -15,20 +15,20 @@
 	<insert id="addExamroom"
 			   parameterType="cn.soa.examsystem.entity.Examroom">
 		insert into
-		examroom_info(examroom_id,examroom_create_time,examroom_create_person,examroom_begin_time,examroom_end_time,examroom_place,examroom_max_person,examroom_name,examroom_lock_status)
+		examroom_info(examroom_id,exam_id,examroom_create_time,examroom_create_person,examroom_begin_time,examroom_end_time,examroom_place,examroom_max_person,examroom_name,examroom_lock_status)
 		values
-		(#{examroom_id},to_date(#{examroom_create_time},'yyyy-MM-dd HH24:mi:ss'),#{examroom_create_person},to_date(#{examroom_begin_time},'yyyy-MM-dd HH24:mi:ss'),to_date(#{examroom_end_time},'yyyy-MM-dd HH24:mi:ss'),#{examroom_place},#{examroom_max_person},#{examroom_name},#{examroom_lock_status})
+		(#{examroom_id},#{exam_id},to_date(#{examroom_create_time},'yyyy-MM-dd HH24:mi:ss'),#{examroom_create_person},to_date(#{examroom_begin_time},'yyyy-MM-dd HH24:mi:ss'),to_date(#{examroom_end_time},'yyyy-MM-dd HH24:mi:ss'),#{examroom_place},#{examroom_max_person},#{examroom_name},#{examroom_lock_status})
 	</insert>
 	<select id="findExamroomByName" resultType="string">
 		select examroom_name from examroom_info where examroom_name=#{examroom_name}
 	</select>
 	<select id="findAllExamroomInfo" resultType="map">
 		 select * from (select rownum rn,a1.* from (select EXAMROOM_ID,EXAMROOM_NAME,to_char(EXAMROOM_BEGIN_TIME,'yyyy-mm-dd hh24:mi:ss') as EXAMROOM_BEGIN_TIME,to_char(EXAMROOM_END_TIME,'yyyy-mm-dd hh24:mi:ss') as EXAMROOM_END_TIME,
- 		EXAMROOM_MAX_PERSON,decode(replace(EXAMROOM_LOCK_STATUS,' ',''),'on','是','off','否') as EXAMROOM_LOCK_STATUS,EXAMROOM_PLACE from examroom_info order by EXAMROOM_CREATE_TIME desc) a1 where rownum<![CDATA[<=]]>#{1})
+ 		EXAMROOM_MAX_PERSON,decode(replace(EXAMROOM_LOCK_STATUS,' ',''),'on','是','off','否') as EXAMROOM_LOCK_STATUS,EXAMROOM_PLACE from examroom_info where exam_id=#{2} order by EXAMROOM_CREATE_TIME desc) a1 where rownum<![CDATA[<=]]>#{1})
 		where rn<![CDATA[>=]]>#{0}
 	</select>
 	<select id="findExamroomTotalCount" resultType="int">
-		select count(*) from examroom_info
+		select count(*) from examroom_info where exam_id=#{exam_id}
 	</select>
 	<delete id="deleteExamroomById" parameterType="string">
 		 delete examroom_info where examroom_id=#{examroom_id}

@@ -63,8 +63,8 @@ public class ExamRoomController extends ExceptionController{
 	 */
 	@ResponseBody
 	@RequestMapping("/findAllExamroomInfo.do")
-	public JsonResult<List<Map<String,Object>>> findAllExamroomInfo(Integer page,Integer limit) throws MyException{
-		return examRoomServiceInter.findAllExamroomInfo(page, limit);
+	public JsonResult<List<Map<String,Object>>> findAllExamroomInfo(Integer page,Integer limit,String exam_id) throws MyException{
+		return examRoomServiceInter.findAllExamroomInfo(page, limit,exam_id);
 	}
 	/**
 	 * 根据考场ID删除对应的考场信息

@@ -32,7 +32,7 @@ public interface ExamRoomServiceInter {
 	 * 查询所有的考场信息
 	 * @return
 	 */
-	public JsonResult<List<Map<String, Object>>> findAllExamroomInfo(Integer page,Integer limit) throws MyException;
+	public JsonResult<List<Map<String, Object>>> findAllExamroomInfo(Integer page,Integer limit,String exam_id) throws MyException;
 	/**
 	 * 根据考场ID删除对应的考场信息
 	 * @throws MyException 

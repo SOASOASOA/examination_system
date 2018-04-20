@@ -203,6 +203,8 @@ html, body {
 
 				$(function()
 					{
+						//获得考卷ID
+						var exam_id=getCookie("EXAM_ID");
 						//添加开始时间控件
 						laydate.render(
 							{
@@ -274,6 +276,7 @@ html, body {
 									}
 								//获取考试创建人
 								data.field.examroom_create_person = JSON.parse(str).user_name.trim();
+								data.field.exam_id=exam_id;
 								var ajson =
 									{
 										url : path + "examroom/addExamroom.do",
@@ -303,7 +306,6 @@ html, body {
 									});
 								$('#em_form').hide();
 								$('#em_table_body').show();
-
 								return false;
 							});
 
@@ -314,6 +316,7 @@ html, body {
 								height : 'full-250',
 								url : path + 'examroom/findAllExamroomInfo.do' //数据接口
 								,
+								where: {exam_id:exam_id},
 								method : 'post',
 								page : true //开启分页
 								,
