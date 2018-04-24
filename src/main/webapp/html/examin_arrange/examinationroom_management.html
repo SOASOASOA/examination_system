@@ -283,7 +283,7 @@ html, body {
 										data : data.field
 									};
 								//自定义AJAX函数
-								ajaxJsonReturnMessage(ajson);
+								ajaxReturnMessage(ajson);
 								return false;
 							});
 						//<添加新考场按钮>添加单击事件，展示并重置表单
@@ -355,7 +355,7 @@ html, body {
 												align : 'center',
 											},
 											{
-												field : 'EXAMROOM_PLACE',
+												field : 'examroom_place',
 												title : '考场地点',
 												align : 'center',
 											},
@@ -415,7 +415,7 @@ html, body {
 															}
 													};
 												//自定义AJAX函数
-												ajaxJsonReturnMessage(ajson);
+												ajaxReturnMessage(ajson);
 											});
 									} else if (layEvent === 'edit')
 									{ //编辑
@@ -481,7 +481,7 @@ html, body {
 																data : dataJson,
 															};
 														//自定义AJAX函数
-														ajaxJsonReturnMessage(ajson);
+														ajaxReturnMessage(ajson);
 														return false;
 													},
 												btn2 : function(index, layero)

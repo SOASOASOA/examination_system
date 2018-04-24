@@ -73,4 +73,17 @@ public interface ExamRoomDao {
 	    * @throws
 	 */
 	public Integer updateExamroomInfoById(Examroom examroom);
+	/**
+	 * 
+	    * @Title: findExamroomByExamId
+	    * @Description: 根据考卷ID查询对应的考场
+	    * @param @param exam_id
+	    * @param @return    参数说明
+	    * @return List<Map<String,Object>>    返回类型
+	    * @throws
+	 */
+	public List<Map<String,Object>> findExamroomByExamId(String exam_id);
+	
+	
+	
 }

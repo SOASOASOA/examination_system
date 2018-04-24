@@ -33,6 +33,8 @@
 			//监听登录提交按钮事件,获取用户名，密码，验证码进行后端验证
 			form.on('submit(submit)', function(data) {
 				var data=data.field;
+				//将用户的登录账号保存在cookie中
+				addCookie("user_account",data.user_account,1);
 				$.ajax(
 						{
 							url : path + "login/checkUser.do",

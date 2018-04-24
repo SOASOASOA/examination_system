@@ -43,4 +43,9 @@ public interface ExamRoomServiceInter {
 	 * @throws MyException 
 	 */
 	public JsonResult<String> updateExamroomInfoById(Examroom examroom) throws MyException;
+	/**
+	 * @Description: 根据考卷ID查询对应的考场ID和名称
+	 * @throws MyException 
+	 */
+	public JsonResult<List<Map<String,Object>>> findExamroomByExamId(String exam_id) throws MyException;
 }

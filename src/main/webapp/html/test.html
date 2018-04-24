@@ -6,15 +6,13 @@
 <script type="text/javascript" src="../javaScript/jquery-1.11.1.js"></script>
 </head>
 <body>
-	<input type="checkbox" id="tt">123
+	<input type="radio" name="sex" value="1">男
+		<input type="radio" name="sex" value="0">女
 	<button id="bt1">按钮1</button>
-	<button id="bt2">按钮2</button>
 	<script type="text/javascript">
 		$('#bt1').click(function(){
-			$('#tt').prop('checked',true);
-		});
-		$('#bt2').click(function(){
-			$('#tt').prop('checked',false);
+			var val=$('input[type=radio]:checked').val();
+			console.log(val);
 		});
 	</script>
 </body>

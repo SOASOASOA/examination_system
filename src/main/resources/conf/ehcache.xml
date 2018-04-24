@@ -14,6 +14,12 @@
 	<!-- cache:为指定名称的对象进行缓存的特殊配置 name:指定对象的完整名 -->
 	<cache name="myCache" maxElementsInMemory="100" eternal="false"
 		timeToIdleSeconds="300" timeToLiveSeconds="600" overflowToDisk="true" />
+		<cache name="findUserInfoByUserId" maxElementsInMemory="100" eternal="false"
+		timeToIdleSeconds="300" timeToLiveSeconds="600" overflowToDisk="true" />
+	<cache name="myCache2" maxElementsInMemory="100" eternal="false"
+		timeToIdleSeconds="300" timeToLiveSeconds="600" overflowToDisk="true" />
+	<cache name="myCache3" maxElementsInMemory="100" eternal="false"
+		timeToIdleSeconds="300" timeToLiveSeconds="600" overflowToDisk="true" />
 </ehcache>
 
 

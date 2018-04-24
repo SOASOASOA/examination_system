@@ -82,7 +82,15 @@ public class ExamRoomController extends ExceptionController{
 	@ResponseBody
 	@RequestMapping("/updateExamroomInfoById.do")
 	public JsonResult<String> updateExamroomInfoById(Examroom examroom) throws MyException{
-		System.out.println(examroom);
 		return examRoomServiceInter.updateExamroomInfoById(examroom);
+	}
+	/**
+	 * 根据examroomId,修改对应的考场信息
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/findExamroomByExamId.do")
+	public JsonResult<List<Map<String,Object>>> findExamroomByExamId(String exam_id) throws MyException{
+		return examRoomServiceInter.findExamroomByExamId(exam_id);
 	}
 }

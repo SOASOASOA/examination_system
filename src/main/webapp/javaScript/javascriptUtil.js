@@ -6,7 +6,7 @@
 	object.error为自定义错误消息
  * @returns
  */
-function ajaxJsonReturnMessage()
+function ajaxReturnMessage()
 	{
 		if (arguments.length==1 && typeof arguments[0] === 'object')
 			{
@@ -48,4 +48,23 @@ function hashcode(str)
 				hash |= 0; // Convert to 32bit integer
 			}
 		return hash;
+	}
+
+
+/**
+ * 自定义异步请求：传送类型为POST,返回类型为JSON,该函数返回需要进行数据处理
+	object.path为自定义请求地址
+	object.data为自定义发送的JSON对象
+	object.success为自定义处理data的逻辑函数
+	object.error为自定义错误消息
+ * @returns
+ */
+function ajaxReturnJson()
+	{
+		if (arguments.length==1 && typeof arguments[0] === 'object')
+			{
+				arguments[0].type="post";
+				arguments[0].dataType="json";
+				$.ajax(arguments[0]);
+			}
 	}

@@ -2,9 +2,9 @@
     /**  
     * @Title: ExamPaper.java
     * @Package cn.soa.examsystem.entity
-    * @Description: TODO(ÓÃÒ»¾ä»°ÃèÊö¸ÃÎÄ¼ş×öÊ²Ã´)
+    * @Description: TODO(ï¿½ï¿½Ò»ï¿½ä»°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ê²Ã´)
     * @author zhugang
-    * @date 2018Äê3ÔÂ27ÈÕ
+    * @date 2018ï¿½ï¿½3ï¿½ï¿½27ï¿½ï¿½
     * @version V1.0  
     */
     
@@ -15,21 +15,22 @@ import java.util.Date;
 
 /**
     * @ClassName: ExamPaper
-    * @Description: ÊÔÌâÊµÌåÀà
+    * @Description: ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½
     * @author zhugang
-    * @date 2018Äê3ÔÂ27ÈÕ
+    * @date 2018ï¿½ï¿½3ï¿½ï¿½27ï¿½ï¿½
     *
     */
 
 public class ExamPaper implements Serializable{
 
 	
+	
+	
 	    /**
-	    * @Fields serialVersionUID : ĞòÁĞ»¯
+	    * @Fields serialVersionUID : TODO(ç”¨ä¸€å¥è¯æè¿°è¿™ä¸ªå˜é‡è¡¨ç¤ºä»€ä¹ˆ)
 	    */
 	    
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -8111316682063891413L;
 	private	String	id;
 	private String  qsid;
 	private	Date	createTime;
@@ -63,7 +64,7 @@ public class ExamPaper implements Serializable{
 	private	Integer	importantLevel;
 	
 	    /**
-	     * ´´½¨Ò»¸öĞÂµÄÊµÀı ExamPaper.
+	     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Âµï¿½Êµï¿½ï¿½ ExamPaper.
 	     *
 	     */
 	    
@@ -74,7 +75,7 @@ public class ExamPaper implements Serializable{
 
 		
 		    /**
-		     * ´´½¨Ò»¸öĞÂµÄÊµÀı ExamPaper.
+		     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Âµï¿½Êµï¿½ï¿½ ExamPaper.
 		     *
 		     * @param id
 		     * @param qsid
@@ -771,7 +772,7 @@ public class ExamPaper implements Serializable{
 
 
 			
-			    /* (·Ç Javadoc)
+			    /* (ï¿½ï¿½ Javadoc)
 			    * 
 			    * 
 			    * @return

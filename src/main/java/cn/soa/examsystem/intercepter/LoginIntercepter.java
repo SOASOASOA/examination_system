@@ -31,7 +31,6 @@ public class LoginIntercepter implements HandlerInterceptor{
 		if(user_id==null) {
 			ExaminUtil.returnPromptMessage(res, new JsonResult(1,null,"login.html"));
 			return false;
-			
 		}
 		return true;
 	}

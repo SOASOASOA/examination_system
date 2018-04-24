@@ -4,11 +4,11 @@
 <mapper namespace="cn.soa.examsystem.dao.LoginDAO">
 	<select id="findUserIdByName" resultType="map" parameterType="string">
 		select 
-			user_id,user_password 
+			user_id,user_password,user_name
 		from 
 			user_info
 		where 
-			user_account=#{user_name}
+			user_account=#{user_account}
 	</select>
 </mapper>
 

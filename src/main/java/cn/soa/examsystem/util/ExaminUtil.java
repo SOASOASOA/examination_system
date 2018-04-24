@@ -6,28 +6,26 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.binary.Base64;
-import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ExaminUtil {
 	/**
-	 * 灏嗙敤鎴风殑瀵嗙爜閫氳繃MD5鍜孊ase64杩涜鍔犲瘑澶勭悊
-	 * @param password 鐢ㄦ埛瀵嗙爜
+	 * 将用户的密码通过MD5和Base64进行加密处理
+	 * @param password 用户密码
 	 * @return
 	 */
 	public static String toMD5(String password) {
-		//鑾峰彇MD5瀵硅薄
+		//获取MD5对象
 		MessageDigest md;
 		try {
 			md = MessageDigest.getInstance("MD5");
-			//鍔犲瘑澶勭悊
+			//加密处理
 			byte[] output=md.digest(password.getBytes());
-			//鍒╃敤Base64杞崲鎴愬瓧绗︿覆缁撴灉
+			//利用Base64转换成字符串结果
 			String result=Base64.encodeBase64String(output);
 			return result;
 		} catch (NoSuchAlgorithmException e) {
@@ -36,7 +34,7 @@ public class ExaminUtil {
 		}
 	}
 	/**
-	 * 鑾峰彇UUID
+	 * 获取UUID
 	 * @return
 	 */
 	public static String getUUID() {
@@ -44,10 +42,10 @@ public class ExaminUtil {
 		return uuid;
 	}
 	/**
-	 * 杩斿洖鐢ㄦ埛鎻愮ず淇℃伅
+	 * 返回用户提示信息
 	 * @param req
 	 * @param res
-	 * @param jsonResult 杩斿洖鐢ㄦ埛灏佽鐨勬彁绀轰俊鎭�
+	 * @param jsonResult 返回用户封装的提示信息
 	 */
 	public static void returnPromptMessage(HttpServletResponse res,JsonResult jsonResult) {
 		PrintWriter out;

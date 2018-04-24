@@ -41,6 +41,9 @@
 		where
 		examroom_id=#{examroom_id}
 	</update>
+	<select id="findExamroomByExamId" parameterType="string" resultType="map">
+		select examroom_id,examroom_name from examroom_info where exam_id=#{exam_id}
+	</select>
 </mapper>
 
 

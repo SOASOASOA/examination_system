@@ -172,4 +172,18 @@ public class ExamRoomServiceImpl implements ExamRoomServiceInter{
 		}
 		return new JsonResult<String>(str);
 	}
+	/**
+	 * @Description: 根据考卷ID查询对应的考场ID和名称
+	 */
+	@Override
+	public JsonResult<List<Map<String, Object>>> findExamroomByExamId(String exam_id) throws MyException {
+		if(exam_id==null) {
+			throw new MyException("考卷ID数据异常");
+		}
+		List<Map<String, Object>> findExamroomByExamId = examRoomDao.findExamroomByExamId(exam_id);
+		if(findExamroomByExamId==null) {
+			throw new MyException("根据考卷ID查询考场数据异常");
+		}
+		return new JsonResult<List<Map<String, Object>>>(findExamroomByExamId);
+	}
 }
