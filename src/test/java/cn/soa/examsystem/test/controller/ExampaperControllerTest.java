@@ -10,18 +10,14 @@
     
 package cn.soa.examsystem.test.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import cn.soa.examsystem.controller.ExamPaperController;
 import cn.soa.examsystem.entity.ExamPaper;
-import cn.soa.examsystem.entity.User;
 import cn.soa.examsystem.service.impl.ExamPaperServiceImpl;
-import cn.soa.examsystem.service.impl.MainService;
 import cn.soa.examsystem.test.dao.BaseTest;
 import cn.soa.examsystem.util.JsonResult;
 

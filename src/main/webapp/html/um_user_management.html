@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>用户管理</title>
+<link rel="stylesheet" type="text/css" href="../layui/css/layui.css">
+<script type="text/javascript" src="../layui/layui.js"></script>
+<style type="text/css">
+html, body {
+	height: 100%;
+	background-color: #fff;
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
+
+#head {
+	width: 100%;
+	position: absolute;
+}
+
+#head div:first-child {
+	height: 59.64px;
+	width: 13%;
+	float: left;
+	background-color: #393D49;
+	text-align: center;
+}
+/*logo字体样式*/
+#head div:first-child  span {
+	line-height: 60px;
+	margin-left: 20px;
+	font-weight: bold;
+	font-size: 25px;
+	letter-spacing: 2px;
+	color: #fafafa;
+}
+
+#head_nav {
+	width: 87%;
+	float: left;
+}
+
+#body {
+	position: absolute;
+	width: 100%;
+	top: 59.64px;
+	bottom: 0px;
+}
+/*设置垂直导航高度*/
+#body>ul {
+	position: absolute;
+	height: 100%;
+}
+
+/*导航去四边圆角*/
+.layui-nav {
+	border-radius: 0px;
+}
+/*垂直导航背景顔色*/
+.layui-bg-cyan {
+	border-right: 1.5px solid #DADADA;
+	background-color: #fff;
+}
+
+.layui-bg-cyan {
+	background-color: #fff !important;
+}
+/*侧边导航字体颜色*/
+#body_nav>li a {
+	color: #000;
+}
+/*侧边导航鼠标经过时字体和背景颜色*/
+#body_nav>li a:hover {
+	color: #fff;
+	background-color: #CBCBCB;
+}
+
+#body_nav>li a:hover {
+	background-color: #CBCBCB !important;
+}
+/*侧边导航选中时候的颜色*/
+.layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a,
+	.layui-nav-tree .layui-this, .layui-nav-tree .layui-this>a,
+	.layui-nav-tree .layui-this>a:hover {
+	background-color: #CBCBCB;
+}
+
+#right_body {
+	position: absolute;
+	left: 200px;
+	top: 0px;
+	bottom: 0px;
+	right: 0px;
+}
+
+#right_body>iframe {
+	width: 100%;
+	height: 100%;
+	frameborder: 0;
+	border: none;
+}
+</style>
+</head>
+<body>
+	<div id="head">
+		<div >
+			<span id="logo"></span>
+		</div>
+		<ul id="head_nav" class="layui-nav">
+			<li  class="layui-nav-item"><a id="index" href="javascript:;"></a></li>
+			<li id="jump_list" class="layui-nav-item layui-this"><a href="javascript:;">快速跳转</a>
+				<dl class="layui-nav-child">
+					<dd>
+						<a href="javascript:;"></a>
+					</dd>
+					<dd>
+						<a id="um_user_management" href="javascript:;"></a>
+					</dd>
+					<dd>
+						<a id="ea_examin_arrange" href="javascript:;"></a>
+					</dd>
+					<dd>
+						<a href="javascript:;"></a>
+					</dd>
+				</dl></li>
+			<li id="exam_name" class="layui-nav-item"><a href="javascript:;"></a></li>
+		</ul>
+	</div>
+	<div id="body">
+		<ul id="body_nav" class="layui-nav layui-nav-tree  layui-bg-cyan layui-inline" lay-filter="demo">
+			<li class="layui-nav-item"><a id="um_organization_structure" href="javascript:;"></a></li>
+			<li class="layui-nav-item"><a id="um_c_user_management" href="javascript:;"></a></li>
+		</ul>
+		<div id="right_body"></div>
+	</div>
+	<script type="text/javascript" src="../javaScript/cookie_util.js"></script>
+	<script type="text/javascript" src="../javaScript/js/global-path.js"></script>
+	<script type="text/javascript" src="../javaScript/javascriptUtil.js"></script>
+	<script type="text/javascript">
+		layui.use(
+			[ 'layer', 'form', 'table', 'element' ], function()
+			{
+				var element = layui.element, layer = layui.layer, form = layui.form, table = layui.table;
+				$ = layui.$;
+				$(function()
+					{
+						//获取模板ID
+						var ua_id =getCookie('ua_id');
+						//页面初始化,并添加对应的点击事件
+						var ajson =
+							{
+								url : path + "UserManagement/findUserFunctionlByID.do",
+								data :
+									{
+										'ua_id' : ua_id
+									},
+								success : function(result)
+									{
+										var state = result.state;
+										var data = result.data;
+										var message = result.message;
+										if (state == 0)
+											{
+												for (var i = 0; i < data.length; i++)
+													{
+														$('#'+data[i].FUNCTION_ID).html(data[i].FUNCTION_NAME);
+														if(typeof data[i].FUNCTION_URL!='undefined'){
+															$('#'+data[i].FUNCTION_ID).attr('href-url',data[i].FUNCTION_URL);
+														}
+													}
+											} 
+										return false;// 阻止表单跳转
+									}
+							};
+						//自定义AJAX函数
+						ajaxReturnJson(ajson);
+						//管理中心点击回到主页面单击事件
+						$('#index').click(function(){
+							var href_url=$(this).attr('href-url');
+							window.location.href =href_url;
+						});
+						$('#jump_list a').click(function(){
+							var href_url=$(this).attr('href-url');
+							window.location.href =href_url;
+						});
+						/* //初始化考试分配对应的子页面
+						$("#right_body").load("examinee_distribution.html");
+						//给顶部水平导航中所有a标签添加单击事件,获取a标签中的
+						//URL,并实现对应跳转
+						$("#head_nav li:not(#exam_name)").find("a").click(function()
+							{
+								var $href_url = $(this).attr("href-url");
+								window.location.href = $href_url;
+							});
+						//在显示考卷名的li添加一个跳转页面
+						$("#exam_name").click(function()
+							{
+								var $href_url = $("#examin_arrange").children("a").attr("href-url");
+								window.location.href = $href_url;
+							});
+						//垂直导航添加单击事件,并根据模板添加对应的子页面
+						$("#body_nav>li>a").click(function()
+							{
+								var $url = $(this).attr("href-url");
+								$("#right_body").load($url);
+							});
+
+						//往的功能模块中添加对应的URL
+						function addURL(id, function_url)
+							{
+								$("#" + id + "").children("a").attr("href-url", function_url);
+							} */
+
+					})
+			});
+	</script>
+</body>
+</html>

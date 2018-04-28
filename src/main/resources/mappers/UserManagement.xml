@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="cn.soa.examsystem.dao.UserManagementDao">
+	<select id="findUserFunctionlByID" resultType="map" parameterType="string">
+		select function_name,function_url,function_id from user_function  where ua_id=#{ua_id}
+	</select>
+	<select id="findOrganizationStructureByUserId" resultType="cn.soa.examsystem.entity.Tree" parameterType="string">
+		select uos_id as id,user_father_id as pid,user_name as name from user_oaganization_stucture m start with m.uos_id=(select uos_id from user_info where user_id=#{user_id}) connect by m.user_father_id=prior m.uos_id
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

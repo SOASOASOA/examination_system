@@ -24,7 +24,9 @@ import cn.soa.examsystem.util.ExaminUtil;
 
 public class Test {
 	public static void main(String[] args) {
-		String md5 = ExaminUtil.toMD5("123456");
-		System.out.println(md5);
+		for (int i = 0; i < 5; i++) {
+			String string = UUID.randomUUID().toString();
+			System.out.println(string);
+		}
 	}
 }

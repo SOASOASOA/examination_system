@@ -83,7 +83,5 @@ public interface ExamRoomDao {
 	    * @throws
 	 */
 	public List<Map<String,Object>> findExamroomByExamId(String exam_id);
-	
-	
-	
+
 }

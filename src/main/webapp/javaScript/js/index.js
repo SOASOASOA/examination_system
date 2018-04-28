@@ -103,8 +103,8 @@ layui.use(
 					{
 						var $url = $(this).attr('href-url');
 						var $ua_id = $(this).attr('ua_id');
-						addCookie("ua_id", $ua_id, 1);
-						window.location.href = $url;
+						addCookie("ua_id",$ua_id,1);
+						window.location.href=$url;
 					});
 
 				$("#head_nav_dl a").click(function()
@@ -114,6 +114,7 @@ layui.use(
 						layer.open(
 							{
 								type : 2,
+								//skin: 'mylayer-class',弹出层样式
 								title:layer_title,
 								area :
 									[ '800px', '600px' ],

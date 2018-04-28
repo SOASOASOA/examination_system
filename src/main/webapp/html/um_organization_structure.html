@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>组织结构</title>
+<link rel="stylesheet" href="../css/zTreeStyle/zTreeStyle.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="../layui/css/layui.css">
+<script type="text/javascript" src="../layui/layui.js"></script>
+<style type="text/css">
+html, body {
+	height: 100%;
+	background-color: #fff;
+	position: relative;
+}
+
+#left_div {
+	width: 250px;
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	border-right: 1.5px solid #DADADA;
+}
+
+#right_div {
+	position: absolute;
+	left: 250px;
+	top: 0px;
+	bottom: 0px;
+	right: 0px;
+}
+
+.root_desc {
+	font-family: 微软雅黑;
+	font-size: 18px;
+	font-weight: 400;
+	margin-left: 20px;
+	line-height: 50px;
+}
+
+#root_node_div p:first-child {
+	margin-top: 20px;
+}
+
+#root_node_div>button {
+	margin-top: 5%;
+	margin-left: 30%
+}
+
+#node_form_title {
+	width: 100%;
+	height: 50px;
+	background-color: #1E9FFF;
+	text-align: center;
+	line-height: 50px;
+	font-weight: 400;
+	font-size: 20px;
+	color: #fff;
+}
+
+#child_node_div {
+	width: 100%;
+}
+
+#child_node_div_form {
+	margin-top: 20px;
+	display: flex;
+}
+
+#child_node_div_form>form {
+	margin: auto;
+}
+
+#root_node_div {
+	display: none;
+}
+
+.layui-form-item {
+	margin-top: 50px;
+}
+.layui-input-block{
+	width: 300px;
+}
+</style>
+</head>
+<body>
+	<div id="left_div">
+		<ul id="oaganization_tree" class="ztree"></ul>
+	</div>
+	<div id="right_div">
+		<div id="root_node_div">
+			<p class="root_desc">请在左侧选择您要操作的组织结构（注：根组织无权限修改）。</p>
+			<p class="root_desc">您也可以点击下面按钮从根新增子级结构。</p>
+			<button class="layui-btn layui-btn-normal">增加子级</button>
+		</div>
+		<div id="child_node_div">
+			<div id="node_form_title">组织结构修改</div>
+			<div id="child_node_div_form">
+				<form class="layui-form" action="">
+					<div class="layui-form-item">
+						<label class="layui-form-label">上级节点:</label>
+						<div class="layui-input-block">
+							<input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">节点ID:</label>
+						<div class="layui-input-block">
+							<input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">节点名称:</label>
+						<div class="layui-input-block">
+							<input type="text" name="title" required lay-verify="required"  autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<div class="layui-input-block">
+							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="submit">保存</button>
+							<button id="cancel" class="layui-btn layui-btn-normal">增加子级</button>
+							<button id="cancel" class="layui-btn layui-btn-normal">删除节点</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+	<script type="text/javascript" src="../javaScript/cookie_util.js"></script>
+	<script type="text/javascript" src="../javaScript/javascriptUtil.js"></script>
+	<script type="text/javascript" src="../javaScript/js/global-path.js"></script>
+	<script type="text/javascript" src="../javaScript/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="../javaScript/ztree/jquery.ztree.core.js"></script>
+	<script type="text/javascript">
+		layui.use(
+			[ 'layer', 'form', 'table', 'element' ], function()
+			{
+				var element = layui.element, layer = layui.layer, form = layui.form, table = layui.table;
+				$ = layui.$;
+				$(function()
+					{
+						var str = getCookie("user");// 从Cookie中取出管理员信息
+						var data = JSON.parse(str);
+						var user_id = null;// 管理员ID
+						if (data != null)
+							{
+								user_id = data.user_id;
+							}
+						var ajson =
+							{
+								url : path + "UserManagement/findOrganizationStructureByUserId.do",
+								data :
+									{
+										user_id : user_id
+									},
+								success : function(result)
+									{
+										var data = result.data;
+										var state = result.state;
+										var message = result.message;
+										if (state == 0)
+											{
+												var zTreeObj;
+												// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+												var setting =
+													{
+														data :
+															{
+																simpleData :
+																	{
+																		enable : true,
+																		idKey : "id",
+																		pIdKey : "pid",
+																		rootPId : ""
+																	}
+															}
+													};
+												zTreeObj = $.fn.zTree.init($("#oaganization_tree"), setting, data);
+											}
+										if (state != 0)
+											{
+												layer.msg(message);
+											}
+									}
+							};
+						//自定义AJAX函数
+						ajaxReturnJson(ajson);
+					})
+			});
+	</script>
+</body>
+
+
+</html>

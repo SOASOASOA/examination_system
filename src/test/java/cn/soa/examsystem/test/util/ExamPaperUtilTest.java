@@ -1,17 +1,11 @@
 package cn.soa.examsystem.test.util;
 
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import cn.soa.examsystem.dao.ExamPaperDao;
-import cn.soa.examsystem.dao.UserDao;
-import cn.soa.examsystem.entity.ExamPaper;
-import cn.soa.examsystem.entity.User;
 import cn.soa.examsystem.test.dao.BaseTest;
 import cn.soa.examsystem.util.ExamPaperUtils;
 import cn.soa.examsystem.util.PropertiesUtils;
@@ -60,7 +54,7 @@ public class ExamPaperUtilTest extends BaseTest{
 	{
 		Map<String, String> testMap = new HashMap<String, String>();
 		testMap.put("id", "1");
-		testMap.put("title", "ÄãºÃ");
+		testMap.put("title", "ï¿½ï¿½ï¿½");
 		testMap.put("aaa", "bbb");
 		Map<String, String> map = examPaperUtils.transferNameMatchSQLInMap(testMap);
 		System.out.println(map);

@@ -134,7 +134,7 @@ html, body {
 		</ul>
 		<div id="right_body"></div>
 	</div>
-	<script type="text/javascript" src="../../javaScript/js/global-path.js"></script>
+	<script type="text/javascript" src="../../javaScript/js/path.js"></script>
 	<!-- ------------------cookie工具类------------------------------------->
 	<script type="text/javascript" src="../../javaScript/cookie_util.js"></script>
 	<script type="text/javascript" src="../../javaScript/javascriptUtil.js"></script>
@@ -173,7 +173,7 @@ html, body {
 									},
 								btn2 : function(index, layero)
 									{
-										window.location.href ="../index.html";
+										window.location.href =lpath+"index/index.html";
 									}
 							});
 						//页面初始化,并添加对应的点击事件
@@ -181,6 +181,7 @@ html, body {
 							{
 								//初始化考试编排页面
 								var ua_id = getCookie("ua_id");
+								console.log(ua_id);
 								$.ajax(
 									{
 										url : path + "examroom/findUserFunction.do",

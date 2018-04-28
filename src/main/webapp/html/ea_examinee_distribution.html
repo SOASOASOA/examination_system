@@ -90,7 +90,7 @@ html, body {
 									url : path + "examroom/findExamroomByExamId.do",
 									data : {exam_id:$EXAM_ID},
 									success:function(result)
-									{
+										{
 										var state = result.state;
 										var data = result.data;
 										var message = result.message;

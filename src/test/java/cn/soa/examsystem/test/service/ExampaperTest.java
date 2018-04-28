@@ -2,9 +2,9 @@
     /**  
     * @Title: MainTest.java
     * @Package cn.soa.examsystem.test.service
-    * @Description: TODO(ÓÃÒ»¾ä»°ÃèÊö¸ÃÎÄ¼þ×öÊ²Ã´)
+    * @Description: TODO(ï¿½ï¿½Ò»ï¿½ä»°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ê²Ã´)
     * @author zhugang
-    * @date 2018Äê3ÔÂ24ÈÕ
+    * @date 2018ï¿½ï¿½3ï¿½ï¿½24ï¿½ï¿½
     * @version V1.0  
     */
     
@@ -14,31 +14,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 import cn.soa.examsystem.entity.User;
-import cn.soa.examsystem.service.impl.MainService;
 import cn.soa.examsystem.test.dao.BaseTest;
 
 /**
     * @ClassName: MainTest
-    * @Description: service²ã²âÊÔÀà
+    * @Description: serviceï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     * @author zhugang
-    * @date 2018Äê3ÔÂ24ÈÕ
+    * @date 2018ï¿½ï¿½3ï¿½ï¿½24ï¿½ï¿½
     *
     */
 
 public class ExampaperTest extends BaseTest {
 	
-	private MainService mainService;
 	
-	@Before
-	public void initUserDao(){
-		mainService = ctx.getBean("mainService",MainService.class);
-	}
-	
-	@Test
-	public void getUserInfoByUserAccountTest()
-	{
-		String account = "Áõ±¸";
-		User user = mainService.getUserInfoByUserAccount(account);
-		System.out.println(user);
-	}
 }

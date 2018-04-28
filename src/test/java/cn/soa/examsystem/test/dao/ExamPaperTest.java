@@ -1,20 +1,12 @@
 package cn.soa.examsystem.test.dao;
 
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import cn.soa.examsystem.dao.ExamPaperDao;
-import cn.soa.examsystem.dao.UserDao;
-import cn.soa.examsystem.entity.ExamPaper;
-import cn.soa.examsystem.entity.KnowledgePoint;
-import cn.soa.examsystem.entity.QuestionType;
-import cn.soa.examsystem.entity.Subject;
-import cn.soa.examsystem.entity.User;
 
 
 
