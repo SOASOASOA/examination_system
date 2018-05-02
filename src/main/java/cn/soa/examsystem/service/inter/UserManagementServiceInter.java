@@ -21,4 +21,18 @@ public interface UserManagementServiceInter {
 	 * @throws MyException 
 	 */
 	public JsonResult<List<Tree>> findOrganizationStructureByUserId(String user_id) throws MyException;
+	/**
+	 * 根据uos_id查询对应的节点组织
+	 * @throws MyException 
+	 */
+	public JsonResult<List<Map<String,Object>>> findNodeOrganizationByUosId(String uos_id) throws MyException;
+	/**
+	 * 根据uos_id修改对应的节点名称
+	 * @throws MyException 
+	 */
+	public JsonResult<String> updateNodeNameByUosId(String uos_id,String user_name) throws MyException;
+	/**
+	 * 增加新的子节点
+	 */
+	public JsonResult<String> addNode(String user_father_id,String user_name) throws MyException;
 }

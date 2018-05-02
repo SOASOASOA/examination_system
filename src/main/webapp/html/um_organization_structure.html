@@ -46,7 +46,7 @@ html, body {
 	margin-left: 30%
 }
 
-#node_form_title {
+.node_form_title {
 	width: 100%;
 	height: 50px;
 	background-color: #1E9FFF;
@@ -61,24 +61,29 @@ html, body {
 	width: 100%;
 }
 
-#child_node_div_form {
+.child_node_div_form {
 	margin-top: 20px;
 	display: flex;
 }
 
-#child_node_div_form>form {
+.child_node_div_form>form {
 	margin: auto;
-}
-
-#root_node_div {
-	display: none;
 }
 
 .layui-form-item {
 	margin-top: 50px;
 }
-.layui-input-block{
+
+.layui-input-block {
 	width: 300px;
+}
+
+#child_node_div,#add_child_node_div {
+	display: none;
+}
+
+input[readonly] {
+	background-color: #F1F1F1;
 }
 </style>
 </head>
@@ -90,40 +95,63 @@ html, body {
 		<div id="root_node_div">
 			<p class="root_desc">请在左侧选择您要操作的组织结构（注：根组织无权限修改）。</p>
 			<p class="root_desc">您也可以点击下面按钮从根新增子级结构。</p>
-			<button class="layui-btn layui-btn-normal">增加子级</button>
+			<button class="layui-btn layui-btn-normal add-child-node">增加子级</button>
 		</div>
 		<div id="child_node_div">
-			<div id="node_form_title">组织结构修改</div>
-			<div id="child_node_div_form">
+			<div class="node_form_title">组织结构修改</div>
+			<div class="child_node_div_form">
 				<form class="layui-form" action="">
 					<div class="layui-form-item">
 						<label class="layui-form-label">上级节点:</label>
 						<div class="layui-input-block">
-							<input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
+							<input type="text" name="fater_node_name" required lay-verify="required" autocomplete="off" class="layui-input">
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">节点ID:</label>
 						<div class="layui-input-block">
-							<input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input">
+							<input type="text" name="node_id" required lay-verify="required" autocomplete="off" class="layui-input">
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">节点名称:</label>
 						<div class="layui-input-block">
-							<input type="text" name="title" required lay-verify="required"  autocomplete="off" class="layui-input">
+							<input type="text" name="node_name" required lay-verify="required" autocomplete="off" class="layui-input">
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<div class="layui-input-block">
-							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="submit">保存</button>
-							<button id="cancel" class="layui-btn layui-btn-normal">增加子级</button>
-							<button id="cancel" class="layui-btn layui-btn-normal">删除节点</button>
+							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="um_os_submit">保存</button>
+							<button  class="layui-btn layui-btn-normal add-child-node">增加子级</button>
 						</div>
 					</div>
 				</form>
 			</div>
-
+		</div>
+		<div id="add_child_node_div">
+			<div class="node_form_title">组织结构修改</div>
+			<div class="child_node_div_form">
+				<form class="layui-form" action="">
+					<div class="layui-form-item">
+						<label class="layui-form-label">上级节点:</label>
+						<div class="layui-input-block">
+							<input type="text" name="add_fater_node_name" required lay-verify="required" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">节点名称:</label>
+						<div class="layui-input-block">
+							<input type="text" name="add_node_name"  lay-verify="required" placeholder="输入组织结构名称" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<div class="layui-input-block">
+							<button class="layui-btn layui-btn-normal" lay-submit lay-filter="um_os_child_submit">保存</button>
+							<button id="um_os_back" class="layui-btn layui-btn-normal">返回</button>
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 	<script type="text/javascript" src="../javaScript/cookie_util.js"></script>
@@ -142,10 +170,15 @@ html, body {
 						var str = getCookie("user");// 从Cookie中取出管理员信息
 						var data = JSON.parse(str);
 						var user_id = null;// 管理员ID
+						var zTreeObj;//ztree的全局对象
+						var $node_id;//当前节点ID
+						var $node_name;//当前节点名称
+						var $node_pid;//当前节点的父节点ID
 						if (data != null)
 							{
 								user_id = data.user_id;
 							}
+						//初始化组织结构树(ztree)
 						var ajson =
 							{
 								url : path + "UserManagement/findOrganizationStructureByUserId.do",
@@ -160,8 +193,9 @@ html, body {
 										var message = result.message;
 										if (state == 0)
 											{
-												var zTreeObj;
-												// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+												$node_name=data[0].name;
+												$node_id=data[0].id;
+												// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）		
 												var setting =
 													{
 														data :
@@ -172,6 +206,31 @@ html, body {
 																		idKey : "id",
 																		pIdKey : "pid",
 																		rootPId : ""
+																	}
+															},
+														callback :
+															{
+																beforeClick : function(treeId, treeNode, clickFlag)
+																	{
+																		if (treeNode.pid == "")
+																			{
+																				$('#root_node_div').show();
+																				$('#child_node_div').hide();
+																				$('#add_child_node_div').hide();
+																			} else
+																			{
+																				$('#child_node_div').show();
+																				$('#root_node_div').hide();
+																				$('#add_child_node_div').hide();
+																			}
+																	},
+																onClick : function(event, treeId, treeNode)
+																	{
+																		console.log(treeNode);
+																		$node_id=treeNode.id;
+																		$node_pid=treeNode.pid;
+																		$node_name=treeNode.name;
+																		initNodeInfo(treeNode);
 																	}
 															}
 													};
@@ -185,7 +244,125 @@ html, body {
 							};
 						//自定义AJAX函数
 						ajaxReturnJson(ajson);
+						//修改用户点击保存事件
+						form.on('submit(um_os_submit)', function(data)
+							{
+								var nodeId = data.field.node_id;//节点ID
+								var nodeName = data.field.node_name;//节点名称
+								var ajson =
+									{
+										url : path + "UserManagement/updateNodeNameByUosId.do",
+										data :
+											{
+												uos_id : nodeId,
+												user_name : nodeName
+											},
+										success : function(result)
+											{
+												var data = result.data;
+												var state = result.state;
+												var message = result.message;
+												if (state == 0)
+													{
+														layer.msg(data);
+														var treeObj = $.fn.zTree.getZTreeObj("oaganization_tree");
+														var nodes = treeObj.getSelectedNodes();
+														if (nodes.length > 0)
+															{
+																nodes[0].name = nodeName;
+																treeObj.updateNode(nodes[0]);
+															}
+													}
+												if (state != 0)
+													{
+														layer.msg(message);
+													}
+											}
+									};
+								//自定义AJAX函数
+								ajaxReturnJson(ajson);
+								return false;
+							});
+						//增加子级单击事件
+						$('.add-child-node').click(function(){
+							$('#add_child_node_div').show();
+							$('#root_node_div').hide();
+							$('#child_node_div').hide();
+							$('input[name=add_fater_node_name]').val($node_name);
+							$('input[name=add_fater_node_name]').attr('readonly', 'readonly');
+							return false;
+						});
+						//新增节点单击事件
+						form.on('submit(um_os_child_submit)', function(data)
+							{
+								
+								var ajson =
+									{
+										url : path + "UserManagement/addNode.do",
+										data :
+											{
+												user_father_id : $node_id,
+												user_name :data.field.add_node_name
+											}
+									};
+								//自定义AJAX函数
+								ajaxReturnMessage(ajson);
+							});
+						//增加子级单击按钮
+						$('#um_os_back').click(function(){
+							if($node_pid==''){
+								$('#root_node_div').show();
+								$('#child_node_div').hide();
+								$('#add_child_node_div').hide();
+							}else{
+								$('#child_node_div').show();
+								$('#add_child_node_div').hide();
+								$('#root_node_div').hide();
+							}
+							return false;
+						});
+						
+						
 					})
+				function initNodeInfo(treeNode)
+					{
+						var ajson =
+							{
+								url : path + "UserManagement/findNodeOrganizationByUosId.do",
+								data :
+									{
+										uos_id : treeNode.id
+									},
+								success : function(result)
+									{
+										var data = result.data;
+										var state = result.state;
+										var message = result.message;
+										if (state == 0)
+											{
+												if (typeof data == 'undefined' || data == null || data.length < 1)
+													{
+														$('input[name=fater_node_name]').val('');
+														$('input[name=node_id]').val(treeNode.id);
+														$('input[name=node_name]').val(treeNode.name);
+														$('input[name=fater_node_name],input[name=node_id],input[name=fater_node_name]').attr('readonly', 'readonly');
+													} else
+													{
+														$('input[name=fater_node_name]').val(data[0].FATER_NAME);
+														$('input[name=node_id]').val(data[0].UOS_ID);
+														$('input[name=node_name]').val(data[0].USER_NAME);
+														$('input[name=fater_node_name],input[name=node_id]').attr('readonly', 'readonly');
+													}
+											}
+										if (state != 0)
+											{
+												layer.msg(message);
+											}
+									}
+							};
+						//自定义AJAX函数
+						ajaxReturnJson(ajson);
+					}
 			});
 	</script>
 </body>

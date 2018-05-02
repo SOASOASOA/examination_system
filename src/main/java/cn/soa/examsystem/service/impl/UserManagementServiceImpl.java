@@ -21,6 +21,7 @@ import cn.soa.examsystem.dao.UserManagementDao;
 import cn.soa.examsystem.entity.Tree;
 import cn.soa.examsystem.exception.MyException;
 import cn.soa.examsystem.service.inter.UserManagementServiceInter;
+import cn.soa.examsystem.util.ExaminUtil;
 import cn.soa.examsystem.util.JsonResult;
 
 /**
@@ -66,6 +67,56 @@ public class UserManagementServiceImpl implements UserManagementServiceInter {
 			throw new MyException("获取组织模块信息异常");
 		}
 		return new JsonResult<List<Tree>>(findOrganizationStructureByUserId);
+	}
+
+	/**
+	 * 根据uos_id查询对应的节点组织
+	 * @throws MyException 
+	 */
+	@Override
+	public JsonResult<List<Map<String, Object>>> findNodeOrganizationByUosId(String uos_id) throws MyException {
+		if(uos_id==null) {
+			throw new MyException("获取用户UOSID异常");
+		}
+		List<Map<String, Object>> findNodeOrganizationByUosId = userManagementDao.findNodeOrganizationByUosId(uos_id);
+		if(findNodeOrganizationByUosId==null) {
+			throw new MyException("获取对应的节点组织信息异常");
+		}
+		return new JsonResult<List<Map<String, Object>>>(findNodeOrganizationByUosId);
+	}
+
+	/**
+	 * 根据uos_id修改对应的节点名称
+	 * @throws MyException 
+	 */
+	@Override
+	public JsonResult<String> updateNodeNameByUosId(String uos_id, String user_name) throws MyException {
+		if(uos_id==null||user_name==null) {
+			throw new MyException("获取用户UOSID异常");
+		}
+		Integer updateNodeNameByUosId = userManagementDao.updateNodeNameByUosId(uos_id, user_name);
+		String str="节点名称修改失败";
+		if(updateNodeNameByUosId==1) {
+			str="节点名称修改成功";
+		}
+		return new JsonResult<String>(str);
+	}
+
+	/**
+	 * 增加新的子节点
+	 */
+	@Override
+	public JsonResult<String> addNode(String user_father_id, String user_name) throws MyException {
+		if(user_name==null||user_father_id==null) {
+			throw new MyException("新增节点信息异常");
+		}
+		String uos_id=ExaminUtil.getUUID();
+		Integer addNode = userManagementDao.addNode(uos_id, user_father_id, user_name);
+		String str="新增节点失败";
+		if(addNode==1) {
+			str="新增节点成功";
+		}
+		return new JsonResult<String>(str);
 	}
 
 }

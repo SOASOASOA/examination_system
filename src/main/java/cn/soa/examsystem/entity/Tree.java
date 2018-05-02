@@ -11,6 +11,8 @@
 package cn.soa.examsystem.entity;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 /**
     * @ClassName: Tree

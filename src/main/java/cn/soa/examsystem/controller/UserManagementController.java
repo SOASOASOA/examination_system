@@ -48,4 +48,30 @@ public class UserManagementController {
 	public JsonResult<List<Tree>> findOrganizationStructureByUserId(String user_id) throws MyException {
 		return userManagementServiceInter.findOrganizationStructureByUserId(user_id);
 	}
+	/**
+	 * 根据uos_id查询对应的节点组织
+	 * @throws MyException 
+	 */
+	@ResponseBody
+	@RequestMapping("/findNodeOrganizationByUosId.do")
+	public JsonResult<List<Map<String, Object>>> findNodeOrganizationByUosId(String uos_id) throws MyException {
+		return userManagementServiceInter.findNodeOrganizationByUosId(uos_id);
+	}
+	/**
+	 * 根据uos_id修改对应的节点名称
+	 * @throws MyException 
+	 */
+	@ResponseBody
+	@RequestMapping("/updateNodeNameByUosId.do")
+	public JsonResult<String>  updateNodeNameByUosId(String uos_id,String user_name) throws MyException {
+		return userManagementServiceInter.updateNodeNameByUosId(uos_id, user_name);
+	}
+	/**
+	 * 增加新的子节点
+	 */
+	@ResponseBody
+	@RequestMapping("/addNode.do")
+	public JsonResult<String> addNode(String user_father_id, String user_name) throws MyException {
+		return userManagementServiceInter.addNode(user_father_id, user_name);
+	}
 }

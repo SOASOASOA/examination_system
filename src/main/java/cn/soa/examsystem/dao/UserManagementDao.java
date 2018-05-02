@@ -21,7 +21,19 @@ public interface UserManagementDao {
 	 */
 	public List<Map<String,Object>> findUserFunctionlByID(String ua_id);
 	/**
-	 * 更加user_id查询对应组织结构
+	 * 根据user_id查询对应组织结构
 	 */
 	public List<Tree> findOrganizationStructureByUserId(String user_id);
-}
+	/**
+	 * 根据uos_id查询对应的节点组织
+	 */
+	public List<Map<String,Object>> findNodeOrganizationByUosId(String uos_id);
+	/**
+	 * 根据uos_id修改对应的节点名称
+	 */
+	public Integer updateNodeNameByUosId(String uos_id,String user_name);
+	/**
+	 * 增加新的子节点
+	 */
+	public Integer addNode(String uos_id,String user_father_id,String user_name);
+} 
