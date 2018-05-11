@@ -26,4 +26,20 @@ public class UserManagementDaoTest extends BaseTest{
 		}
 		
 	}
+	@Test
+	public void findUserInfoByUserID()
+	{
+		List<Map<String, Object>> findUserFunctionlByID = ud.findUserInfoByUserID("7fcc3e0f-522b-c92f-0382-b7386bdf4e73",0,1);
+		for (Map<String, Object> map : findUserFunctionlByID) {
+			System.out.println(map);
+		}
+	}
+	@Test
+	public void findChildRoleByUserID()
+	{
+		List<String> findUserFunctionlByID = ud.findChildRoleByUserID("7fcc3e0f-522b-c92f-0382-b7386bdf4e73");
+		for (String string : findUserFunctionlByID) {
+			System.out.println(string);
+		}
+	}
 }

@@ -10,6 +10,12 @@
     
 package cn.soa.examsystem.controller;
 
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import cn.soa.examsystem.util.ExaminUtil;
@@ -24,9 +30,14 @@ import cn.soa.examsystem.util.ExaminUtil;
 
 public class Test {
 	public static void main(String[] args) {
-		for (int i = 0; i < 5; i++) {
-			String string = UUID.randomUUID().toString();
-			System.out.println(string);
-		}
+		List<String> closedList = new LinkedList<String>();
+		List<String> closedList1 = new LinkedList<String>();
+		closedList.add("1");
+		closedList.add("2");
+		closedList1.add("1");
+		closedList1.add("2");
+		closedList1.add("3");
+		closedList1.removeAll(closedList);
+		System.out.println(closedList1);
 	}
 }

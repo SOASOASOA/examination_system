@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,11 +105,11 @@ html, body {
 </head>
 <body>
 	<div id="head">
-		<div >
+		<div>
 			<span id="logo"></span>
 		</div>
 		<ul id="head_nav" class="layui-nav">
-			<li  class="layui-nav-item"><a id="index" href="javascript:;"></a></li>
+			<li class="layui-nav-item"><a id="index" href="javascript:;"></a></li>
 			<li id="jump_list" class="layui-nav-item layui-this"><a href="javascript:;">快速跳转</a>
 				<dl class="layui-nav-child">
 					<dd>
@@ -129,11 +130,12 @@ html, body {
 	</div>
 	<div id="body">
 		<ul id="body_nav" class="layui-nav layui-nav-tree  layui-bg-cyan layui-inline" lay-filter="demo">
-			<li class="layui-nav-item"><a id="um_organization_structure" href="javascript:;"></a></li>
 			<li class="layui-nav-item"><a id="um_c_user_management" href="javascript:;"></a></li>
+			<li class="layui-nav-item"><a id="um_organization_structure" href="javascript:;"></a></li>
 		</ul>
 		<div id="right_body"></div>
 	</div>
+	<script type="text/javascript" src="../javaScript/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="../javaScript/cookie_util.js"></script>
 	<script type="text/javascript" src="../javaScript/js/global-path.js"></script>
 	<script type="text/javascript" src="../javaScript/javascriptUtil.js"></script>
@@ -146,7 +148,7 @@ html, body {
 				$(function()
 					{
 						//获取模板ID
-						var ua_id =getCookie('ua_id');
+						var ua_id = getCookie('ua_id');
 						//页面初始化,并添加对应的点击事件
 						var ajson =
 							{
@@ -164,26 +166,35 @@ html, body {
 											{
 												for (var i = 0; i < data.length; i++)
 													{
-														$('#'+data[i].FUNCTION_ID).html(data[i].FUNCTION_NAME);
-														if(typeof data[i].FUNCTION_URL!='undefined'){
-															$('#'+data[i].FUNCTION_ID).attr('href-url',data[i].FUNCTION_URL);
-														}
+														$('#' + data[i].FUNCTION_ID).html(data[i].FUNCTION_NAME);
+														if (typeof data[i].FUNCTION_URL != 'undefined')
+															{
+																$('#' + data[i].FUNCTION_ID).attr('href-url', data[i].FUNCTION_URL);
+															}
 													}
-											} 
+											}
 										return false;// 阻止表单跳转
 									}
 							};
 						//自定义AJAX函数
 						ajaxReturnJson(ajson);
 						//管理中心点击回到主页面单击事件
-						$('#index').click(function(){
-							var href_url=$(this).attr('href-url');
-							window.location.href =href_url;
-						});
-						$('#jump_list a').click(function(){
-							var href_url=$(this).attr('href-url');
-							window.location.href =href_url;
-						});
+						$('#index').click(function()
+							{
+								var href_url = $(this).attr('href-url');
+								window.location.href = href_url;
+							});
+						$('#jump_list a').click(function()
+							{
+								var href_url = $(this).attr('href-url');
+								window.location.href = href_url;
+							});
+						//垂直导航添加单击事件,并根据模板添加对应的子页面
+						$("#body_nav>li>a").click(function()
+							{
+								var $url = $(this).attr("href-url");
+								$("#right_body").load($url);
+							});
 						/* //初始化考试分配对应的子页面
 						$("#right_body").load("examinee_distribution.html");
 						//给顶部水平导航中所有a标签添加单击事件,获取a标签中的

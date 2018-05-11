@@ -35,4 +35,12 @@ public interface UserManagementServiceInter {
 	 * 增加新的子节点
 	 */
 	public JsonResult<String> addNode(String user_father_id,String user_name) throws MyException;
+	/**
+	 * 通过user_id查询对应组织结构根节点uos_id,并查询相同组织结构根uos_id相同的用户信息
+	 */
+	public JsonResult<List<Map<String,Object>>> findUserInfoByUserID(String user_id,Integer page, Integer limit) throws MyException;
+	/**
+	 * 根据uos_id查询用户信息
+	 */
+	public JsonResult<List<Map<String,Object>>> findUserInfoByUosID(String user_id,String uos_id,Integer page, Integer limit) throws MyException;
 }

@@ -74,4 +74,20 @@ public class UserManagementController {
 	public JsonResult<String> addNode(String user_father_id, String user_name) throws MyException {
 		return userManagementServiceInter.addNode(user_father_id, user_name);
 	}
+	/**
+	 * 通过user_id查询对应组织结构根节点uos_id,并查询相同组织结构根uos_id相同的用户信息
+	 */
+	@ResponseBody
+	@RequestMapping("/findUserInfoByUserID.do")
+	public JsonResult<List<Map<String, Object>>> findUserInfoByUserID(String user_id,Integer page, Integer limit) throws MyException {
+		return userManagementServiceInter.findUserInfoByUserID(user_id, page, limit);
+	}
+	/**
+	 * 根据uos_id查询用户信息
+	 */
+	@ResponseBody
+	@RequestMapping("/findUserInfoByUosID.do")
+	public JsonResult<List<Map<String, Object>>> findUserInfoByUosID(String user_id,String uos_id,Integer page, Integer limit) throws MyException {
+		return userManagementServiceInter.findUserInfoByUosID(user_id, uos_id, page, limit);
+	}
 }
