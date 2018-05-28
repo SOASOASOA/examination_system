@@ -35,7 +35,7 @@
 	</select>
 	<select id="findUserInfoByUserID" resultType="map">
 		select * from (select rownum rn,a1.* from(select
-		a1.user_id,a1.user_account,a1.user_name,a1.user_certificaiton_num,a1.user_company,decode(a1.user_account_state,1,'启用',0,'未启用','未启用')
+		a1.user_id,a1.user_account,a1.user_name,a1.user_sex,to_char(a1.user_birthdate,'yyyy-MM-dd') as user_birthdate,a1.user_certificaiton_num,a1.user_company,decode(a1.user_account_state,1,'启用',2,'未启用','未启用')
 		as user_account_state,a3.role_name from user_info a1,ui_ur_relation
 		a2,user_role a3 where a1.USER_ID=a2.UI_ID and a2.UR_ID=a3.ROLE_ID and
 		uos_id=(select uos_id from user_info where user_id=#{0}) order by
@@ -43,20 +43,21 @@
 		where rownum<![CDATA[<=]]>#{2})
 		where rn<![CDATA[>=]]>#{1}
 	</select>
-	<select id="findChildRoleByUserID" resultType="string"
+	<select id="findChildRoleByUserID" resultType="map"
 		parameterType="string">
-		select role_name from user_role m start with
+		select role_id,role_name from user_role m start with
 		m.father_id=(select a3.role_id from user_info a1,ui_ur_relation
 		a2,user_role a3 where a1.USER_ID=a2.UI_ID and a2.UR_ID=a3.ROLE_ID and
 		a1.user_id=#{user_id}) connect by m.father_id=prior m.role_id
 	</select>
 	<select id="findUserInfoTotalCountByUserID" resultType="int"
 		parameterType="string">
-		select count(*) from user_info where uos_id=(select uos_id from user_info where user_id=#{user_id})
+		select count(*) from user_info where uos_id=(select
+		uos_id from user_info where user_id=#{user_id})
 	</select>
 	<select id="findUserInfoByUosID" resultType="map">
-	select * from (select rownum rn,a1.* from(select
-		a1.user_id,a1.user_account,a1.user_name,a1.user_certificaiton_num,a1.user_company,decode(a1.user_account_state,1,'启用',0,'未启用','未启用')
+		select * from (select rownum rn,a1.* from(select
+		a1.user_id,a1.user_account,a1.user_name,a1.user_sex,to_char(a1.user_birthdate,'yyyy-MM-dd') as user_birthdate,a1.user_certificaiton_num,a1.user_company,decode(a1.user_account_state,1,'启用',2,'未启用','未启用')
 		as user_account_state,a3.role_name from user_info a1,ui_ur_relation
 		a2,user_role a3 where a1.USER_ID=a2.UI_ID and a2.UR_ID=a3.ROLE_ID and
 		uos_id=#{0} order by
@@ -68,6 +69,46 @@
 		parameterType="string">
 		select count(*) from user_info where uos_id=#{uos_id}
 	</select>
+	<insert id="addNewUser" parameterType="cn.soa.examsystem.entity.Admin">
+		insert into user_info
+		(USER_ID,USER_ACCOUNT,USER_PASSWORD,USER_REGIST_TIME,USER_NAME,USER_SEX,USER_CERTIFICAITON_NUM,USER_COMPANY,USER_EMAIL,USER_BIRTHDATE,USER_ACCOUNT_STATE,USER_PHONE_NUM,UOS_ID)
+		values
+		(#{user_id},#{user_account},#{user_password},to_date(#{user_regist_time},'yyyy-MM-dd HH24:mi:ss'),#{user_name},#{user_sex,jdbcType=NUMERIC},#{user_certificaiton_num,jdbcType=VARCHAR},#{user_company,jdbcType=VARCHAR},#{user_email,jdbcType=VARCHAR},to_date(#{user_birthdate,jdbcType=DATE},'yyyy-MM-dd HH24:mi:ss'),#{user_account_state,jdbcType=NUMERIC},#{user_phone_num,jdbcType=CHAR},#{uos_id})
+	</insert>
+	<insert id="addUR_Relation">
+		insert into ui_ur_relation
+		(UI_UR_ID,UI_ID,UR_ID)
+		values
+		(#{0},#{1},#{2})
+	</insert>
+	<select id="checkUserAccount" resultType="string"
+		parameterType="string">
+		select user_account from user_info where user_account=#{user_account}
+	</select>
+	<update id="updateUser">
+		update user_info set
+		user_modify_time=to_date(#{user_modify_time},'yyyy-MM-dd HH24:mi:ss')
+		<if test="user_name != null and user_name != ''"> ,user_name=#{user_name}</if>
+		<if test="user_company != null and user_company != ''"> ,user_company=#{user_company}</if>
+		<if test="user_email != null and user_email != ''"> ,user_email=#{user_email}</if>
+		<if test="user_phone_num != null and user_phone_num != ''"> ,user_phone_num=#{user_phone_num}</if>
+		<if test="user_birthdate != null and user_birthdate != ''"> ,user_birthdate=to_date(#{user_birthdate},'yyyy-MM-dd')</if>
+		<if test="user_sex != null and user_sex != ''"> ,user_sex=#{user_sex}</if>
+		<if test="user_account_state != null and user_account_state != ''"> ,user_account_state=#{user_account_state}</if>
+		where 
+		user_id=#{user_id}
+	</update>
+	<update id="updatePasswordByID">
+		update user_info set user_password='4QrcOUm6Wau+VuBX8g+IPg==' 
+		where user_id in
+		 <foreach collection="list" index="index" item="item" 
+        separator="," open="(" close=")">
+       	 #{item}
+    	</foreach>
+	</update>
+	<update id="updatePasswordOfAllUser">
+		update user_info set user_password='4QrcOUm6Wau+VuBX8g+IPg==' 
+	</update>
 </mapper>
 
 

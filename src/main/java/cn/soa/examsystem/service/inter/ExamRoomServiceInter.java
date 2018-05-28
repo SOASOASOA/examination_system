@@ -48,4 +48,8 @@ public interface ExamRoomServiceInter {
 	 * @throws MyException 
 	 */
 	public JsonResult<List<Map<String,Object>>> findExamroomByExamId(String exam_id) throws MyException;
+	/**
+	 *通过user_id查询对应组织结构根节点uos_id,并查询此根节点组织下的用户信息
+	 */
+	public JsonResult<List<Map<String,Object>>> findUserInfoByUserID(String user_id,Integer page, Integer limit) throws MyException;
 }

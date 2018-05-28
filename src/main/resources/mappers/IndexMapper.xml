@@ -11,7 +11,7 @@
 		and u4.ua_id=u5.ua_id
 	</select>
 	<select id="findUserInfoByUserId" resultType="map" parameterType="string">
-		select user_account,user_name,user_certificaiton_num,user_company,user_phone_num,user_email,to_char(user_birthdate,'yyyy-mm-dd') as user_birthdate,decode(user_sex,1,'男',0,'女','男') as user_sex,decode(user_account_state,1,'启用',0,'未启用','未启用') as user_account_state from user_info where user_id=#{user_id}
+		select user_account,user_name,user_certificaiton_num,user_company,user_phone_num,user_email,to_char(user_birthdate,'yyyy-mm-dd') as user_birthdate,decode(user_sex,1,'男',2,'女','男') as user_sex,decode(user_account_state,1,'启用',2,'未启用','未启用') as user_account_state from user_info where user_id=#{user_id}
 	</select>
 	<select id="findRoleNameByUserId" resultType="string" parameterType="string">
 		select a3.role_name from user_info a1,ui_ur_relation a2,user_role a3 where a1.user_id=a2.ui_id and a2.ur_id=a3.role_id and a1.user_id=#{user_id}

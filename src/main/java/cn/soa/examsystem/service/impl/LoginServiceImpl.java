@@ -42,10 +42,10 @@ public class LoginServiceImpl implements LoginService {
 			throw new MyException("密码不能为空值");
 		}
 		Map<String, Object> User = loginDAO.findUserIdByName(user_account);
+		if(User==null) {
+				throw new MyException("用户名不存在,请重新输入");
+			}
 		String password=(String)User.get("USER_PASSWORD");
-		if(password==null) {
-			throw new MyException("用户名错误");
-		}
 		if(!password.equals(ExaminUtil.toMD5(user_password))) {
 			throw new MyException("密码错误");
 		}

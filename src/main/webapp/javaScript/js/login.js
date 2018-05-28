@@ -39,7 +39,10 @@
 						{
 							url : path + "login/checkUser.do",
 							type : "post",
-							data : data,
+							data : {
+								"user_account":data.user_account,
+								"user_password":data.user_password
+							},
 							dataType : "json",
 							success : function(result)
 								{
@@ -53,9 +56,7 @@
 											addCookie("user",str,1);
 											//跳转到主页面
 											window.location.href="index.html";
-										}
-									if (state == "1")
-										{
+										}else{
 											layer.msg(message);
 										}
 									return false;//阻止表单跳转

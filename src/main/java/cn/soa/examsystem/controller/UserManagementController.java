@@ -7,9 +7,13 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.soa.examsystem.controller.form.UserFrom;
+import cn.soa.examsystem.entity.Admin;
 import cn.soa.examsystem.entity.Tree;
+import cn.soa.examsystem.exception.ExceptionController;
 import cn.soa.examsystem.exception.MyException;
 import cn.soa.examsystem.service.inter.UserManagementServiceInter;
 import cn.soa.examsystem.util.JsonResult;
@@ -25,7 +29,7 @@ import cn.soa.examsystem.util.JsonResult;
 @Controller
 
 @RequestMapping("/UserManagement")
-public class UserManagementController {
+public class UserManagementController  extends ExceptionController{
 	@Resource
 	private UserManagementServiceInter userManagementServiceInter;
 	
@@ -89,5 +93,45 @@ public class UserManagementController {
 	@RequestMapping("/findUserInfoByUosID.do")
 	public JsonResult<List<Map<String, Object>>> findUserInfoByUosID(String user_id,String uos_id,Integer page, Integer limit) throws MyException {
 		return userManagementServiceInter.findUserInfoByUosID(user_id, uos_id, page, limit);
+	}
+	/**
+	 * 根据USER_ID查询后代节点
+	 */
+	@ResponseBody
+	@RequestMapping("/findChildRoleByUserID.do")
+	public JsonResult<List<Map<String, Object>>> findChildRoleByUserID(String user_id) throws MyException {
+		return userManagementServiceInter.findChildRoleByUserID(user_id);
+	}
+	/**
+	 * 根据USER_ID查询后代节点
+	 */
+	@ResponseBody
+	@RequestMapping("/addNewUser.do")
+	public JsonResult<String> addNewUser(UserFrom userFrom) throws MyException {
+		return userManagementServiceInter.addNewUser(userFrom);
+	}
+	/**
+	 * 修改用户信息
+	 */ 
+	@ResponseBody
+	@RequestMapping("/updateUser.do")
+	public JsonResult<String> updateUser(Admin admin) throws MyException {
+		return userManagementServiceInter.updateUser(admin);
+	}
+	/**
+	 * 初始化所有用户密码
+	 */
+	@ResponseBody
+	@RequestMapping("/updatePasswordOfAllUser.do")
+	public JsonResult<String> updatePasswordOfAllUser() throws MyException {
+		return userManagementServiceInter.updatePasswordOfAllUser();
+	}
+	/**
+	 * 初始化所有用户密码
+	 */
+	@ResponseBody
+	@RequestMapping("/updatePasswordByID.do")
+	public JsonResult<String> updatePasswordByID(@RequestParam(value = "user_ids[]", required=false)List<String> lists) throws MyException {
+		return userManagementServiceInter.updatePasswordByID(lists);
 	}
 }

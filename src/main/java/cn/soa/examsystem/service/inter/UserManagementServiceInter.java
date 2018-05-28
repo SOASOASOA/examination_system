@@ -3,6 +3,8 @@ package cn.soa.examsystem.service.inter;
 import java.util.List;
 import java.util.Map;
 
+import cn.soa.examsystem.controller.form.UserFrom;
+import cn.soa.examsystem.entity.Admin;
 import cn.soa.examsystem.entity.Tree;
 import cn.soa.examsystem.exception.MyException;
 import cn.soa.examsystem.util.JsonResult;
@@ -43,4 +45,25 @@ public interface UserManagementServiceInter {
 	 * 根据uos_id查询用户信息
 	 */
 	public JsonResult<List<Map<String,Object>>> findUserInfoByUosID(String user_id,String uos_id,Integer page, Integer limit) throws MyException;
+	/**
+	 * 根据USER_ID查询后代节点
+	 */
+	public JsonResult<List<Map<String,Object>>> findChildRoleByUserID(String user_id) throws MyException;
+	/**
+	 * 根据组织uos_id新增对应的用户
+	 */
+	public JsonResult<String> addNewUser(UserFrom userfrom) throws MyException;
+	/**
+	 * 修改用户信息
+	 */
+	public JsonResult<String>  updateUser(Admin admin) throws MyException;
+	/**
+	 * 初始化所有用户密码
+	 */
+	public JsonResult<String>  updatePasswordOfAllUser() throws MyException;
+	/**
+	 * 批量修改指定用户的初始密码
+	 */
+	public JsonResult<String>   updatePasswordByID(List<String> lists) throws MyException;
+
 }

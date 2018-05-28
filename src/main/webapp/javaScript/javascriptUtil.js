@@ -25,7 +25,7 @@ function ajaxReturnMessage()
 								layer.msg(message);
 							}
 						return false;// 阻止表单跳转
-					}
+					};
 				$.ajax(arguments[0]);
 			}
 	}
@@ -68,3 +68,30 @@ function ajaxReturnJson()
 				$.ajax(arguments[0]);
 			}
 	}
+
+/**
+ *为Array对象添加自定义查询数组下标的方法
+ */
+if(typeof Array.prototype.indexOf!=='function'){
+	Array.prototype.indexOf = function(val) { 
+		for (var i = 0; i < this.length; i++) { 
+		if (this[i] == val) return i; 
+		} 
+		return -1; 
+		};
+}
+
+/**
+ *为Array对象添加自定义查询删除数组指定元素的方法
+ */	
+if(typeof Array.prototype.remove!=='function'){
+	Array.prototype.remove=	function(val) { 
+		
+		var index=this.indexOf(val);
+		if(index>-1){
+			this.splice(index, 1);
+		}
+	};
+}
+
+	

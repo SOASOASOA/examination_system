@@ -93,4 +93,12 @@ public class ExamRoomController extends ExceptionController{
 	public JsonResult<List<Map<String,Object>>> findExamroomByExamId(String exam_id) throws MyException{
 		return examRoomServiceInter.findExamroomByExamId(exam_id);
 	}
+	/**
+	 *通过user_id查询对应组织结构根节点uos_id,并查询此根节点组织下的用户信息
+	 */
+	@ResponseBody
+	@RequestMapping("/findUserInfoByUserID.do")
+	public JsonResult<List<Map<String,Object>>> findUserInfoByUserID(String user_id,Integer page, Integer limit) throws MyException{
+		return examRoomServiceInter.findUserInfoByUserID(user_id, page, limit);
+	}
 }

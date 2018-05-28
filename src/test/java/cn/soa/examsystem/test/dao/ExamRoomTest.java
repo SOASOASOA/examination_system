@@ -54,4 +54,13 @@ public class ExamRoomTest extends BaseTest{
 			System.out.println(map);
 		}*/
 	}
+	
+	@Test
+	public void findUserInfoByUserID()
+	{
+		List<Map<String, Object>> findUserInfoByUserID = examRoomDao.findUserInfoByUserID("7fcc3e0f-522b-c92f-0382-b7386bdf4e73", 1,10);
+		for (Map<String, Object> map : findUserInfoByUserID) {
+			System.out.println(map);
+		}
+	}
 }

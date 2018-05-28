@@ -106,7 +106,7 @@ layui.use(
 						addCookie("ua_id",$ua_id,1);
 						window.location.href=$url;
 					});
-
+				
 				$("#head_nav_dl a").click(function()
 					{
 						var $href_url = $(this).attr("href-url");

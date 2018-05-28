@@ -10,7 +10,7 @@ import cn.soa.examsystem.entity.Examroom;
  * 考试编排的DAO层
     * @ClassName: ExamRoomDao
     * @Description: TODO(这里用一句话描述这个类的作用)
-    * @author zhugang
+    * @author hezy
     * @date 2018年4月5日
     *
  */
@@ -83,5 +83,12 @@ public interface ExamRoomDao {
 	    * @throws
 	 */
 	public List<Map<String,Object>> findExamroomByExamId(String exam_id);
-
+	/**
+	 * 通过user_id查询对应组织结构根节点uos_id,并查询此根节点组织下的用户信息
+	 */
+	public List<Map<String,Object>> findUserInfoByUserID(String user_id,Integer start_page,Integer end_page);
+	/**
+	 * 通过user_id查询对应组织结构根节点uos_id,相同组织节点uos_id的用户总个数
+	 */
+	public Integer findUserInfoTotalCountByUserID(String user_id);
 }

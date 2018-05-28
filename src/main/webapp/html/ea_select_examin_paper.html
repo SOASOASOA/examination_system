@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>考试编排</title>
-<link rel="stylesheet" type="text/css" href="../../layui/css/layui.css">
-<script type="text/javascript" src="../../layui/layui.js"></script>
+<link rel="stylesheet" type="text/css" href="../layui/css/layui.css">
+<script type="text/javascript" src="../layui/layui.js"></script>
 <style type="text/css">
 .exam_name {
 	color: red
@@ -22,9 +22,9 @@
       <input id="keyword" type="text"  placeholder="请输入关键词" autocomplete="off" class="layui-input">
     </div>
  	</div>
-	<script type="text/javascript" src="../../javaScript/js/path.js"></script>
+	<script type="text/javascript" src="../javaScript/js/global-path.js"></script>
 	<!-- ------------------cookie工具类------------------------------------->
-	<script type="text/javascript" src="../../javaScript/cookie_util.js"></script>
+	<script type="text/javascript" src="../javaScript/cookie_util.js"></script>
 	<script type="text/javascript">
 		layui.use(
 			[ 'layer', 'form', 'table', 'element' ], function()
@@ -38,7 +38,7 @@
 							{ 
 								elem : '#examin_paper',
 								height : 315,
-								url : gpath + 'examroom/findAllExaminPaper.do' //数据接口
+								url : path + 'examroom/findAllExaminPaper.do' //数据接口
 								,
 								method : 'post',
 								page : true //开启分页

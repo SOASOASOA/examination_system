@@ -44,6 +44,20 @@
 	<select id="findExamroomByExamId" parameterType="string" resultType="map">
 		select examroom_id,examroom_name from examroom_info where exam_id=#{exam_id}
 	</select>
+	<select id="findUserInfoByUserID" resultType="map">
+		select * from (select rownum rn,a1.* from(
+		select user_id,user_account,user_name,user_company from user_info  where 
+		uos_id=(select uos_id from user_info where user_id=#{0}) 
+		and USER_ACCOUNT_STATE<![CDATA[<>]]>2 order by
+		USER_REGIST_TIME) a1
+		where rownum<![CDATA[<=]]>#{2})
+		where rn<![CDATA[>=]]>#{1}
+	</select>
+	<select id="findUserInfoTotalCountByUserID" resultType="int"
+		parameterType="string">
+		select count(*) from user_info where uos_id=(select
+		uos_id from user_info where user_id=#{user_id})
+	</select>
 </mapper>
 
 

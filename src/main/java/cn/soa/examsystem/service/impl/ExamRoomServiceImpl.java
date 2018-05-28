@@ -186,4 +186,24 @@ public class ExamRoomServiceImpl implements ExamRoomServiceInter{
 		}
 		return new JsonResult<List<Map<String, Object>>>(findExamroomByExamId);
 	}
+
+	
+	@Override
+	public JsonResult<List<Map<String, Object>>> findUserInfoByUserID(String user_id, Integer page, Integer limit)
+			throws MyException {
+		if(user_id==null) {
+			throw new MyException("用户ID异常");
+		}
+		if(page==null||limit==null) {
+			throw new MyException("分页查询异常");
+		}
+		start_page=(page-1)*limit+1;//起始行 
+		end_page=page*limit;//结束行
+		List<Map<String, Object>> findUserInfoByUserID = examRoomDao.findUserInfoByUserID(user_id, start_page, end_page);
+		if(findUserInfoByUserID==null) {
+			throw new MyException("获取对应的用户信息异常");
+		}
+		Integer total = examRoomDao.findUserInfoTotalCountByUserID(user_id);
+		return new JsonResult<List<Map<String, Object>>>(total,findUserInfoByUserID);
+	}
 }
